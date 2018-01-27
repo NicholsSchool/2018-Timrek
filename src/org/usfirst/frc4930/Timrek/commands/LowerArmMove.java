@@ -30,7 +30,6 @@ public class LowerArmMove extends Command{
 	
 	@Override
 	protected boolean isFinished() {
-		
 		return (startState != Robot.lowerArm.checkState()) || (!Robot.lowerArm.checkMove());
 	}
 	

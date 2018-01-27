@@ -71,6 +71,19 @@ public class RobotMap {
         
         dropWhl = new WPI_TalonSRX(34);
         
+     //Invert necessary motors   
+        lDrvMSTR.setInverted(true);
+        
+        rDrvSlv1.setInverted(true);
+        rDrvSlv2.setInverted(true);
+        
+        rShoulder.setInverted(true);
+        
+        lElbow.setInverted(true);
+        
+        rIntake.setInverted(true);
+        
+     //Assign Slaves  
         lDrvSlv1.follow(lDrvMSTR);
         lDrvSlv1.setNeutralMode(NeutralMode.Brake);
         
@@ -85,10 +98,20 @@ public class RobotMap {
         
         rShoulder.set(ControlMode.Follower, 21);
         rElbow.set(ControlMode.Follower, 21);
-        
+      
+      //Assign Encoders  
         lShoulder.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,100);
         lElbow.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,100);
        
+        
+        lDrvMSTR.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,100);
+        rDrvMSTR.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,100);
+        dropWhl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,100);
+        
+     //Invert Necessary Encoders
+        lDrvMSTR.setSensorPhase(true);
+        
+     //Make DriveTank   
         driveTank = new DifferentialDrive(lDrvMSTR, rDrvMSTR);
         driveTank.setSafetyEnabled(false);
         

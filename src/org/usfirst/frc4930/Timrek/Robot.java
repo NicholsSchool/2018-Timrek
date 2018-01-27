@@ -112,5 +112,13 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        RobotMap.lShoulder.set(0.5);
+        
+       SmartDashboard.putNumber("Left Shoulder Encoder(21):", RobotMap.lShoulder.getSelectedSensorPosition(0));
+       SmartDashboard.putNumber("Left Elbow Encoder(25):", RobotMap.lElbow.getSelectedSensorPosition(0));
+       SmartDashboard.putNumber("Left Master Encoder(22):", RobotMap.lDrvMSTR.getSelectedSensorPosition(0));
+       SmartDashboard.putNumber("Right Master Encoder(28):", RobotMap.rDrvMSTR.getSelectedSensorPosition(0));
+       SmartDashboard.putNumber("Drop Wheel Encoder(34):", RobotMap.dropWhl.getSelectedSensorPosition(0));
+       
     }
 }

@@ -3,6 +3,8 @@ package org.usfirst.frc4930.Timrek.subsystems;
 import org.usfirst.frc4930.Timrek.Robot;
 import org.usfirst.frc4930.Timrek.RobotMap;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class UpperArm extends Subsystem {
@@ -34,6 +36,14 @@ public class UpperArm extends Subsystem {
 	
 	public void move(double speed) { 
 		RobotMap.lElbow.set(speed);
+	}
+	
+	public void setPosition(double position) {
+		RobotMap.lElbow.config_kP(0, 0.5, 100);
+		RobotMap.lElbow.config_kI(0, 0.0, 100);
+		RobotMap.lElbow.config_kD(0, 0.1, 100);
+		
+		RobotMap.lElbow.set(ControlMode.Position, position);
 	}
 	
 	public void stop() {
