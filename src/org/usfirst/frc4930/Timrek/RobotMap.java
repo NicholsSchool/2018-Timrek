@@ -84,9 +84,10 @@ public class RobotMap {
         rDrvSlv2.setNeutralMode(NeutralMode.Brake);
         
         rShoulder.set(ControlMode.Follower, 21);
+        rElbow.set(ControlMode.Follower, 21);
         
         lShoulder.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,100);
-     
+        lElbow.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,100);
        
         driveTank = new DifferentialDrive(lDrvMSTR, rDrvMSTR);
         driveTank.setSafetyEnabled(false);

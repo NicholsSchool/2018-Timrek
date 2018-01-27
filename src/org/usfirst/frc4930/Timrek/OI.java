@@ -14,6 +14,7 @@ package org.usfirst.frc4930.Timrek;
 import org.usfirst.frc4930.Timrek.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
@@ -24,12 +25,31 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class OI {
 	public Joystick j0;
 	public Joystick j1;
-
+	public Joystick j2;
+	
+	
+	public JoystickButton j2b3;
+	public JoystickButton j2b4;
+	public JoystickButton j2b11;
+	public JoystickButton j2b12;
+	
     public OI() {
        j0 = new Joystick(0);
        j1 = new Joystick(1);
+       j2 = new Joystick(2);
 
-
+       j2b11 = new JoystickButton(j2, 11);
+       j2b12 = new JoystickButton(j2, 12);
+       j2b3 = new JoystickButton(j2, 3);
+       j2b4 = new JoystickButton(j2, 4);
+       
+       j2b3.whileHeld(new Intake());
+       j2b4.whileHeld(new Outtake());
+       
+       j2b11.whenPressed(new LowerArmMove());
+       j2b12.whenPressed(new UpperArmMove());
+       
+       
         // SmartDashboard Buttons
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
 

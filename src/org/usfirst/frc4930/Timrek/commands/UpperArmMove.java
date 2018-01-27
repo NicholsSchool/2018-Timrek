@@ -4,26 +4,26 @@ import org.usfirst.frc4930.Timrek.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class LowerArmMove extends Command{
+public class UpperArmMove extends Command {
 	
 	private boolean startState;
 	
-	public LowerArmMove() {
-		requires(Robot.lowerArm);
+	public UpperArmMove() {
 		requires(Robot.upperArm);
-	}
+		requires(Robot.lowerArm);
+	} 
 	
 	protected void initialize() {
-		startState = Robot.lowerArm.checkState();
+		startState = Robot.upperArm.checkState();
 	}
 	
 	protected void execute() {
 		if(Robot.lowerArm.checkMove()){
-			if (Robot.lowerArm.checkState()) {
-				Robot.lowerArm.move(0.4);
+			if (Robot.upperArm.checkState()) {
+				Robot.upperArm.move(0.4);
 			}
 			else {
-				Robot.lowerArm.move(-0.4);
+				Robot.upperArm.move(-0.4);
 			}
 		}
 	}
@@ -31,11 +31,11 @@ public class LowerArmMove extends Command{
 	@Override
 	protected boolean isFinished() {
 		
-		return (startState != Robot.lowerArm.checkState()) || (!Robot.lowerArm.checkMove());
+		return (startState != Robot.upperArm.checkState()) || (!Robot.upperArm.checkMove());
 	}
 	
 	protected void end() {
-		Robot.lowerArm.stop();
+		Robot.upperArm.stop();
 	}
 	
 	protected void interrupted() {
