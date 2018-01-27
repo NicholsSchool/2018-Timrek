@@ -12,6 +12,7 @@
 package org.usfirst.frc4930.Timrek;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -82,13 +83,11 @@ public class RobotMap {
         rDrvSlv2.follow(lDrvMSTR);
         rDrvSlv2.setNeutralMode(NeutralMode.Brake);
         
-        lDrvSlv1.set(ControlMode.Follower, 22);
-        lDrvSlv2.set(ControlMode.Follower, 22);
-        rDrvSlv1.set(ControlMode.Follower, 28);
-        rDrvSlv2.set(ControlMode.Follower, 28);
+        rShoulder.set(ControlMode.Follower, 21);
         
+        lShoulder.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,100);
      
-        
+       
         driveTank = new DifferentialDrive(lDrvMSTR, rDrvMSTR);
         driveTank.setSafetyEnabled(false);
         
