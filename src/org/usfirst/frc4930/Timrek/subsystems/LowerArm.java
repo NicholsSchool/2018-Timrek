@@ -15,20 +15,20 @@ public class LowerArm extends Subsystem{
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
-		upperArmRaised = Robot.upperArm.checkState();
 	}
 	
 	public boolean checkMove() {
+		upperArmRaised = !Robot.upperArm.checkGround();
 		return upperArmRaised;
 	}
 	
 	public boolean checkState() {
 		// encoder values NEED TO BE TESTED
 		
-		if (RobotMap.lShoulder.getSelectedSensorPosition(0) < 10) {
+		if (RobotMap.lShoulder.getSelectedSensorPosition(0) < 1000) {
 			isGrounded = true;
 		}
-		else if (RobotMap.lShoulder.getSelectedSensorPosition(0) > 100) {
+		else {
 			isGrounded = false;
 		}
 		

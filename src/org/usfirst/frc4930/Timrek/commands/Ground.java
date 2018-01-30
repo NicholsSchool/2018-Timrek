@@ -4,31 +4,30 @@ import org.usfirst.frc4930.Timrek.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class UpperArmMove extends Command {
+public class Ground extends Command{
 	
-	private int startState;
-	private int desiredState;
-	private int change;
+	private boolean lowerArmRaised;
 	
-	public UpperArmMove(int state) {
+	public Ground() {
 		requires(Robot.upperArm);
 		requires(Robot.lowerArm);
-		desiredState = state;
-		startState = Robot.upperArm.getState();
-		change = desiredState - startState;
 	} 
 	
 	protected void initialize() {
+		 lowerArmRaised = Robot.upperArm.checkMove();
+		//Check if the Lower arm isn't lowered, the lower it using the command I will make
 	}
 	
 	protected void execute() {
-			Robot.upperArm.move(0.1 * change);
+		if(!lowerArmRaised){
+		Robot.upperArm.changeState(1);
+		}
 	}
 	
 	@Override
 	protected boolean isFinished() {
 		
-		return (Robot.upperArm.getState() == desiredState);
+		return (Robot.upperArm.checkGround());
 	}
 	
 	protected void end() {
@@ -38,5 +37,4 @@ public class UpperArmMove extends Command {
 	protected void interrupted() {
 		end();
 	}
-
 }

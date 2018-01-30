@@ -30,6 +30,9 @@ public class OI {
 	
 	public JoystickButton j2b3;
 	public JoystickButton j2b4;
+	public JoystickButton j2b8;
+	public JoystickButton j2b9;
+	public JoystickButton j2b10;
 	public JoystickButton j2b11;
 	public JoystickButton j2b12;
 	
@@ -38,6 +41,9 @@ public class OI {
        j1 = new Joystick(1);
        j2 = new Joystick(2);
 
+       j2b8 = new JoystickButton(j2, 8);
+       j2b9 = new JoystickButton(j2, 9);
+       j2b10 = new JoystickButton(j2, 10);
        j2b11 = new JoystickButton(j2, 11);
        j2b12 = new JoystickButton(j2, 12);
        j2b3 = new JoystickButton(j2, 3);
@@ -46,8 +52,12 @@ public class OI {
        j2b3.whileHeld(new Intake());
        j2b4.whileHeld(new Outtake());
        
-       j2b11.whenPressed(new LowerArmMove());
-       j2b12.whenPressed(new UpperArmMove());
+       j2b8.whenPressed(new Ground());
+       j2b9.whenPressed(new UpperArmMove(1));
+       j2b10.whenPressed(new UpperArmMove(2));
+       
+    //   j2b11.whenPressed(new LowerArmMove());
+       j2b12.whenPressed(new UpperArmMove(3));
        
        
         // SmartDashboard Buttons

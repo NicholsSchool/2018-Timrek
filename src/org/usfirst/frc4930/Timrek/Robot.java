@@ -104,6 +104,11 @@ public class Robot extends TimedRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        RobotMap.lShoulder.setSelectedSensorPosition(0, 0, 100);
+        RobotMap.lElbow.setSelectedSensorPosition(0, 0, 100);
+        RobotMap.lDrvMSTR.setSelectedSensorPosition(0, 0, 100);
+        RobotMap.rDrvMSTR.setSelectedSensorPosition(0, 0, 100);
+        RobotMap.dropWhl.setSelectedSensorPosition(0, 0, 100);
     }
 
     /**
@@ -112,7 +117,6 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        RobotMap.lShoulder.set(0.5);
         
        SmartDashboard.putNumber("Left Shoulder Encoder(21):", RobotMap.lShoulder.getSelectedSensorPosition(0));
        SmartDashboard.putNumber("Left Elbow Encoder(25):", RobotMap.lElbow.getSelectedSensorPosition(0));

@@ -20,10 +20,10 @@ public class LowerArmMove extends Command{
 	protected void execute() {
 		if(Robot.lowerArm.checkMove()){
 			if (Robot.lowerArm.checkState()) {
-				Robot.lowerArm.move(0.4);
+				Robot.lowerArm.move(0.1);
 			}
 			else {
-				Robot.lowerArm.move(-0.4);
+				Robot.lowerArm.move(-0.1);
 			}
 		}
 	}
