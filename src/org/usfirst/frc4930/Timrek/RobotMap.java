@@ -96,10 +96,10 @@ public class RobotMap {
         lDrvSlv2.follow(lDrvMSTR);
         lDrvSlv2.setNeutralMode(NeutralMode.Brake);
         
-        rDrvSlv1.follow(lDrvMSTR);
+        rDrvSlv1.follow(rDrvMSTR);
         rDrvSlv1.setNeutralMode(NeutralMode.Brake);
         
-        rDrvSlv2.follow(lDrvMSTR);
+        rDrvSlv2.follow(rDrvMSTR);
         rDrvSlv2.setNeutralMode(NeutralMode.Brake);
         
         rShoulder.set(ControlMode.Follower, 21);
