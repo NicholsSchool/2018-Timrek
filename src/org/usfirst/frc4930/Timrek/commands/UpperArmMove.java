@@ -19,16 +19,20 @@ public class UpperArmMove extends Command {
 	} 
 	
 	protected void initialize() {
+		// Run This code to test PID Loop 
+		Robot.upperArm.setPosition(45000 * change);
 	}
 	
 	protected void execute() {
-			Robot.upperArm.move(0.1 * change);
+		//	Robot.upperArm.move(0.35 * change);
+			
 	}
 	
 	@Override
 	protected boolean isFinished() {
 		
 		return (Robot.upperArm.getState() == desiredState);
+		
 	}
 	
 	protected void end() {

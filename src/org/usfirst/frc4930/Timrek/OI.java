@@ -27,6 +27,16 @@ public class OI {
 	public Joystick j1;
 	public Joystick j2;
 	
+	public JoystickButton j1b3;
+	public JoystickButton j1b4;
+	public JoystickButton j1b7;
+	public JoystickButton j1b8;
+	public JoystickButton j1b9;
+	public JoystickButton j1b10;
+	public JoystickButton j1b11;
+	public JoystickButton j1b12;
+	
+	
 	
 	public JoystickButton j2b3;
 	public JoystickButton j2b4;
@@ -41,6 +51,15 @@ public class OI {
        j1 = new Joystick(1);
        j2 = new Joystick(2);
 
+       j1b3 = new JoystickButton(j1, 3);
+       j1b4 = new JoystickButton(j1, 4);
+       j1b7 = new JoystickButton(j1, 7);
+       j1b8 = new JoystickButton(j1, 8);
+       j1b9 = new JoystickButton(j1, 9);
+       j1b10 = new JoystickButton(j1, 10);
+       j1b11 = new JoystickButton(j1, 11);
+       j1b12 = new JoystickButton(j1, 12);
+       
        j2b8 = new JoystickButton(j2, 8);
        j2b9 = new JoystickButton(j2, 9);
        j2b10 = new JoystickButton(j2, 10);
@@ -48,6 +67,18 @@ public class OI {
        j2b12 = new JoystickButton(j2, 12);
        j2b3 = new JoystickButton(j2, 3);
        j2b4 = new JoystickButton(j2, 4);
+       
+       j1b3.whenPressed(new ShiftDown());
+       j1b4.whenPressed(new ShiftUp());
+       
+       j1b7.whenPressed(new PTOUp());
+       j1b8.whenPressed(new PTODown());
+       
+       j1b9.whenPressed(new ClawOpen());
+       j1b10.whenPressed(new ClawClose());
+       
+       j1b11.whenPressed(new Drop());
+       j1b12.whenPressed(new Raise());
        
        j2b3.whileHeld(new Intake());
        j2b4.whileHeld(new Outtake());
