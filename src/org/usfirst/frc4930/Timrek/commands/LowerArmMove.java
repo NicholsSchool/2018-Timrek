@@ -6,31 +6,30 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class LowerArmMove extends Command{
 	
-	private boolean startState;
+	private int startState;
+	private int desiredState;
+	private int change;
 	
-	public LowerArmMove() {
+	public LowerArmMove(int state) {
 		requires(Robot.lowerArm);
 		requires(Robot.upperArm);
+		desiredState = state;
+		startState = Robot.lowerArm.getState();
+		change = desiredState - startState;
 	}
 	
 	protected void initialize() {
-		startState = Robot.lowerArm.checkState();
+		// Run This code to test PID Loop 
+		//Robot.lowerArm.setPosition(45000 * change);
 	}
 	
 	protected void execute() {
-		if(Robot.lowerArm.checkMove()){
-			if (Robot.lowerArm.checkState()) {
-				Robot.lowerArm.move(0.1);
-			}
-			else {
-				Robot.lowerArm.move(-0.1);
-			}
-		}
+		Robot.lowerArm.move(0.35 * change);
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		return (startState != Robot.lowerArm.checkState()) || (!Robot.lowerArm.checkMove());
+		return (Robot.lowerArm.getState() == desiredState);
 	}
 	
 	protected void end() {

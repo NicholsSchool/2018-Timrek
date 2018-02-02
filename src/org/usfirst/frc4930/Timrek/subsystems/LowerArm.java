@@ -9,8 +9,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class LowerArm extends Subsystem{
 	
-	private boolean isGrounded;
 	private boolean upperArmRaised;
+	private boolean fullyRaised;
+	private boolean isGrounded;
+
 	
 	@Override
 	protected void initDefaultCommand() {
@@ -22,7 +24,7 @@ public class LowerArm extends Subsystem{
 		return upperArmRaised;
 	}
 	
-	public boolean checkState() {
+	public boolean checkGround() {
 		// encoder values NEED TO BE TESTED
 		
 		if (RobotMap.lShoulder.getSelectedSensorPosition(0) < 1000) {
@@ -35,8 +37,32 @@ public class LowerArm extends Subsystem{
 		return isGrounded;
 	}
 	
+	public boolean checkRaised() {
+		// encoder values NEED TO BE TESTED
+		if(RobotMap.lShoulder.getSelectedSensorPosition(0) > 40000) {
+			fullyRaised = true;
+		}
+		else {
+			fullyRaised = false;
+		}
+		
+		return fullyRaised;
+			
+	}
+	
 	public void move(double speed) { 
 		RobotMap.lShoulder.set(speed);
+	}
+	
+	public int getState() {
+		int state;
+		if(checkGround()){
+			state = 1;
+		}
+		else {
+			state = 2;
+		}
+		return state;
 	}
 	
 	public void setPosition(double position) {
@@ -48,6 +74,8 @@ public class LowerArm extends Subsystem{
 	}
 	
 	public void stop() {
+		
+		//may have to change to .set(0.1), to hold position, NEEDS TO BE TESTED
 		RobotMap.lShoulder.stopMotor();
 	}
 }

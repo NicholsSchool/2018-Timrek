@@ -38,15 +38,19 @@ public class RobotMap {
 	
 	public static WPI_TalonSRX lElbow;
 	public static WPI_TalonSRX rElbow;
+	
 	public static WPI_TalonSRX lIntake;
 	public static WPI_TalonSRX rIntake;
+	
 	public static WPI_TalonSRX lDrvMSTR;
 	public static WPI_VictorSPX lDrvSlv1;
 	public static WPI_VictorSPX lDrvSlv2;
 	public static WPI_TalonSRX rDrvMSTR;
 	public static WPI_VictorSPX rDrvSlv1;
 	public static WPI_VictorSPX rDrvSlv2;
+	
 	public static WPI_TalonSRX dropWhl;
+	public static WPI_TalonSRX mast;
 
 	public static Compressor compressor;
 	public static Solenoid solenoid0;
@@ -77,6 +81,7 @@ public class RobotMap {
         rDrvSlv2 = new WPI_VictorSPX(32);
         
         dropWhl = new WPI_TalonSRX(34);
+        mast = new WPI_TalonSRX(33);
         
      //Invert necessary motors   
         lDrvMSTR.setInverted(true);

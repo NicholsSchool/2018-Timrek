@@ -18,7 +18,7 @@ public class UpperArm extends Subsystem {
 	}
 	
 	public boolean checkMove(){
-		lowerArmRaised = !Robot.lowerArm.checkState();
+		lowerArmRaised = !Robot.lowerArm.checkGround();
 		return lowerArmRaised;
 	}
 	
