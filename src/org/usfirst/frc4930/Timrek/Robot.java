@@ -43,7 +43,7 @@ public class Robot extends TimedRobot {
     public static Shifter shifter;
     public static DropWheel dropWheel;
     
-    
+    //ALL THESE VALUES NEED TO BE CHECKED TO SEE HOW SOLENOID STATE RELATES TO ROBOT
     public static boolean shifterInLowGear = true;
     public static boolean ptoOn = true;
     public static boolean dropped = false;
@@ -131,7 +131,12 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
-       SmartDashboard.putBoolean("Compressor: ", RobotMap.compressor.enabled()); 
+       SmartDashboard.putBoolean("Compressor Enabled: ", RobotMap.compressor.enabled()); 
+       SmartDashboard.putBoolean("Shifter (Solenoid 0)", RobotMap.solenoid0.get());
+       SmartDashboard.putBoolean("PTO (Solenoid 1)", RobotMap.solenoid1.get());
+       SmartDashboard.putBoolean("DropWheel (Solenoid 2)", RobotMap.solenoid2.get());
+       SmartDashboard.putBoolean("Claw (Solenoid 4)", RobotMap.solenoid4.get());
+       
        SmartDashboard.putNumber("Left Shoulder Encoder(21):", RobotMap.lShoulder.getSelectedSensorPosition(0));
        SmartDashboard.putNumber("Left Elbow Encoder(25):", RobotMap.lElbow.getSelectedSensorPosition(0));
        SmartDashboard.putNumber("Left Master Encoder(22):", RobotMap.lDrvMSTR.getSelectedSensorPosition(0));

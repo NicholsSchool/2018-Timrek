@@ -68,26 +68,29 @@ public class OI {
        j2b3 = new JoystickButton(j2, 3);
        j2b4 = new JoystickButton(j2, 4);
        
-       j1b3.whenPressed(new ShiftDown());
-       j1b4.whenPressed(new ShiftUp());
        
-       j1b7.whenPressed(new PTOUp());
-       j1b8.whenPressed(new PTODown());
+       //Shifter (Solenoid 0)
+       j1b3.whenPressed(new ShiftDown()); //Set True
+       j1b4.whenPressed(new ShiftUp());  //Set False
        
-       j1b9.whenPressed(new ClawOpen());
-       j1b10.whenPressed(new ClawClose());
+       //PTO (Solenoid 1)
+       j1b7.whenPressed(new PTODown()); //Set True
+       j1b8.whenPressed(new PTOUp());  //Set False
        
-       j1b11.whenPressed(new Drop());
-       j1b12.whenPressed(new Raise());
+       //DropWheel (Solenoid 2)
+       j1b9.whenPressed(new Drop());   //Set True
+       j1b10.whenPressed(new Raise()); //Set False
+       
+       //Claw (Solenoid 4)
+       j1b11.whenPressed(new ClawOpen()); //Set True
+       j1b12.whenPressed(new ClawClose()); //Set False
        
        j2b3.whileHeld(new Intake());
        j2b4.whileHeld(new Outtake());
        
-       j2b8.whenPressed(new Ground());
        j2b9.whenPressed(new UpperArmMove(1));
        j2b10.whenPressed(new UpperArmMove(2));
        
-    //   j2b11.whenPressed(new LowerArmMove());
        j2b12.whenPressed(new UpperArmMove(3));
        
        
