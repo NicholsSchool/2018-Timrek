@@ -20,7 +20,7 @@ public class UpperArmMove extends Command {
 	
 	protected void initialize() {
 		// Run This code to test PID Loop 
-		Robot.upperArm.setPosition(45000 * change);
+		Robot.upperArm.setPosition(40000 * change);
 	}
 	
 	protected void execute() {

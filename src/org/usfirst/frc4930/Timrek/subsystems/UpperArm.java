@@ -92,7 +92,7 @@ public class UpperArm extends Subsystem {
 	
 
 	public void setPosition(double position) {
-		RobotMap.lElbow.config_kP(0, 0.1, 100);
+		RobotMap.lElbow.config_kP(0, 0.02, 100);
 		RobotMap.lElbow.config_kI(0, 0.0, 100);
 		RobotMap.lElbow.config_kD(0, 0.1, 100);
 		

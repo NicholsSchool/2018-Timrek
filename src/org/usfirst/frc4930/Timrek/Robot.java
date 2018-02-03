@@ -128,6 +128,8 @@ public class Robot extends TimedRobot {
        SmartDashboard.putBoolean("DropWheel (Solenoid 2)", RobotMap.solenoid2.get());
        SmartDashboard.putBoolean("Claw (Solenoid 4)", RobotMap.solenoid4.get());
        
+       SmartDashboard.putNumber("LeftShoulder", RobotMap.lShoulder.get());
+       
        SmartDashboard.putNumber("Left Shoulder Encoder(21):", RobotMap.lShoulder.getSelectedSensorPosition(0));
        SmartDashboard.putNumber("Left Elbow Encoder(25):", RobotMap.lElbow.getSelectedSensorPosition(0));
        SmartDashboard.putNumber("Left Master Encoder(22):", RobotMap.lDrvMSTR.getSelectedSensorPosition(0));
