@@ -66,7 +66,7 @@ public class LowerArm extends Subsystem{
 	}
 	
 	public void setPosition(double position) {
-		RobotMap.lShoulder.config_kP(0, 0.5, 100);
+		RobotMap.lShoulder.config_kP(0, 0.01, 100);
 		RobotMap.lShoulder.config_kI(0, 0.0, 100);
 		RobotMap.lShoulder.config_kD(0, 0.1, 100);
 		
