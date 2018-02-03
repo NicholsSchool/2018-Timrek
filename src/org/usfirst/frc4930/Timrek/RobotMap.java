@@ -16,7 +16,9 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -54,6 +56,8 @@ public class RobotMap {
 	public static Solenoid solenoid2;
 	public static Solenoid solenoid4;
 	public static Solenoid solenoid5;
+	
+	public static AHRS ahrs; //Gyro
 	
 	public static DifferentialDrive driveTank;
 	
@@ -117,6 +121,10 @@ public class RobotMap {
         
      //Invert Necessary Encoders
         lDrvMSTR.setSensorPhase(true);
+        
+     //Gyro 
+      
+        ahrs = new AHRS(SPI.Port.kMXP); 
         
      // Safety Enabled   
 //        lShoulder.setSafetyEnabled(true);

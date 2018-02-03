@@ -1,9 +1,13 @@
 package org.usfirst.frc4930.Timrek.PathPlanning;
 
+import org.usfirst.frc4930.Timrek.Robot;
+import org.usfirst.frc4930.Timrek.RobotMap;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
 import jaci.pathfinder.Waypoint;
+import jaci.pathfinder.followers.EncoderFollower;
 import jaci.pathfinder.modifiers.TankModifier;
 
 public class Path extends Subsystem {
@@ -15,9 +19,12 @@ public class Path extends Subsystem {
 	private Trajectory.Config config; 
 	private Trajectory trajectory; 
 	
-	private double wheelBaseWidth;
+	private double wheelBaseWidth  = 0.6096;
+	private double wheelDiameter = 0.09525;
 	private TankModifier modifier;
 
+	private double velocity;
+	
 	public Trajectory left;       
 	public Trajectory right;      
 		
@@ -26,23 +33,23 @@ public class Path extends Subsystem {
 		// TODO Auto-generated method stub
 		
 	}
-	public void addPoints(Waypoint point) {
-		points[numPoints] = point;
-		numPoints ++;
+	public void addPoint(Waypoint point) {
+		this.points[numPoints] = point;
+		this.numPoints ++;
 	}
 	
 	public void config(double velocity, double acceleration, double jerk){
-		config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.02, velocity, acceleration, jerk);
+		this.config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH,
+				0.02, velocity, acceleration, jerk);
+		this.velocity = velocity;
 	}
 	
 	public Trajectory generate() {
-		trajectory = Pathfinder.generate(points, config);
+		this.trajectory = Pathfinder.generate(points, config);
 		return trajectory;
 	}
 	
-	public void setWheelBaseWidth(double width){
-		wheelBaseWidth = width;
-	}
+
 	
 	public void setTankDrive() {
 		modifier = new TankModifier(trajectory).modify(wheelBaseWidth);
@@ -59,7 +66,26 @@ public class Path extends Subsystem {
 		}
 	}
 
+	public void run() {
+		EncoderFollower leftEncoder = new EncoderFollower(left);
+		EncoderFollower rightEncoder = new EncoderFollower(right);
+		
+		leftEncoder.configureEncoder(RobotMap.lDrvMSTR.getSelectedSensorPosition(0), 1600, wheelDiameter);
+		rightEncoder.configureEncoder(RobotMap.rDrvMSTR.getSelectedSensorPosition(0), 1600, wheelDiameter);
+		
+		leftEncoder.configurePIDVA(0.1, 0.0, 0.0, 1 / velocity, 0);
+		double output = leftEncoder.calculate(RobotMap.lDrvMSTR.getSelectedSensorPosition(0));
+		double l = leftEncoder.calculate(RobotMap.lDrvMSTR.getSelectedSensorPosition(0));
+		double r = rightEncoder.calculate(RobotMap.rDrvMSTR.getSelectedSensorPosition(0));
+		
+		double gyroHeading = RobotMap.ahrs.getAngle();
+		double desiredHeading = Pathfinder.r2d(leftEncoder.getHeading());
 
+		double angleDifference = Pathfinder.boundHalfDegrees(desiredHeading - gyroHeading);
+		double turn = 0.8 * (-1.0/80.0) * angleDifference;
+		
+		Robot.driveTrain.move(l + turn, r + turn);
+	}
 
 }
 
