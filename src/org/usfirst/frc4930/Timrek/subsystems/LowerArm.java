@@ -20,7 +20,7 @@ public class LowerArm extends Subsystem{
 	}
 	
 	public boolean checkMove() {
-		upperArmRaised = !Robot.upperArm.checkGround();
+		upperArmRaised = Robot.upperArm.checkRaised();
 		return upperArmRaised;
 	}
 	
@@ -73,9 +73,12 @@ public class LowerArm extends Subsystem{
 		RobotMap.lShoulder.set(ControlMode.Position, position);
 	}
 	
+	public void rest() {
+		RobotMap.lShoulder.set(0.1);
+	}
+	
 	public void stop() {
-		
-		//may have to change to .set(0.1), to hold position, NEEDS TO BE TESTED
+
 		RobotMap.lShoulder.stopMotor();
 	}
 }

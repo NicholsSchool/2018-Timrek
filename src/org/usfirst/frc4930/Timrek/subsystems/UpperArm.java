@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class UpperArm extends Subsystem {
 	
-	private boolean lowerArmRaised;
+	private boolean lowerArmGrounded;
 	private boolean fullyRaised;
 	private boolean isGrounded;
 	
@@ -18,8 +18,8 @@ public class UpperArm extends Subsystem {
 	}
 	
 	public boolean checkMove(){
-		lowerArmRaised = !Robot.lowerArm.checkGround();
-		return lowerArmRaised;
+		lowerArmGrounded = Robot.lowerArm.checkGround();
+		return lowerArmGrounded;
 	}
 	
 	public boolean checkGround() {
@@ -99,9 +99,12 @@ public class UpperArm extends Subsystem {
 		RobotMap.lElbow.set(ControlMode.Position, position);
 	}
 	
-	public void stop() {
+	public void rest() {
 		RobotMap.lElbow.set(0.1);
 	}
 	
+	public void stop() {
+		RobotMap.lElbow.stopMotor();
+	}
 	
 }

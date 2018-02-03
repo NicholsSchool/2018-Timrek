@@ -36,7 +36,7 @@ public class UpperArmMove extends Command {
 	}
 	
 	protected void end() {
-		Robot.upperArm.stop();
+		Robot.upperArm.rest();
 	}
 	
 	protected void interrupted() {

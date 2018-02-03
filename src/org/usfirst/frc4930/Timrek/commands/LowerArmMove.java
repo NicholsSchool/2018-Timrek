@@ -33,6 +33,7 @@ public class LowerArmMove extends Command{
 	}
 	
 	protected void end() {
+		//If lowerArm does not keep its position, change to .rest()
 		Robot.lowerArm.stop();
 	}
 	
