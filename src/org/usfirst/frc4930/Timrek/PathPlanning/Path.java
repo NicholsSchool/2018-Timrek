@@ -52,9 +52,9 @@ public class Path extends Subsystem {
 
 	
 	public void setTankDrive() {
-		modifier = new TankModifier(trajectory).modify(wheelBaseWidth);
-		left  =  modifier.getLeftTrajectory(); 
-		right = modifier.getRightTrajectory();
+		this.modifier = new TankModifier(trajectory).modify(wheelBaseWidth);
+		this.left  =  modifier.getLeftTrajectory(); 
+		this.right = modifier.getRightTrajectory();
 	}
 	
 	public void getValues(Trajectory trajectory) {
@@ -67,8 +67,8 @@ public class Path extends Subsystem {
 	}
 
 	public void run() {
-		EncoderFollower leftEncoder = new EncoderFollower(left);
-		EncoderFollower rightEncoder = new EncoderFollower(right);
+		EncoderFollower leftEncoder = new EncoderFollower(this.left);
+		EncoderFollower rightEncoder = new EncoderFollower(this.right);
 		
 		leftEncoder.configureEncoder(RobotMap.lDrvMSTR.getSelectedSensorPosition(0), 1600, wheelDiameter);
 		rightEncoder.configureEncoder(RobotMap.rDrvMSTR.getSelectedSensorPosition(0), 1600, wheelDiameter);

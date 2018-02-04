@@ -11,12 +11,14 @@
 
 package org.usfirst.frc4930.Timrek;
 
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc4930.Timrek.PathPlanning.PickAuto;
 import org.usfirst.frc4930.Timrek.subsystems.*;
 
 /**
@@ -30,6 +32,7 @@ public class Robot extends TimedRobot {
 
     Command autonomousCommand;
     SendableChooser<Command> chooser = new SendableChooser<>();
+    PickAuto pickAuto = new PickAuto();
 
     public static OI oi;
     public static DriveTrain driveTrain;
@@ -62,7 +65,6 @@ public class Robot extends TimedRobot {
         shifter = new Shifter();
         lowerArm = new LowerArm();
         upperArm = new UpperArm();
-  
         // OI must be constructed after subsystems. If the OI creates Commands
         //(which it very likely will), subsystems are not guaranteed to be
         // constructed yet. Thus, their requires() statements may grab null
@@ -88,7 +90,8 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
-        autonomousCommand = chooser.getSelected();
+
+        autonomousCommand = pickAuto.getCommand();
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     }
