@@ -4,15 +4,15 @@ import org.usfirst.frc4930.Timrek.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ShiftDown extends Command{
-	  public ShiftDown() {
-		    requires(Robot.shifter);
+public class Disengage extends Command{
+	  public Disengage() {
+		    requires(Robot.pto);
 		  }
 
 		  protected void initialize() {}
 
 		  protected void execute() {
-		    Robot.shifter.setLowGear();
+		    Robot.pto.setLowGear();
 		  }
 
 		  protected boolean isFinished() {

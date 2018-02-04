@@ -4,15 +4,15 @@ import org.usfirst.frc4930.Timrek.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class PTODown extends Command{
-	  public PTODown() {
-		    requires(Robot.pto);
+public class LowGear extends Command{
+	  public LowGear() {
+		    requires(Robot.shifter);
 		  }
 
 		  protected void initialize() {}
 
 		  protected void execute() {
-		    Robot.pto.setLowGear();
+		    Robot.shifter.setLowGear();
 		  }
 
 		  protected boolean isFinished() {

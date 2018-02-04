@@ -72,12 +72,12 @@ public class OI {
        
        
        //Shifter (Solenoid 0)
-       j1b3.whenPressed(new ShiftDown()); //Set True
-       j1b4.whenPressed(new ShiftUp());  //Set False
+       j1b3.whenPressed(new LowGear()); //Set True
+       j1b4.whenPressed(new HighGear());  //Set False
        
        //PTO (Solenoid 1)
-       j1b7.whenPressed(new PTODown()); //Set True
-       j1b8.whenPressed(new PTOUp());  //Set False
+       j1b7.whenPressed(new Disengage()); //Set True
+       j1b8.whenPressed(new Engage());  //Set False
        
        //DropWheel (Solenoid 2)
        j1b9.whenPressed(new Drop());   //Set True

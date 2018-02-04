@@ -4,8 +4,8 @@ import org.usfirst.frc4930.Timrek.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class PTOUp extends Command {
-	  public PTOUp() {
+public class Engage extends Command {
+	  public Engage() {
 		    requires(Robot.pto);
 		  }
 

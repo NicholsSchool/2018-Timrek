@@ -5,8 +5,8 @@ import org.usfirst.frc4930.Timrek.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ShiftUp extends Command{
-	  public ShiftUp() {
+public class HighGear extends Command{
+	  public HighGear() {
 		    requires(Robot.shifter);
 		  }
 
