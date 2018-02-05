@@ -4,6 +4,9 @@ public class StartingRight extends StartingPath{
 	
 
 	public StartingRight() {
+		
+		this.size(4, 4, 2, 2);
+		
 		leftSwitch.addPoint(Points.rightStart);
 		leftScale.addPoint(Points.rightStart);
 		rightSwitch.addPoint(Points.rightStart);
@@ -22,6 +25,6 @@ public class StartingRight extends StartingPath{
 		leftScale.addPoint(Points.forwardLeftSide);
 		leftScale.addPoint(Points.scaleLeftSide);
 		
-		init();
+		this.init();
 	}
 }

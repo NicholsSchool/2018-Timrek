@@ -3,6 +3,9 @@ package org.usfirst.frc4930.Timrek.PathPlanning;
 public class StartingCenter extends StartingPath {
 
 	public StartingCenter(){
+		
+		this.size(4, 4, 4, 4);
+		
 		leftSwitch.addPoint(Points.centerStart);
 		leftScale.addPoint(Points.centerStart);
 		rightSwitch.addPoint(Points.centerStart);
@@ -26,6 +29,6 @@ public class StartingCenter extends StartingPath {
 		rightScale.addPoint(Points.forwardRightSide);
 		rightScale.addPoint(Points.scaleRightSide);
 		
-		init();
+		this.init();
 	}
 }

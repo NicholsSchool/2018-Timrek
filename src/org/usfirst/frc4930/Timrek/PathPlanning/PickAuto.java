@@ -4,10 +4,11 @@ import org.usfirst.frc4930.Timrek.Robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.MatchType;
-import edu.wpi.first.wpilibj.command.Command;
+
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class PickAuto {
-	private Command autoCommand;
+	private CommandGroup autoCommand;
 	private String gameData;
 	//gameData 
 	
@@ -16,19 +17,19 @@ public class PickAuto {
 	private boolean switchLeft;
 	private boolean scaleLeft;
 	
-	private int position;
+	private int dialPosition;
 	private StartingPath startPosition;
 	
 
-	public Command getCommand() {
+	public CommandGroup getCommand() {
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		switchLeft = gameData.charAt(0) == 'L';
 		scaleLeft = gameData.charAt(1) == 'L';
 		
 		isQualification = DriverStation.getInstance().getMatchType() == MatchType.Qualification;
-		position = Robot.positionDial.getDialNumber();  //DIAL CODE NEEDS TO BE TESTED
+		dialPosition = Robot.positionDial.getDialNumber();  //DIAL CODE NEEDS TO BE TESTED
 		
-		switch (position) {
+		switch (dialPosition) {
 	      case 1:
 	    	  startPosition = new StartingLeft();
 	      case 2:
@@ -38,6 +39,9 @@ public class PickAuto {
 	      default:
 	    	  startPosition = null; //I dont know whether I should put null or something else
 	    }
+		
+		//If it is a qualification match, the toSwitch parameter for Auto, is true, because
+		// we want ranking point for switch in qualification, and scale in elimination
 		
 		if(isQualification){
 			if(switchLeft){
@@ -52,7 +56,7 @@ public class PickAuto {
 				autoCommand = new Auto(startPosition.leftScale, isQualification);
 			}
 			else {
-				autoCommand = new Auto(startPosition.leftScale, isQualification);
+				autoCommand = new Auto(startPosition.rightScale, isQualification);
 			}
 		}
 		return autoCommand;

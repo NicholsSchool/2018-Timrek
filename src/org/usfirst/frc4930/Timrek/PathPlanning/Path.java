@@ -13,8 +13,9 @@ import jaci.pathfinder.modifiers.TankModifier;
 public class Path extends Subsystem {
 	
 	private int numPoints = 0;
+	private int totalPoints;
 	
-	private Waypoint[] points = new Waypoint[10];
+	private Waypoint[] points;  //Find out if the size 10 could be a problem
 	
 	private Trajectory.Config config; 
 	private Trajectory trajectory; 
@@ -36,9 +37,18 @@ public class Path extends Subsystem {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public Path(int totalPoints){
+		this.totalPoints = totalPoints;
+		this.points = new Waypoint[totalPoints];
+	}
+	
+	
 	public void addPoint(Waypoint point) {
+		if(this.numPoints < this.totalPoints){
 		this.points[numPoints] = point;
 		this.numPoints ++;
+		}
 	}
 	
 	public void config(double velocity, double acceleration, double jerk){
@@ -48,16 +58,16 @@ public class Path extends Subsystem {
 	}
 	
 	public Trajectory generate() {
-		this.trajectory = Pathfinder.generate(points, config);
+		this.trajectory = Pathfinder.generate(this.points, this.config);
 		return trajectory;
 	}
 	
 
 	
 	public void setTankDrive() {
-		this.modifier = new TankModifier(trajectory).modify(wheelBaseWidth);
-		this.left  =  modifier.getLeftTrajectory(); 
-		this.right = modifier.getRightTrajectory();
+		this.modifier = new TankModifier(this.trajectory).modify(this.wheelBaseWidth);
+		this.left  =  this.modifier.getLeftTrajectory(); 
+		this.right = this.modifier.getRightTrajectory();
 	}
 	
 	public void getValues(Trajectory trajectory) {
@@ -70,13 +80,14 @@ public class Path extends Subsystem {
 	}
 	
 	public void configEncoders() {
-		leftEncoder = new EncoderFollower(this.left);
-	    rightEncoder = new EncoderFollower(this.right);
+		this.leftEncoder = new EncoderFollower(this.left);
+	    this.rightEncoder = new EncoderFollower(this.right);
 		
-		leftEncoder.configureEncoder(RobotMap.lDrvMSTR.getSelectedSensorPosition(0), 1600, wheelDiameter);
-		rightEncoder.configureEncoder(RobotMap.rDrvMSTR.getSelectedSensorPosition(0), 1600, wheelDiameter);
+		this.leftEncoder.configureEncoder(RobotMap.lDrvMSTR.getSelectedSensorPosition(0), 1600, wheelDiameter);
+		this.rightEncoder.configureEncoder(RobotMap.rDrvMSTR.getSelectedSensorPosition(0), 1600, wheelDiameter);
 		
-		leftEncoder.configurePIDVA(0.1, 0.0, 0.0, 1 / velocity, 0);
+		this.leftEncoder.configurePIDVA(0.1, 0.0, 0.0, 1 / velocity, 0);
+		this.rightEncoder.configurePIDVA(0.1, 0.0, 0.0, 1 / velocity, 0);
 	}
 	
 	public void run() {
@@ -91,7 +102,7 @@ public class Path extends Subsystem {
 		double angleDifference = Pathfinder.boundHalfDegrees(desiredHeading - gyroHeading);
 		double turn = 0.8 * (-1.0/80.0) * angleDifference;
 		
-		Robot.driveTrain.move(l + turn, r + turn);
+		Robot.driveTrain.move(l + turn, r - turn);
 	}
 
 }

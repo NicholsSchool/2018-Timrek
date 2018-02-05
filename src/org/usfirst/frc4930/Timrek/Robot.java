@@ -14,6 +14,7 @@ package org.usfirst.frc4930.Timrek;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -30,7 +31,7 @@ import org.usfirst.frc4930.Timrek.subsystems.*;
  */
 public class Robot extends TimedRobot {
 
-    Command autonomousCommand;
+    CommandGroup autonomousCommand;
     SendableChooser<Command> chooser = new SendableChooser<>();
     PickAuto pickAuto = new PickAuto();
 
@@ -97,7 +98,7 @@ public class Robot extends TimedRobot {
 
         autonomousCommand = pickAuto.getCommand();
         // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+        if (autonomousCommand != null) autonomousCommand.start(); //CHECK IF THIS IS RIGHT
     }
 
     /**
