@@ -138,5 +138,10 @@ public class Robot extends TimedRobot {
        
        SmartDashboard.putNumber("UpperArmState: ", Robot.upperArm.getState());
        SmartDashboard.putNumber("LowerArmState: ", Robot.lowerArm.getState());
+       
+       
+       SmartDashboard.putNumber("Gyro", RobotMap.ahrs.getAngle());
+     //  SmartDashboard.putNumber("PositionPot", Robot.positionDial.getDialNumber());
+       //SmartDashboard.putNumber("PositionPot", Robot.timeDelayDial.getDialNumber());
     }
 }

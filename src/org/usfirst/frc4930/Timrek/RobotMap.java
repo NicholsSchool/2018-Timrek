@@ -11,11 +11,13 @@
 
 package org.usfirst.frc4930.Timrek;
 
+import edu.wpi.first.wpilibj.SPI;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -54,6 +56,8 @@ public class RobotMap {
 	public static Solenoid solenoid2;
 	public static Solenoid solenoid4;
 	public static Solenoid solenoid5;
+	
+	public static AHRS ahrs;
 	
 	public static DifferentialDrive driveTank;
 	
@@ -138,6 +142,8 @@ public class RobotMap {
      //Make DriveTank   
         driveTank = new DifferentialDrive(lDrvMSTR, rDrvMSTR);
         driveTank.setSafetyEnabled(false);
+        
+        ahrs = new AHRS(SPI.Port.kMXP); 
         
       //Pneumatics
         compressor = new Compressor(50);
