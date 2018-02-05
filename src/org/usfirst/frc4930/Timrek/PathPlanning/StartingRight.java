@@ -22,19 +22,6 @@ public class StartingRight extends StartingPath{
 		leftScale.addPoint(Points.forwardLeftSide);
 		leftScale.addPoint(Points.scaleLeftSide);
 		
-		leftSwitch.config(velocity, acceleration, jerk);
-		leftScale.config(velocity, acceleration, jerk);
-		rightSwitch.config(velocity, acceleration, jerk);
-		rightScale.config(velocity, acceleration, jerk);
-		
-		leftSwitch.generate();
-		leftScale.generate();
-		rightSwitch.generate();
-		rightScale.generate();
-		
-		leftSwitch.setTankDrive();
-		leftScale.setTankDrive();
-		rightSwitch.setTankDrive();
-		rightScale.setTankDrive();
+		init();
 	}
 }

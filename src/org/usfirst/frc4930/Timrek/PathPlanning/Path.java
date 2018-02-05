@@ -26,7 +26,10 @@ public class Path extends Subsystem {
 	private double velocity;
 	
 	public Trajectory left;       
-	public Trajectory right;      
+	public Trajectory right;  
+	
+	private EncoderFollower leftEncoder;
+	private EncoderFollower rightEncoder;
 		
 	@Override
 	protected void initDefaultCommand() {
@@ -65,15 +68,19 @@ public class Path extends Subsystem {
 			        seg.acceleration, seg.jerk, seg.heading);
 		}
 	}
-
-	public void run() {
-		EncoderFollower leftEncoder = new EncoderFollower(this.left);
-		EncoderFollower rightEncoder = new EncoderFollower(this.right);
+	
+	public void configEncoders() {
+		leftEncoder = new EncoderFollower(this.left);
+	    rightEncoder = new EncoderFollower(this.right);
 		
 		leftEncoder.configureEncoder(RobotMap.lDrvMSTR.getSelectedSensorPosition(0), 1600, wheelDiameter);
 		rightEncoder.configureEncoder(RobotMap.rDrvMSTR.getSelectedSensorPosition(0), 1600, wheelDiameter);
 		
 		leftEncoder.configurePIDVA(0.1, 0.0, 0.0, 1 / velocity, 0);
+	}
+	
+	public void run() {
+
 		double output = leftEncoder.calculate(RobotMap.lDrvMSTR.getSelectedSensorPosition(0));
 		double l = leftEncoder.calculate(RobotMap.lDrvMSTR.getSelectedSensorPosition(0));
 		double r = rightEncoder.calculate(RobotMap.rDrvMSTR.getSelectedSensorPosition(0));
