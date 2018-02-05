@@ -43,6 +43,8 @@ public class Robot extends TimedRobot {
     public static Claw claw;
     public static Shifter shifter;
     public static DropWheel dropWheel;
+    public static Dial positionDial;
+    public static Dial timeDelayDial;
     
     //ALL THESE VALUES NEED TO BE CHECKED TO SEE HOW SOLENOID STATE RELATES TO ROBOT
     public static boolean shifterInLowGear = true;
@@ -63,6 +65,8 @@ public class Robot extends TimedRobot {
         claw = new Claw();
         dropWheel = new DropWheel();
         shifter = new Shifter();
+        positionDial = new Dial(RobotMap.positionPot);
+        timeDelayDial = new Dial(RobotMap.timeDelayPot);
         lowerArm = new LowerArm();
         upperArm = new UpperArm();
         // OI must be constructed after subsystems. If the OI creates Commands

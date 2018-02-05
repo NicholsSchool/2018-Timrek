@@ -1,5 +1,7 @@
 package org.usfirst.frc4930.Timrek.PathPlanning;
 
+import org.usfirst.frc4930.Timrek.Robot;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.MatchType;
 import edu.wpi.first.wpilibj.command.Command;
@@ -24,7 +26,7 @@ public class PickAuto {
 		scaleLeft = gameData.charAt(1) == 'L';
 		
 		isQualification = DriverStation.getInstance().getMatchType() == MatchType.Qualification;
-		position = 1;  //SWICTH TO DIAL CODE ONCE DIAL IS ADDED
+		position = Robot.positionDial.getDialNumber();  //DIAL CODE NEEDS TO BE TESTED
 		
 		switch (position) {
 	      case 1:

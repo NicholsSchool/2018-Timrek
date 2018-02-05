@@ -19,6 +19,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -58,6 +59,8 @@ public class RobotMap {
 	public static Solenoid solenoid5;
 	
 	public static AHRS ahrs; //Gyro
+	public static AnalogPotentiometer positionPot;
+	public static AnalogPotentiometer timeDelayPot;
 	
 	public static DifferentialDrive driveTank;
 	
@@ -123,8 +126,11 @@ public class RobotMap {
         lDrvMSTR.setSensorPhase(true);
         
      //Gyro 
-      
         ahrs = new AHRS(SPI.Port.kMXP); 
+     
+     //Pots 
+        positionPot = new AnalogPotentiometer(0, 360, 0);
+        timeDelayPot = new AnalogPotentiometer(0, 360, 0);
         
      // Safety Enabled   
 //        lShoulder.setSafetyEnabled(true);
