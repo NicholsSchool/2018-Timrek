@@ -60,7 +60,7 @@ public class RobotMap {
 	
 	public static AHRS ahrs; //Gyro
 	public static AnalogPotentiometer positionPot;
-	public static AnalogPotentiometer timeDelayPot;
+//	public static AnalogPotentiometer timeDelayPot;
 	
 	public static DifferentialDrive driveTank;
 	
@@ -130,7 +130,7 @@ public class RobotMap {
      
      //Pots 
         positionPot = new AnalogPotentiometer(0, 360, 0);
-        timeDelayPot = new AnalogPotentiometer(0, 360, 0);
+     //   timeDelayPot = new AnalogPotentiometer(0, 360, 0);
         
      // Safety Enabled   
 //        lShoulder.setSafetyEnabled(true);

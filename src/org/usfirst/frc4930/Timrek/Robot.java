@@ -67,7 +67,7 @@ public class Robot extends TimedRobot {
         dropWheel = new DropWheel();
         shifter = new Shifter();
         positionDial = new Dial(RobotMap.positionPot);
-        timeDelayDial = new Dial(RobotMap.timeDelayPot);
+ //       timeDelayDial = new Dial(RobotMap.timeDelayPot);
         lowerArm = new LowerArm();
         upperArm = new UpperArm();
         // OI must be constructed after subsystems. If the OI creates Commands
@@ -144,5 +144,9 @@ public class Robot extends TimedRobot {
        
        SmartDashboard.putNumber("UpperArmState: ", Robot.upperArm.getState());
        SmartDashboard.putNumber("LowerArmState: ", Robot.lowerArm.getState());
+
+       SmartDashboard.putNumber("Gyro", RobotMap.ahrs.getAngle());
+     //  SmartDashboard.putNumber("PositionPot", Robot.positionDial.getDialNumber());
+       //SmartDashboard.putNumber("PositionPot", Robot.timeDelayDial.getDialNumber());
     }
 }
