@@ -19,6 +19,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -58,6 +59,8 @@ public class RobotMap {
 	public static Solenoid solenoid5;
 	
 	public static AHRS ahrs;
+	public static AnalogPotentiometer positionPot;
+	public static AnalogPotentiometer timeDelayPot;
 	
 	public static DifferentialDrive driveTank;
 	
@@ -144,6 +147,8 @@ public class RobotMap {
         driveTank.setSafetyEnabled(false);
         
         ahrs = new AHRS(SPI.Port.kMXP); 
+        positionPot = new AnalogPotentiometer(0, 360, 0);
+        timeDelayPot = new AnalogPotentiometer(1, 360, 0);
         
       //Pneumatics
         compressor = new Compressor(50);

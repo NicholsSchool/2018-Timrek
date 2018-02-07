@@ -40,6 +40,8 @@ public class Robot extends TimedRobot {
     public static Claw claw;
     public static Shifter shifter;
     public static DropWheel dropWheel;
+    public static Dial positionDial;
+    public static Dial timeDelayDial;
     
     //ALL THESE VALUES NEED TO BE CHECKED TO SEE HOW SOLENOID STATE RELATES TO ROBOT
     public static boolean shifterInLowGear = true;
@@ -62,7 +64,8 @@ public class Robot extends TimedRobot {
         shifter = new Shifter();
         lowerArm = new LowerArm();
         upperArm = new UpperArm();
-  
+        positionDial = new Dial(RobotMap.positionPot);
+        timeDelayDial = new Dial(RobotMap.timeDelayPot);
         // OI must be constructed after subsystems. If the OI creates Commands
         //(which it very likely will), subsystems are not guaranteed to be
         // constructed yet. Thus, their requires() statements may grab null
@@ -141,7 +144,10 @@ public class Robot extends TimedRobot {
        
        
        SmartDashboard.putNumber("Gyro", RobotMap.ahrs.getAngle());
-     //  SmartDashboard.putNumber("PositionPot", Robot.positionDial.getDialNumber());
-       //SmartDashboard.putNumber("PositionPot", Robot.timeDelayDial.getDialNumber());
+       
+       SmartDashboard.putNumber("PositionPot Raw: ", RobotMap.positionPot.get());
+       SmartDashboard.putNumber("DelayPot Raw: " , RobotMap.timeDelayPot.get());
+       SmartDashboard.putNumber("PositionPot", Robot.positionDial.getPosition());
+       SmartDashboard.putNumber("DelayPot", Robot.timeDelayDial.getPosition());
     }
 }

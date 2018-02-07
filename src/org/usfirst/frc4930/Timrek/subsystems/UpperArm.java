@@ -25,7 +25,7 @@ public class UpperArm extends Subsystem {
 	public boolean checkGround() {
 		// encoder values NEED TO BE TESTED
 		
-		if (RobotMap.lElbow.getSelectedSensorPosition(0) < 2000) {
+		if (RobotMap.lElbow.getSelectedSensorPosition(0) < 20000) {
 			isGrounded = true;
 		}
 		else {
@@ -89,7 +89,9 @@ public class UpperArm extends Subsystem {
 		return state;
 	}
 	
-	
+	public double getEncoder() {
+		return RobotMap.lElbow.getSelectedSensorPosition(0);
+	}
 
 	public void setPosition(double position) {
 		RobotMap.lElbow.config_kP(0, 0.02, 100);
@@ -108,7 +110,7 @@ public class UpperArm extends Subsystem {
 	}
 	
 	public void rest() {
-		RobotMap.lElbow.set(0.1);
+		RobotMap.lElbow.set(0.15);
 	}
 	
 	public void stop() {
