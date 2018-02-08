@@ -42,6 +42,8 @@ public class UpperArmMove extends Command {
 	
 	protected void end() {
 		Robot.upperArm.rest();
+		// start joystick control
+		new MoveArm().start();
 	}
 	
 	protected void interrupted() {
