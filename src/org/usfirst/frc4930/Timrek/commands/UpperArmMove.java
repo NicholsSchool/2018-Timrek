@@ -15,16 +15,16 @@ public class UpperArmMove extends Command {
 		requires(Robot.lowerArm);
 		desiredState = state;
 		startState = Robot.upperArm.getState();
-		change = desiredState - startState;
+		change = (desiredState - startState) * 40000;
 	} 
 	
 	protected void initialize() {
 		// Run This code to test PID Loop 
 		if(change > 0){
-			Robot.upperArm.setPosition(40000 * change);
+			Robot.upperArm.setPosition(change);
 		}
 		else {
-			Robot.upperArm.goDown(40000 * change);
+			Robot.upperArm.goDown(change);
 		}
 	}
 	
@@ -36,7 +36,10 @@ public class UpperArmMove extends Command {
 	@Override
 	protected boolean isFinished() {
 		
-		return (Robot.upperArm.getState() == desiredState);
+		boolean lowerBound = Robot.upperArm.getEncoder() > change - 100;
+		boolean upperBound =  Robot.upperArm.getEncoder() < change + 100;
+		
+		return (Robot.upperArm.getState() == desiredState) && lowerBound && upperBound;
 		
 	}
 	
