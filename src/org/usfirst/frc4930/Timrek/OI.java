@@ -90,16 +90,6 @@ public class OI {
        //Intake 
        j2b3.whileHeld(new Intake()); 
        j2b4.whileHeld(new Outtake());
-       
-       //UpperArm (TESTING CURRENTLY. ONLY CALL WHEN LOWER ARM IS IN GROUND)
-       j2b7.whenPressed(new UpperArmMove(1)); //Ground
-       j2b9.whenPressed(new UpperArmMove(2)); //Center
-       j2b11.whenPressed(new UpperArmMove(3)); //Raised Fully
-       
-       //LowerArm (TESTING CURRENTLY. ONLY CALL WHEN UPPER ARM IS RAISED FULLY)
-       j2b8.whenPressed(new LowerArmMove(1)); //Ground
-       j2b10.whenPressed(new LowerArmMove(2)); //Raised
-
       
     }
 

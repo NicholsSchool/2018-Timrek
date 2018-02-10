@@ -90,113 +90,6 @@ public class Arm extends Subsystem
     }
   }
 
-  // set velocity
-  public void pIDSetV(double speed) {
-    // config pid
-    lShoulder.config_kP(0, 0.0, 0);
-    lShoulder.config_kI(0, 0.0, 0);
-    lShoulder.config_kD(0, 0.0, 0);
-
-    lElbow.config_kP(0, 0.0, 0);
-    lElbow.config_kI(0, 0.0, 0);
-    lElbow.config_kD(0, 0.0, 0);
-
-    if (speed > 0.05) {
-      pIDExtendV(speed);
-    } else if (speed < -0.05) {
-      pIDRetractV(speed);
-    } else {
-      pIDMaintainV();
-    }
-  }
-
-  private void pIDMaintainV() {
-    lElbow.set(ControlMode.Velocity, 0.0);
-    lShoulder.set(ControlMode.Velocity, 0.0);
-  }
-
-  private void pIDExtendV(double speed) {
-    // limit switches return false when pressed
-    // if the upper arm is not fully extended, extend upper arm
-    if (lElbow.getSelectedSensorPosition(0) < Values.ELBOW_EXTENDED * 0.8) {
-      lShoulder.set(ControlMode.Velocity, 0.0);
-      lElbow.set(ControlMode.Velocity, speed * Values.ELBOW_VELOCITY);
-    } else if (lShoulder.getSelectedSensorPosition(0) < Values.SHOULDER_EXTENDED * 0.8) {
-      // else if lower arm is not fully extended, extend lower arm
-      lShoulder.set(ControlMode.Velocity, speed * Values.SHOULDER_VELOCITY);
-      lElbow.set(ControlMode.Velocity, 0.0);
-    }
-  }
-
-  private void pIDRetractV(double speed) {
-    // limit switches return false when pressed
-    // if lower arm is not retracted, retract lower arm
-    if (lArmDownLSwitch.get()) {
-      lShoulder.set(ControlMode.Velocity, speed * Values.SHOULDER_VELOCITY);
-      lElbow.set(ControlMode.Velocity, 0.0);
-    } else if (lElbow.getSelectedSensorPosition(0) > 3000) {
-      // else if upp arm is not retracted, retract upper arm
-      lShoulder.set(ControlMode.Velocity, 0.0);
-      lElbow.set(ControlMode.Velocity, speed * Values.ELBOW_VELOCITY);
-    }
-  }
-
-  // set position
-  public void pIDSetP(double jPosition) {
-
-    // config pid
-    lShoulder.config_kP(0, 0.0, 0);
-    lShoulder.config_kI(0, 0.0, 0);
-    lShoulder.config_kD(0, 0.0, 0);
-
-    lElbow.config_kP(0, 0.0, 0);
-    lElbow.config_kI(0, 0.0, 0);
-    lElbow.config_kD(0, 0.0, 0);
-
-    // map joystick values from -1.0 to 1.0
-    // to relative position values from 0.0 to 1.0
-    // a joystick value of 0.0 will map to a position value of 0.5
-    double position = (jPosition + 1.0) / 2.0;
-
-    if (position > 0.05) {
-      pIDExtendP(position);
-    } else if (position < -0.05) {
-      pIDRetractP(position);
-    } else {
-      pIDMaintainP();
-    }
-  }
-
-  private void pIDMaintainP() {
-    lElbow.set(0.1);
-    lShoulder.set(0.1);
-  }
-
-  private void pIDExtendP(double position) {
-    // limit switches return false when pressed
-    // if the upper arm is not fully extended, extend upper arm
-    if (lElbow.getSelectedSensorPosition(0) < Values.ELBOW_EXTENDED * 0.8) {
-      lShoulder.set(0.05);
-      lElbow.set(ControlMode.Position, position * Values.ELBOW_EXTENDED);
-    } else if (lShoulder.getSelectedSensorPosition(0) < Values.SHOULDER_EXTENDED * 0.8) {
-      // else if lower arm is not fully extended, extend lower arm
-      lShoulder.set(ControlMode.Position, position * Values.SHOULDER_EXTENDED);
-      lElbow.set(0.05);
-    }
-  }
-
-  private void pIDRetractP(double position) {
-    // limit switches return false when pressed
-    // if lower arm is not retracted, retract lower arm
-    if (lArmDownLSwitch.get()) {
-      lShoulder.set(ControlMode.Position, position * Values.SHOULDER_EXTENDED);
-      lElbow.set(0.05);
-    } else if (lElbow.getSelectedSensorPosition(0) > 3000) {
-      // else if upp arm is not retracted, retract upper arm
-      lShoulder.set(0.05);
-      lElbow.set(ControlMode.Position, position * Values.ELBOW_EXTENDED);
-    }
-  }
 
   public void resetEncoders() {
     lShoulder.setSelectedSensorPosition(0, 0, 0);
@@ -224,5 +117,4 @@ public class Arm extends Subsystem
         break;
     }
   }
-
 }
