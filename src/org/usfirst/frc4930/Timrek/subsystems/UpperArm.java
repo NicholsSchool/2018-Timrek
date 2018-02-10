@@ -94,9 +94,9 @@ public class UpperArm extends Subsystem {
 	}
 
 	public void setPosition(double position) {
-		RobotMap.lElbow.config_kP(0, 0.02, 100);
+		RobotMap.lElbow.config_kP(0, 0.015, 100);
 		RobotMap.lElbow.config_kI(0, 0.0, 100);
-		RobotMap.lElbow.config_kD(0, 0.2, 100);
+		RobotMap.lElbow.config_kD(0, 0.3, 100);
 		
 		RobotMap.lElbow.set(ControlMode.Position, position);
 	}
@@ -104,7 +104,7 @@ public class UpperArm extends Subsystem {
 	public void goDown(double position){
 		RobotMap.lElbow.config_kP(0, 0.005, 100);
 		RobotMap.lElbow.config_kI(0, 0.0, 100);
-		RobotMap.lElbow.config_kD(0, 0.35, 100);
+		RobotMap.lElbow.config_kD(0, 0.45, 100);
 		
 		RobotMap.lElbow.set(ControlMode.Position, position);
 	}

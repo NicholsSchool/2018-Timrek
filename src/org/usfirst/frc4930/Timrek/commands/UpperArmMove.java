@@ -3,6 +3,7 @@ package org.usfirst.frc4930.Timrek.commands;
 import org.usfirst.frc4930.Timrek.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class UpperArmMove extends Command {
 	
@@ -16,6 +17,7 @@ public class UpperArmMove extends Command {
 		desiredState = state;
 		startState = Robot.upperArm.getState();
 		change = (desiredState - startState) * 40000;
+		SmartDashboard.putNumber("change", change);
 	} 
 	
 	protected void initialize() {

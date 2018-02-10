@@ -15,16 +15,21 @@ public class LowerArmMove extends Command{
 		requires(Robot.upperArm);
 		desiredState = state;
 		startState = Robot.lowerArm.getState();
-		change = desiredState - startState;
+		change = (desiredState - startState) * 40000;
 	}
 	
 	protected void initialize() {
-		// Run This code to test PID Loop 
-		//Robot.lowerArm.setPosition(45000 * change);
+	
+		if(change > 0){
+			Robot.lowerArm.setPosition(change);
+		}
+		else {
+			Robot.lowerArm.goDown(change);
+		}
 	}
 	
 	protected void execute() {
-		Robot.lowerArm.move(0.35 * change);
+	//	Robot.lowerArm.move(0.35 * change);
 	}
 	
 	@Override
@@ -34,7 +39,7 @@ public class LowerArmMove extends Command{
 	
 	protected void end() {
 		//If lowerArm does not keep its position, change to .rest()
-		Robot.lowerArm.stop();
+		Robot.lowerArm.rest();
 	}
 	
 	protected void interrupted() {
