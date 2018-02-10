@@ -12,7 +12,7 @@ public class DropWheel extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
-		setDefaultCommand(new MoveDropWheel());
+//		setDefaultCommand(new MoveDropWheel());
 	}
 
 	public void drop() {
@@ -25,13 +25,13 @@ public class DropWheel extends Subsystem {
 		Robot.dropped = false;
 	}
 	
-	public void move(double speed) {
+	public void set(double speed) {
 		RobotMap.dropWhl.set(speed);
 	}
 	
 	public void pivot() {
-		double speed = Robot.oi.j0.getX();
-		move(speed);
+		double speed = Robot.oi.j1.getX();
+		set(speed);
 	}
 	
 	public void stop() {
