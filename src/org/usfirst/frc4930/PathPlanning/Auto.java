@@ -1,4 +1,4 @@
-package org.usfirst.frc4930.Timrek.PathPlanning;
+package org.usfirst.frc4930.PathPlanning;
 
 import org.usfirst.frc4930.Timrek.commands.Outtake;
 import org.usfirst.frc4930.Timrek.commands.UpperArmMove;

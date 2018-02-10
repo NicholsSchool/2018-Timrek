@@ -1,4 +1,4 @@
-package org.usfirst.frc4930.Timrek.PathPlanning;
+package org.usfirst.frc4930.PathPlanning;
 
 import org.usfirst.frc4930.Timrek.Robot;
 import org.usfirst.frc4930.Timrek.RobotMap;

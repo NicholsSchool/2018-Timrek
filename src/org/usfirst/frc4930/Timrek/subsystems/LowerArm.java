@@ -66,9 +66,21 @@ public class LowerArm extends Subsystem{
 	}
 	
 	public void setPosition(double position) {
-		RobotMap.lShoulder.config_kP(0, 0.5, 100);
+		//NOT TESTED
+		
+		RobotMap.lShoulder.config_kP(0, 0.04, 100);
 		RobotMap.lShoulder.config_kI(0, 0.0, 100);
-		RobotMap.lShoulder.config_kD(0, 0.1, 100);
+		RobotMap.lShoulder.config_kD(0, 0.2, 100);
+		
+		RobotMap.lShoulder.set(ControlMode.Position, position);
+	}
+	
+	public void goDown(double position){
+		
+		//NOT TESTED
+		RobotMap.lShoulder.config_kP(0, 0.005, 100);
+		RobotMap.lShoulder.config_kI(0, 0.0, 100);
+		RobotMap.lShoulder.config_kD(0, 0.35, 100);
 		
 		RobotMap.lShoulder.set(ControlMode.Position, position);
 	}

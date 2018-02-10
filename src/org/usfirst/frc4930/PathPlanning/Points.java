@@ -1,4 +1,4 @@
-package org.usfirst.frc4930.Timrek.PathPlanning;
+package org.usfirst.frc4930.PathPlanning;
 
 import jaci.pathfinder.Waypoint;
 

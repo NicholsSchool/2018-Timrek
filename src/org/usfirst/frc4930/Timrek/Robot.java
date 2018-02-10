@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc4930.Timrek.PathPlanning.PickAuto;
+import org.usfirst.frc4930.PathPlanning.*;
 import org.usfirst.frc4930.Timrek.subsystems.*;
 
 /**
@@ -31,7 +31,8 @@ import org.usfirst.frc4930.Timrek.subsystems.*;
  */
 public class Robot extends TimedRobot {
 
-    CommandGroup autonomousCommand;
+    CommandGroup autonomousCommandGroup;
+    Command autonomousCommand;
     SendableChooser<Command> chooser = new SendableChooser<>();
     PickAuto pickAuto = new PickAuto();
 
@@ -46,6 +47,7 @@ public class Robot extends TimedRobot {
     public static DropWheel dropWheel;
     public static Dial positionDial;
     public static Dial timeDelayDial;
+    public static StartingLeft startingLeft;
     
     //ALL THESE VALUES NEED TO BE CHECKED TO SEE HOW SOLENOID STATE RELATES TO ROBOT
     public static boolean shifterInLowGear = true;
@@ -70,6 +72,7 @@ public class Robot extends TimedRobot {
  //       timeDelayDial = new Dial(RobotMap.timeDelayPot);
         lowerArm = new LowerArm();
         upperArm = new UpperArm();
+        startingLeft = new StartingLeft();
         // OI must be constructed after subsystems. If the OI creates Commands
         //(which it very likely will), subsystems are not guaranteed to be
         // constructed yet. Thus, their requires() statements may grab null
@@ -95,10 +98,10 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
-
-        autonomousCommand = pickAuto.getCommand();
+    	
+        autonomousCommand = new RunPath(startingLeft.leftSwitch);
         // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start(); //CHECK IF THIS IS RIGHT
+        if (autonomousCommandGroup != null) autonomousCommandGroup.start(); //CHECK IF THIS IS RIGHT
     }
 
     /**
@@ -115,7 +118,7 @@ public class Robot extends TimedRobot {
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
+        if (autonomousCommandGroup != null) autonomousCommandGroup.cancel();
         RobotMap.lShoulder.setSelectedSensorPosition(0, 0, 100);
         RobotMap.lElbow.setSelectedSensorPosition(0, 0, 100);
         RobotMap.lDrvMSTR.setSelectedSensorPosition(0, 0, 100);

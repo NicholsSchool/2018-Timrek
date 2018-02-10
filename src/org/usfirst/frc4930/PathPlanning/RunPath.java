@@ -1,4 +1,4 @@
-package org.usfirst.frc4930.Timrek.PathPlanning;
+package org.usfirst.frc4930.PathPlanning;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -6,7 +6,7 @@ public class RunPath extends Command{
 
 	private Path desiredPath;
 	
-	RunPath(Path path) {
+	public RunPath(Path path) {
 		desiredPath = path;
 	}
 	
