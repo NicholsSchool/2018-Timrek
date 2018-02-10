@@ -43,6 +43,7 @@ public class Robot extends TimedRobot {
     public static Dial positionDial;
     public static Dial timeDelayDial;
     public static Arm arm;
+    public static Cameras cameras;
     
     //ALL THESE VALUES NEED TO BE CHECKED TO SEE HOW SOLENOID STATE RELATES TO ROBOT
     public static boolean shifterInLowGear = true;
@@ -68,6 +69,7 @@ public class Robot extends TimedRobot {
         positionDial = new Dial(RobotMap.positionPot);
         timeDelayDial = new Dial(RobotMap.timeDelayPot);
         arm = new Arm();
+        cameras = new Cameras();
         // OI must be constructed after subsystems. If the OI creates Commands
         //(which it very likely will), subsystems are not guaranteed to be
         // constructed yet. Thus, their requires() statements may grab null

@@ -14,10 +14,13 @@ public class Cameras extends Subsystem{
 	}
 	
 	public Cameras() {
+		CameraServer cs = CameraServer.getInstance();
 		// start usb cameras
-		cam = CameraServer.getInstance().startAutomaticCapture("cam0", 0);
+		cam = cs.startAutomaticCapture("cam0", 0);
 		// settings for cam 0
-		cam.setResolution(640, 480);
-		cam.setFPS(24);
+		cam.setResolution(320, 240);
+		cam.setFPS(5);
+		
+		cs.addCamera(cam);
 	}
 }
