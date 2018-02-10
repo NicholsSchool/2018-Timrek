@@ -27,7 +27,7 @@ public class LowerArm extends Subsystem{
 	public boolean checkGround() {
 		// encoder values NEED TO BE TESTED
 		
-		if (RobotMap.lShoulder.getSelectedSensorPosition(0) < 1000) {
+		if (RobotMap.lShoulder.getSelectedSensorPosition(0) < 40000) {
 			isGrounded = true;
 		}
 		else {
@@ -65,13 +65,27 @@ public class LowerArm extends Subsystem{
 		return state;
 	}
 	
+
 	public void setPosition(double position) {
-		RobotMap.lShoulder.config_kP(0, 0.01, 100);
+		//NOT TESTED
+		
+		RobotMap.lShoulder.config_kP(0, 0.04, 100);
 		RobotMap.lShoulder.config_kI(0, 0.0, 100);
-		RobotMap.lShoulder.config_kD(0, 0.1, 100);
+		RobotMap.lShoulder.config_kD(0, 0.2, 100);
 		
 		RobotMap.lShoulder.set(ControlMode.Position, position);
 	}
+	
+	public void goDown(double position){
+		
+		//NOT TESTED
+		RobotMap.lShoulder.config_kP(0, 0.005, 100);
+		RobotMap.lShoulder.config_kI(0, 0.0, 100);
+		RobotMap.lShoulder.config_kD(0, 0.35, 100);
+		
+		RobotMap.lShoulder.set(ControlMode.Position, position);
+	}
+	
 	
 	public void rest() {
 		RobotMap.lShoulder.set(0.1);

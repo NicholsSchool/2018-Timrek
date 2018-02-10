@@ -97,8 +97,8 @@ public class OI {
        j2b11.whenPressed(new UpperArmMove(3)); //Raised Fully
        
        //LowerArm (TESTING CURRENTLY. ONLY CALL WHEN UPPER ARM IS RAISED FULLY)
-    //   j2b8.whenPressed(new LowerArmMove(1)); //Ground
-    //   j2b10.whenPressed(new LowerArmMove(2)); //Raised
+       j2b8.whenPressed(new LowerArmMove(1)); //Ground
+       j2b10.whenPressed(new LowerArmMove(2)); //Raised
 
       
     }
