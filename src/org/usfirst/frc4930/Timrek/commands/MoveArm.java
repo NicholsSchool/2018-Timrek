@@ -2,42 +2,33 @@ package org.usfirst.frc4930.Timrek.commands;
 
 import org.usfirst.frc4930.Timrek.Robot;
 
-import org.usfirst.frc4930.Timrek.Values;
-
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
-
-
-
-
-public class Outtake extends Command
+public class MoveArm extends Command
 {
 
-
-  protected void initialize() {
-
+  public MoveArm() {
+    requires(Robot.arm);
+    requires(Robot.upperArm);
+    requires(Robot.lowerArm);
   }
+
+  protected void initialize() {}
 
   protected void execute() {
-    Robot.gripper.grip(-1);
+    double speed = Robot.oi.j2.getY();
+    Robot.arm.set(speed);
   }
 
-  @Override
   protected boolean isFinished() {
-
     return false;
   }
 
   protected void end() {
-    Robot.gripper.stop();
+	  Robot.arm.stop();
   }
 
   protected void interrupted() {
     end();
   }
-
 }
-

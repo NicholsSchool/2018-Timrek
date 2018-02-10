@@ -13,6 +13,7 @@ public class LowerArmMove extends Command{
 	public LowerArmMove(int state) {
 		requires(Robot.lowerArm);
 		requires(Robot.upperArm);
+		requires(Robot.arm);
 		desiredState = state;
 		startState = Robot.lowerArm.getState();
 		change = (desiredState - startState) * 40000;
@@ -39,7 +40,11 @@ public class LowerArmMove extends Command{
 	
 	protected void end() {
 		//If lowerArm does not keep its position, change to .rest()
-		Robot.lowerArm.rest();
+
+//		Robot.lowerArm.stop();
+		// start joystick control
+		new MoveArm().start();
+
 	}
 	
 	protected void interrupted() {

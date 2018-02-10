@@ -14,6 +14,7 @@ public class UpperArmMove extends Command {
 	public UpperArmMove(int state) {
 		requires(Robot.upperArm);
 		requires(Robot.lowerArm);
+		requires(Robot.arm);
 		desiredState = state;
 		startState = Robot.upperArm.getState();
 		change = (desiredState - startState) * 40000;
@@ -46,7 +47,9 @@ public class UpperArmMove extends Command {
 	}
 	
 	protected void end() {
-		Robot.upperArm.rest();
+//		Robot.upperArm.rest();
+		// start joystick control
+		new MoveArm().start();
 	}
 	
 	protected void interrupted() {

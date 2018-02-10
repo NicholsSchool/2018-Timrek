@@ -8,10 +8,8 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in the future.
 
-
 package org.usfirst.frc4930.Timrek;
 
-import edu.wpi.first.wpilibj.SPI;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -21,16 +19,17 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
-
 /**
- * The RobotMap is a mapping from the ports sensors and actuators are wired into
- * to a variable name. This provides flexibility changing wiring, makes checking
- * the wiring easier and significantly reduces the number of magic numbers
- * floating around.
+ * The RobotMap is a mapping from the ports sensors and actuators are wired into to a variable name.
+ * This provides flexibility changing wiring, makes checking the wiring easier and significantly
+ * reduces the number of magic numbers floating around.
  */
+
 public class RobotMap {
 	public static WPI_TalonSRX lShoulder; 
 	public static WPI_TalonSRX rShoulder;
@@ -61,6 +60,7 @@ public class RobotMap {
 	public static AHRS ahrs;
 	public static AnalogPotentiometer positionPot;
 	public static AnalogPotentiometer timeDelayPot;
+	  public static DigitalInput lArmDownLSwitch;
 	
 	public static DifferentialDrive driveTank;
 	
@@ -149,6 +149,7 @@ public class RobotMap {
         ahrs = new AHRS(SPI.Port.kMXP); 
         positionPot = new AnalogPotentiometer(0, 360, 0);
         timeDelayPot = new AnalogPotentiometer(1, 360, 0);
+        lArmDownLSwitch = new DigitalInput(0);
         
       //Pneumatics
         compressor = new Compressor(50);
@@ -164,4 +165,5 @@ public class RobotMap {
     	solenoid4.set(true);
     	solenoid5.set(true);
     }
+
 }

@@ -8,8 +8,10 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in the future.
 
-
 package org.usfirst.frc4930.Timrek;
+
+import org.usfirst.frc4930.Timrek.subsystems.*;
+
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -17,15 +19,13 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc4930.Timrek.subsystems.*;
-
 /**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the TimedRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the build.properties file in 
- * the project.
+ * The VM is configured to automatically run this class, and to call the functions corresponding to
+ * each mode, as described in the TimedRobot documentation. If you change the name of this class or
+ * the package after creating this project, you must also update the build.properties file in the
+ * project.
  */
+
 public class Robot extends TimedRobot {
 
     Command autonomousCommand;
@@ -42,6 +42,7 @@ public class Robot extends TimedRobot {
     public static DropWheel dropWheel;
     public static Dial positionDial;
     public static Dial timeDelayDial;
+    public static Arm arm;
     
     //ALL THESE VALUES NEED TO BE CHECKED TO SEE HOW SOLENOID STATE RELATES TO ROBOT
     public static boolean shifterInLowGear = true;
@@ -66,6 +67,7 @@ public class Robot extends TimedRobot {
         upperArm = new UpperArm();
         positionDial = new Dial(RobotMap.positionPot);
         timeDelayDial = new Dial(RobotMap.timeDelayPot);
+        arm = new Arm();
         // OI must be constructed after subsystems. If the OI creates Commands
         //(which it very likely will), subsystems are not guaranteed to be
         // constructed yet. Thus, their requires() statements may grab null
@@ -150,4 +152,5 @@ public class Robot extends TimedRobot {
        SmartDashboard.putNumber("PositionPot", Robot.positionDial.getPosition());
        SmartDashboard.putNumber("DelayPot", Robot.timeDelayDial.getPosition());
     }
+
 }
