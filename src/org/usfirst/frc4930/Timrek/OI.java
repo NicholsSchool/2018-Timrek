@@ -91,6 +91,8 @@ public class OI {
        j2b3.whileHeld(new Intake()); 
        j2b4.whileHeld(new Outtake());
       
+       j2b10.whileHeld(new RaiseMast());
+       j2b12.whileHeld(new LowerMast());
     }
 
 }

@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -20,7 +21,8 @@ public class Arm extends Subsystem
   WPI_TalonSRX rShoulder = RobotMap.rShoulder;
   WPI_TalonSRX lElbow = RobotMap.lElbow;
   WPI_TalonSRX rElbow = RobotMap.rElbow;
-
+  double position = 0;
+  
   // DigitalInput uArmDownLSwitch = RobotMap.uArmDownLSwitch;
   DigitalInput lArmDownLSwitch = RobotMap.lArmDownLSwitch;
 
@@ -38,12 +40,24 @@ public class Arm extends Subsystem
   }
 
   public void set(double speed) {
+	 
     if (speed > 0.05) {
-      extend(speed);
+    	extend(speed);
+    	position = lElbow.getSelectedSensorPosition(0);
     } else if (speed < -0.05) {
-      retract(speed);
+    	retract(speed);
+    	position = lElbow.getSelectedSensorPosition(0);
     } else {
-      maintain();
+    	if(lElbow.getSelectedSensorPosition(0) < position - 1000 || lElbow.getSelectedSensorPosition(0) >position + 1000 ){
+    		System.out.println("Adjusting Elbow");
+    		adjust(position);
+    	}
+    	else {
+    		maintain();
+    	}
+    	
+//    	System.out.println("Adjusting Elbow");
+//    	adjust(position);
     }
   }
 
@@ -53,6 +67,13 @@ public class Arm extends Subsystem
     lElbow.set(0.0);
   }
 
+  private void adjust(double position){
+		lElbow.config_kP(0, 0.0175, 100);
+		lElbow.config_kI(0, 0, 100);
+		lElbow.config_kD(0, 0.0, 100);
+		
+		lElbow.set(ControlMode.Position, position);
+  }
   // maintains the arm position
   private void maintain() {
     lElbow.set(0.1);
@@ -96,25 +117,4 @@ public class Arm extends Subsystem
     lElbow.setSelectedSensorPosition(0, 0, 0);
   }
 
-  public void testMotor(int id, double speed) {
-    switch (id) {
-      case Values.L_SHOULDER_ID:
-        lShoulder.set(speed);
-        break;
-      case Values.R_SHOULDER_ID:
-        rShoulder.set(speed);
-        break;
-
-      case Values.L_ELBOW_ID:
-        lElbow.set(speed);
-        break;
-      case Values.R_ELBOW_ID:
-        rElbow.set(speed);
-        break;
-
-      default:
-        System.out.println("Invalid Arm Motor ID");
-        break;
-    }
-  }
 }
