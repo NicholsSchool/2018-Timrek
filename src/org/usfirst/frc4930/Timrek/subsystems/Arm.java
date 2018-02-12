@@ -21,7 +21,10 @@ public class Arm extends Subsystem
   WPI_TalonSRX rShoulder = RobotMap.rShoulder;
   WPI_TalonSRX lElbow = RobotMap.lElbow;
   WPI_TalonSRX rElbow = RobotMap.rElbow;
-  double position = 0;
+  
+  
+  private double elbowPos = 0;
+  private double shoulderPos = 0;
   
   // DigitalInput uArmDownLSwitch = RobotMap.uArmDownLSwitch;
   DigitalInput lArmDownLSwitch = RobotMap.lArmDownLSwitch;
@@ -43,21 +46,24 @@ public class Arm extends Subsystem
 	 
     if (speed > 0.05) {
     	extend(speed);
-    	position = lElbow.getSelectedSensorPosition(0);
+    	elbowPos = lElbow.getSelectedSensorPosition(0);
+    	shoulderPos = lShoulder.getSelectedSensorPosition(0);
     } else if (speed < -0.05) {
     	retract(speed);
-    	position = lElbow.getSelectedSensorPosition(0);
+    	elbowPos = lElbow.getSelectedSensorPosition(0);
+    	shoulderPos = lShoulder.getSelectedSensorPosition(0);
     } else {
-    	if(lElbow.getSelectedSensorPosition(0) < position - 1000 || lElbow.getSelectedSensorPosition(0) >position + 1000 ){
+    	/*if(lElbow.getSelectedSensorPosition(0) < position - 1000 || lElbow.getSelectedSensorPosition(0) >position + 1000 ){
     		System.out.println("Adjusting Elbow");
     		adjust(position);
     	}
     	else {
     		maintain();
-    	}
+    	}*/
     	
-//    	System.out.println("Adjusting Elbow");
-//    	adjust(position);
+    	System.out.println("Adjusting Elbow");
+    	adjustElbow(elbowPos);
+    	adjustShoulder(shoulderPos);
     }
   }
 
@@ -67,19 +73,32 @@ public class Arm extends Subsystem
     lElbow.set(0.0);
   }
 
-  private void adjust(double position){
-		lElbow.config_kP(0, 0.0175, 100);
+  private void adjustElbow(double position){
+		lElbow.config_kP(0, 0.04, 100);
 		lElbow.config_kI(0, 0, 100);
-		lElbow.config_kD(0, 0.0, 100);
+		lElbow.config_kD(0, 0.06, 100);
 		
 		lElbow.set(ControlMode.Position, position);
   }
+  
+  private void adjustShoulder(double position) {
+	  lShoulder.config_kP(0, 0.001, 0);
+	  lShoulder.config_kI(0, 0.0, 0);
+	  lShoulder.config_kD(0, 0.001, 0);
+	  
+	  lShoulder.set(ControlMode.Position, position);
+  }
+  
   // maintains the arm position
   private void maintain() {
     lElbow.set(0.1);
     lShoulder.set(0.1);
   }
 
+  public void resetPosition() {
+	  position = 100;
+  }
+  
   private void extend(double speed) {
     // limit switches return false when pressed
     // if the upper arm is not fully extended, extend upper arm
