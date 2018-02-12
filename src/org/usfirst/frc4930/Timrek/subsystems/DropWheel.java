@@ -31,6 +31,9 @@ public class DropWheel extends Subsystem {
 	
 	public void pivot() {
 		double speed = Robot.oi.j1.getX();
+		/*if(Math.abs(speed) < 0.2) {
+			return;
+		}*/
 		set(speed);
 	}
 	
