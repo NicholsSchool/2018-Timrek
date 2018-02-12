@@ -96,7 +96,8 @@ public class Arm extends Subsystem
   }
 
   public void resetPosition() {
-	  position = 100;
+	  elbowPos = 0;
+	  shoulderPos = 0;
   }
   
   private void extend(double speed) {
