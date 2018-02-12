@@ -10,8 +10,18 @@
 
 package org.usfirst.frc4930.Timrek;
 
-import org.usfirst.frc4930.Timrek.subsystems.*;
-
+import org.usfirst.frc4930.Timrek.subsystems.Arm;
+import org.usfirst.frc4930.Timrek.subsystems.Cameras;
+import org.usfirst.frc4930.Timrek.subsystems.Claw;
+import org.usfirst.frc4930.Timrek.subsystems.Dial;
+import org.usfirst.frc4930.Timrek.subsystems.DriveTrain;
+import org.usfirst.frc4930.Timrek.subsystems.DropWheel;
+import org.usfirst.frc4930.Timrek.subsystems.Gripper;
+import org.usfirst.frc4930.Timrek.subsystems.LowerArm;
+import org.usfirst.frc4930.Timrek.subsystems.Mast;
+import org.usfirst.frc4930.Timrek.subsystems.PTO;
+import org.usfirst.frc4930.Timrek.subsystems.Shifter;
+import org.usfirst.frc4930.Timrek.subsystems.UpperArm;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -26,133 +36,141 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 
-public class Robot extends TimedRobot {
+public class Robot extends TimedRobot
+{
 
-    Command autonomousCommand;
-    SendableChooser<Command> chooser = new SendableChooser<>();
+  Command autonomousCommand;
+  SendableChooser<Command> chooser = new SendableChooser<>();
 
-    public static OI oi;
-    public static DriveTrain driveTrain;
-    public static Gripper gripper;
-    public static LowerArm lowerArm;
-    public static UpperArm upperArm;
-    public static PTO pto;
-    public static Claw claw;
-    public static Shifter shifter;
-    public static DropWheel dropWheel;
-    public static Dial positionDial;
-    public static Dial timeDelayDial;
-    public static Arm arm;
-    public static Mast mast;
-    
-    //ALL THESE VALUES NEED TO BE CHECKED TO SEE HOW SOLENOID STATE RELATES TO ROBOT
-    public static boolean shifterInLowGear = true;
-    public static boolean ptoOn = true;
-    public static boolean dropped = false;
-    public static boolean clawOpen = false;
+  public static OI oi;
+  public static DriveTrain driveTrain;
+  public static Gripper gripper;
+  public static LowerArm lowerArm;
+  public static UpperArm upperArm;
+  public static PTO pto;
+  public static Claw claw;
+  public static Shifter shifter;
+  public static DropWheel dropWheel;
+  public static Dial positionDial;
+  public static Dial timeDelayDial;
+  public static Arm arm;
+  public static Cameras cameras;
+  public static Mast mast;
 
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
-    @Override
-    public void robotInit() {
-        RobotMap.init();
-        driveTrain = new DriveTrain();
-        gripper = new Gripper();
-        pto = new PTO();
-        claw = new Claw();
-        dropWheel = new DropWheel();
-        shifter = new Shifter();
-        lowerArm = new LowerArm();
-        upperArm = new UpperArm();
-        positionDial = new Dial(RobotMap.positionPot);
-        timeDelayDial = new Dial(RobotMap.timeDelayPot);
-        arm = new Arm();
-        mast = new Mast();
-        // OI must be constructed after subsystems. If the OI creates Commands
-        //(which it very likely will), subsystems are not guaranteed to be
-        // constructed yet. Thus, their requires() statements may grab null
-        // pointers. Bad news. Don't move it.
-        oi = new OI();
+  // ALL THESE VALUES NEED TO BE CHECKED TO SEE HOW SOLENOID STATE RELATES TO ROBOT
+  public static boolean shifterInLowGear = true;
+  public static boolean ptoOn = true;
+  public static boolean dropped = false;
+  public static boolean clawOpen = false;
 
+  /**
+   * This function is run when the robot is first started up and should be used for any
+   * initialization code.
+   */
+  @Override
+  public void robotInit() {
+    RobotMap.init();
+    driveTrain = new DriveTrain();
+    gripper = new Gripper();
+    pto = new PTO();
+    claw = new Claw();
+    dropWheel = new DropWheel();
+    shifter = new Shifter();
+    lowerArm = new LowerArm();
+    upperArm = new UpperArm();
+    positionDial = new Dial(RobotMap.positionPot);
+    timeDelayDial = new Dial(RobotMap.timeDelayPot);
+    arm = new Arm();
+    cameras = new Cameras();
+    mast = new Mast();
+    // OI must be constructed after subsystems. If the OI creates Commands
+    // (which it very likely will), subsystems are not guaranteed to be
+    // constructed yet. Thus, their requires() statements may grab null
+    // pointers. Bad news. Don't move it.
+    oi = new OI();
 
-    }
+  }
 
-    /**
-     * This function is called when the disabled button is hit.
-     * You can use it to reset subsystems before shutting down.
-     */
-    @Override
-    public void disabledInit(){
+  /**
+   * This function is called when the disabled button is hit. You can use it to reset subsystems
+   * before shutting down.
+   */
+  @Override
+  public void disabledInit() {
 
-    }
+  }
 
-    @Override
-    public void disabledPeriodic() {
-        Scheduler.getInstance().run();
-    }
+  @Override
+  public void disabledPeriodic() {
+    Scheduler.getInstance().run();
+  }
 
-    @Override
-    public void autonomousInit() {
-        autonomousCommand = chooser.getSelected();
-        // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
-    }
+  @Override
+  public void autonomousInit() {
+    autonomousCommand = chooser.getSelected();
+    // schedule the autonomous command (example)
+    if (autonomousCommand != null)
+      autonomousCommand.start();
+  }
 
-    /**
-     * This function is called periodically during autonomous
-     */
-    @Override
-    public void autonomousPeriodic() {
-        Scheduler.getInstance().run();
-    }
+  /**
+   * This function is called periodically during autonomous
+   */
+  @Override
+  public void autonomousPeriodic() {
+    Scheduler.getInstance().run();
+  }
 
-    @Override
-    public void teleopInit() {
-        // This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
-        RobotMap.lShoulder.setSelectedSensorPosition(0, 0, 100);
-        RobotMap.lElbow.setSelectedSensorPosition(0, 0, 100);
-        RobotMap.lDrvMSTR.setSelectedSensorPosition(0, 0, 100);
-        RobotMap.rDrvMSTR.setSelectedSensorPosition(0, 0, 100);
-        RobotMap.dropWhl.setSelectedSensorPosition(0, 0, 100);
-    }
+  @Override
+  public void teleopInit() {
+    // This makes sure that the autonomous stops running when
+    // teleop starts running. If you want the autonomous to
+    // continue until interrupted by another command, remove
+    // this line or comment it out.
+    if (autonomousCommand != null)
+      autonomousCommand.cancel();
+    RobotMap.lShoulder.setSelectedSensorPosition(0, 0, 100);
+    RobotMap.lElbow.setSelectedSensorPosition(0, 0, 100);
+    RobotMap.lDrvMSTR.setSelectedSensorPosition(0, 0, 100);
+    RobotMap.rDrvMSTR.setSelectedSensorPosition(0, 0, 100);
+    RobotMap.dropWhl.setSelectedSensorPosition(0, 0, 100);
+  }
 
-    /**
-     * This function is called periodically during operator control
-     */
-    @Override
-    public void teleopPeriodic() {
-        Scheduler.getInstance().run();
-        
-       SmartDashboard.putBoolean("Compressor Enabled: ", RobotMap.compressor.enabled()); 
-       SmartDashboard.putBoolean("Shifter (Solenoid 0)", RobotMap.solenoid0.get());
-       SmartDashboard.putBoolean("PTO (Solenoid 1)", RobotMap.solenoid1.get());
-       SmartDashboard.putBoolean("DropWheel (Solenoid 2)", RobotMap.solenoid2.get());
-       SmartDashboard.putBoolean("Claw (Solenoid 4)", RobotMap.solenoid4.get());
-       
-       SmartDashboard.putNumber("LeftShoulder", RobotMap.lShoulder.get());
-       
-       SmartDashboard.putNumber("Left Shoulder Encoder(21):", RobotMap.lShoulder.getSelectedSensorPosition(0));
-       SmartDashboard.putNumber("Left Elbow Encoder(25):", RobotMap.lElbow.getSelectedSensorPosition(0));
-       SmartDashboard.putNumber("Left Master Encoder(22):", RobotMap.lDrvMSTR.getSelectedSensorPosition(0));
-       SmartDashboard.putNumber("Right Master Encoder(28):", RobotMap.rDrvMSTR.getSelectedSensorPosition(0));
-       SmartDashboard.putNumber("Drop Wheel Encoder(34):", RobotMap.dropWhl.getSelectedSensorPosition(0));
-       
-       SmartDashboard.putNumber("UpperArmState: ", Robot.upperArm.getState());
-       SmartDashboard.putNumber("LowerArmState: ", Robot.lowerArm.getState());
-       
-       
-       SmartDashboard.putNumber("Gyro", RobotMap.ahrs.getAngle());
-       
-       SmartDashboard.putNumber("PositionPot Raw: ", RobotMap.positionPot.get());
-       SmartDashboard.putNumber("DelayPot Raw: " , RobotMap.timeDelayPot.get());
-       SmartDashboard.putNumber("PositionPot", Robot.positionDial.getPosition());
-       SmartDashboard.putNumber("DelayPot", Robot.timeDelayDial.getPosition());
-    }
+  /**
+   * This function is called periodically during operator control
+   */
+  @Override
+  public void teleopPeriodic() {
+    Scheduler.getInstance().run();
+
+    SmartDashboard.putBoolean("Compressor Enabled: ", RobotMap.compressor.enabled());
+    SmartDashboard.putBoolean("Shifter (Solenoid 0)", RobotMap.solenoid0.get());
+    SmartDashboard.putBoolean("PTO (Solenoid 1)", RobotMap.solenoid1.get());
+    SmartDashboard.putBoolean("DropWheel (Solenoid 2)", RobotMap.solenoid2.get());
+    SmartDashboard.putBoolean("Claw (Solenoid 4)", RobotMap.solenoid4.get());
+
+    SmartDashboard.putNumber("LeftShoulder", RobotMap.lShoulder.get());
+
+    SmartDashboard.putNumber("Left Shoulder Encoder(21):",
+        RobotMap.lShoulder.getSelectedSensorPosition(0));
+    SmartDashboard.putNumber("Left Elbow Encoder(25):",
+        RobotMap.lElbow.getSelectedSensorPosition(0));
+    SmartDashboard.putNumber("Left Master Encoder(22):",
+        RobotMap.lDrvMSTR.getSelectedSensorPosition(0));
+    SmartDashboard.putNumber("Right Master Encoder(28):",
+        RobotMap.rDrvMSTR.getSelectedSensorPosition(0));
+    SmartDashboard.putNumber("Drop Wheel Encoder(34):",
+        RobotMap.dropWhl.getSelectedSensorPosition(0));
+
+    SmartDashboard.putNumber("UpperArmState: ", Robot.upperArm.getState());
+    SmartDashboard.putNumber("LowerArmState: ", Robot.lowerArm.getState());
+
+    SmartDashboard.putNumber("Gyro", RobotMap.ahrs.getAngle());
+
+    SmartDashboard.putNumber("PositionPot Raw: ", RobotMap.positionPot.get());
+    SmartDashboard.putNumber("DelayPot Raw: ", RobotMap.timeDelayPot.get());
+    SmartDashboard.putNumber("PositionPot", Robot.positionDial.getPosition());
+    SmartDashboard.putNumber("DelayPot", Robot.timeDelayDial.getPosition());
+  }
 
 }
