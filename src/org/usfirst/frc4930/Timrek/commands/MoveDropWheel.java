@@ -11,7 +11,7 @@ public class MoveDropWheel extends Command{
 	}
 	
 	protected void initialize() {
-		
+		Robot.dropWheel.drop();
 	}
 	
 	protected void execute(){
@@ -24,7 +24,8 @@ public class MoveDropWheel extends Command{
 	}
 	
 	protected void end() {
-		Robot.dropWheel.stop();
+		Robot.dropWheel.set(0.0);
+		Robot.dropWheel.raise();
 	}
 	
 	protected void interrupted() {

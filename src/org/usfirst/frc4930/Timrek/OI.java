@@ -26,6 +26,7 @@ public class OI {
 	public Joystick j1;
 	public Joystick j2;
 	
+	public JoystickButton j1b1;
 	public JoystickButton j1b3;
 	public JoystickButton j1b4;
 	public JoystickButton j1b7;
@@ -51,6 +52,7 @@ public class OI {
        j1 = new Joystick(1);
        j2 = new Joystick(2);
 
+       j1b1 = new JoystickButton(j1, 1);
        j1b3 = new JoystickButton(j1, 3);
        j1b4 = new JoystickButton(j1, 4);
        j1b7 = new JoystickButton(j1, 7);
@@ -80,8 +82,9 @@ public class OI {
        j1b8.whenPressed(new Engage());  //Set False
        
        //DropWheel (Solenoid 2)
-       j1b9.whenPressed(new Drop());   //Set True
-       j1b10.whenPressed(new Raise()); //Set False
+//       j1b9.whenPressed(new Drop());   //Set True
+//       j1b10.whenPressed(new Raise()); //Set False
+       j1b1.whileHeld(new MoveDropWheel());
        
        //Claw (Solenoid 4)
        j1b11.whenPressed(new ClawOpen()); //Set True
