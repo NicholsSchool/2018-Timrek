@@ -120,7 +120,7 @@ public class Robot extends TimedRobot {
         RobotMap.lDrvMSTR.setSelectedSensorPosition(0, 0, 100);
         RobotMap.rDrvMSTR.setSelectedSensorPosition(0, 0, 100);
         RobotMap.dropWhl.setSelectedSensorPosition(0, 0, 100);
-        arm.resetPosition();
+        arm.updatePosition();
     }
 
     /**
