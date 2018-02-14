@@ -4,15 +4,15 @@ import org.usfirst.frc4930.Timrek.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Raise extends Command {
-	 public Raise() {
-		    requires(Robot.dropWheel);
+public class DisengagePTO extends Command{
+	  public DisengagePTO() {
+		    requires(Robot.pto);
 		  }
 
 		  protected void initialize() {}
 
 		  protected void execute() {
-		    Robot.dropWheel.raise();
+		    Robot.pto.turnOff();
 		  }
 
 		  protected boolean isFinished() {
