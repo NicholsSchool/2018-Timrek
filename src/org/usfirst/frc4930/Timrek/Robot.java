@@ -1,6 +1,7 @@
 
 package org.usfirst.frc4930.Timrek;
 
+import org.usfirst.frc4930.Timrek.sensors.*;
 import org.usfirst.frc4930.Timrek.subsystems.*;
 
 import edu.wpi.first.wpilibj.TimedRobot;
