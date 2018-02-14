@@ -77,6 +77,7 @@ public class OI {
        j2b10.whileHeld(new RaiseMast());
        j2b12.whileHeld(new LowerMast());
  
+       j2b7.whenPressed(new ToggleCamera());
     
     }
 
