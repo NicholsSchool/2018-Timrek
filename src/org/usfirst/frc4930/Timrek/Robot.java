@@ -126,5 +126,4 @@ public class Robot extends TimedRobot
     SmartDashboard.putNumber("PositionPot", Robot.positionDial.getPosition());
     SmartDashboard.putNumber("DelayPot", Robot.timeDelayDial.getPosition());
   }
-
 }
