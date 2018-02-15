@@ -13,7 +13,7 @@
 package org.usfirst.frc4930.Timrek.subsystems;
 
 import org.usfirst.frc4930.Timrek.RobotMap;
-import org.usfirst.frc4930.Timrek.Values;
+import org.usfirst.frc4930.Timrek.Constants;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 

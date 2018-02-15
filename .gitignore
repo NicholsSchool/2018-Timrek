@@ -1,0 +1,12 @@
+dist/
+.gradle
+bin/
+build/
+classes/
+.idea/
+gen/
+out/
+*~
+.DS_Store
+sysProps.xml
+dist/

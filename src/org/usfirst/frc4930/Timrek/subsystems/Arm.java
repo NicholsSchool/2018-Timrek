@@ -1,7 +1,7 @@
 package org.usfirst.frc4930.Timrek.subsystems;
 
 import org.usfirst.frc4930.Timrek.RobotMap;
-import org.usfirst.frc4930.Timrek.Values;
+import org.usfirst.frc4930.Timrek.Constants;
 import org.usfirst.frc4930.Timrek.commands.MoveArm;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -83,12 +83,12 @@ public class Arm extends Subsystem
   private void extend(double speed) {
     // limit switches return false when pressed
     // if the upper arm is not fully extended, extend upper arm
-    if (lElbow.getSelectedSensorPosition(0) < Values.ELBOW_EXTENDED * 0.9) {
+    if (lElbow.getSelectedSensorPosition(0) < Constants.ELBOW_EXTENDED * 0.9) {
       // 0.1 will maintain the position
       lShoulder.set(0.1);
       // elbow moves faster than the shoulder
       lElbow.set(speed * 0.8);
-    } else if (lShoulder.getSelectedSensorPosition(0) < Values.SHOULDER_EXTENDED * 0.9) {
+    } else if (lShoulder.getSelectedSensorPosition(0) < Constants.SHOULDER_EXTENDED * 0.9) {
       // else if lower arm is not fully extended, extend lower arm
       lShoulder.set(speed);
       lElbow.set(0.1);

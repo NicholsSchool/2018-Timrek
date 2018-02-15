@@ -1,7 +1,7 @@
 package org.usfirst.frc4930.Timrek.commands;
 
 import org.usfirst.frc4930.Timrek.Robot;
-import org.usfirst.frc4930.Timrek.Values;
+import org.usfirst.frc4930.Timrek.Constants;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -13,7 +13,7 @@ public class Outtake extends Command
   }
 
   protected void execute() {
-    Robot.gripper.grip(Values.OUTTAKE_SPEED);
+    Robot.gripper.grip(Constants.OUTTAKE_SPEED);
   }
 
   @Override
