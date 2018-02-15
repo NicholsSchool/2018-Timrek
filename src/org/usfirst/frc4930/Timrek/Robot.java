@@ -3,6 +3,7 @@ package org.usfirst.frc4930.Timrek;
 
 import org.usfirst.frc4930.Timrek.sensors.*;
 import org.usfirst.frc4930.Timrek.subsystems.*;
+import org.usfirst.frc4930.Timrek.autonomous.*;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -84,6 +85,7 @@ public class Robot extends TimedRobot
 
   @Override
   public void teleopInit() {
+	  new Delay(2).start();
     if (autonomousCommand != null)
       autonomousCommand.cancel();
     RobotMap.lShoulder.setSelectedSensorPosition(0, 0, 100);
