@@ -53,6 +53,8 @@ public class RobotMap
   public static AnalogPotentiometer positionPot;
   public static AnalogPotentiometer timeDelayPot;
   public static DigitalInput lArmDownLSwitch;
+ // public static DigitalInput uArmDownLSwitch;
+ //  public static DigitalInput clawLSwitch;
 
   public static DifferentialDrive driveTank;
 
@@ -117,11 +119,18 @@ public class RobotMap
     lDrvMSTR.setSensorPhase(true);
     driveTank = new DifferentialDrive(lDrvMSTR, rDrvMSTR);
     driveTank.setSafetyEnabled(false);
-
+    
+    //Gyro
     ahrs = new AHRS(SPI.Port.kMXP);
+    
+    //Potentiometers
     positionPot = new AnalogPotentiometer(Constants.POSITIONPOT_CHNL, 360, 0);
     timeDelayPot = new AnalogPotentiometer(Constants.DELAYPOT_CHNL, 360, 0);
-    lArmDownLSwitch = new DigitalInput(0);
+    
+    //Limit Switches
+    lArmDownLSwitch = new DigitalInput(Constants.LARM_DOWN_LSWITCH_CHNL);
+   // uArmDownLSwitch = new DigitalInput(Constants.UARM_DOWN_LSWITCH_CHNL);
+   // clawLSwitch = new DigitalInput(Constants.CLAW_LSWITCH_CHNL);
 
     // Pneumatics
     compressor = new Compressor(50);

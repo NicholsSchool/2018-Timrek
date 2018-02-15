@@ -28,9 +28,11 @@ public class Constants
   		UARM_UP_LSWITCH_CHNL = 0,
   		UARM_DOWN_LSWITCH_CHNL = 0, 
   		LARM_DOWN_LSWITCH_CHNL = 8,
+  		CLAW_LSWITCH_CHNL = 0,
   		
   		POSITIONPOT_CHNL = 0,
   		DELAYPOT_CHNL = 1;
+ 
 
   // speeds
   public static final double INTAKE_SPEED = .4, OUTTAKE_SPEED = -1.0;

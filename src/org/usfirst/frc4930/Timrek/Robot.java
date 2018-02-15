@@ -30,12 +30,14 @@ public class Robot extends TimedRobot
   public static Arm arm;
   public static Cameras cameras;
   public static Mast mast;
+  public static LimitSwitch limitSwitch;
 
   // ALL THESE VALUES NEED TO BE CHECKED TO SEE HOW SOLENOID STATE RELATES TO ROBOT
   public static boolean shifterInLowGear = true;
   public static boolean ptoOn = true;
   public static boolean dropped = false;
   public static boolean clawOpen = false;
+  
 
 
   @Override
@@ -54,6 +56,8 @@ public class Robot extends TimedRobot
     arm = new Arm();
     cameras = new Cameras();
     mast = new Mast();
+    limitSwitch = new LimitSwitch();
+
     // OI must be constructed after subsystems.
     oi = new OI();
 
@@ -80,6 +84,7 @@ public class Robot extends TimedRobot
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+    limitSwitch.checkForChange();
   }
 
   @Override
@@ -96,7 +101,8 @@ public class Robot extends TimedRobot
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-
+    limitSwitch.checkForChange();
+    
     SmartDashboard.putBoolean("Compressor Enabled: ", RobotMap.compressor.enabled());
     SmartDashboard.putBoolean("Shifter (Solenoid 0)", RobotMap.solenoid0.get());
     SmartDashboard.putBoolean("PTO (Solenoid 1)", RobotMap.solenoid1.get());
