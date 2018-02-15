@@ -1,4 +1,4 @@
-package org.usfirst.frc4930.Timrek.subsystems;
+package org.usfirst.frc4930.Timrek.sensors;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoSink;
