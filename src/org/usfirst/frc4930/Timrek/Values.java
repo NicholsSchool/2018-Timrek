@@ -45,7 +45,7 @@ public class Values {
 	public static final double
 		INTAKE_SPEED = 1.0,
 		OUTTAKE_SPEED = -1.0,
-		ELBOW_RELATIVE_SPD = 0.5;
+		ELBOW_RELATIVE_SPD = 0.6;
 	
 	
 	// encoder values for the arm
@@ -55,7 +55,7 @@ public class Values {
 		SHOULDER_EXTENDED = 75000,
 		ELBOW_EXTENDED = 95000,
 		SHOULDER_TO_BAR = 40000,
-		ELBOW_TO_BAR = 90000;
+		ELBOW_TO_BAR = 70000;
 		
 	
 	// inverts

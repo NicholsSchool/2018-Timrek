@@ -43,7 +43,6 @@ public class Arm extends Subsystem
   }
 
   public void set(double speed) {
-	 
     if (speed > 0.1) {
     	updatePosition();
     	extend(speed);
@@ -72,9 +71,9 @@ public class Arm extends Subsystem
   }
 
   private void adjustElbow(double position){
-		lElbow.config_kP(0, 0.1, 100);
+		lElbow.config_kP(0, 0.03, 100);
 		lElbow.config_kI(0, 0, 100);
-		lElbow.config_kD(0, 0.3, 100);
+		lElbow.config_kD(0, 0.05, 100);
 		
 		lElbow.set(ControlMode.Position, position);
   }
@@ -136,7 +135,7 @@ public class Arm extends Subsystem
 
   private void retract(double speed) {
     // gravity will help you retract
-    speed *= 0.6;
+    speed *= 0.3;
     // limit switches return false when pressed
     // if both are above the bar, move both at once
     if(lShoulder.getSelectedSensorPosition(0) > Values.SHOULDER_TO_BAR && lElbow.getSelectedSensorPosition(0) > Values.ELBOW_TO_BAR) {
@@ -148,7 +147,8 @@ public class Arm extends Subsystem
     	// if they are below the bar, move one at a time
         // if lower arm is not retracted, retract lower arm
     	if (lShoulder.getSelectedSensorPosition(0) > 200) {
-  	      lShoulder.set(speed);
+    		// don't slam the lower arm
+  	      lShoulder.set(0.1);
   	      lElbow.set(0.05);
   	    } else if (lElbow.getSelectedSensorPosition(0) > 3000) {
   	      // else if upper arm is not retracted, retract upper arm
