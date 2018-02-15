@@ -86,12 +86,6 @@ public class Arm extends Subsystem
 	  lShoulder.set(ControlMode.Position, position);
   }
   
-  // maintains the arm position
-  private void maintain() {
-    lElbow.set(0.05);
-    lShoulder.set(0.05);
-  }
-  
   public void updatePosition() {
 	  elbowPos = lElbow.getSelectedSensorPosition(0);
 	  shoulderPos = lShoulder.getSelectedSensorPosition(0);
@@ -144,11 +138,12 @@ public class Arm extends Subsystem
     		lElbow.set(speed * Values.ELBOW_RELATIVE_SPD);
 
     } else {
+    	// don't slam
+    	speed = 0.1;
     	// if they are below the bar, move one at a time
         // if lower arm is not retracted, retract lower arm
     	if (lShoulder.getSelectedSensorPosition(0) > 200) {
-    		// don't slam the lower arm
-  	      lShoulder.set(0.1);
+  	      lShoulder.set(speed);
   	      lElbow.set(0.05);
   	    } else if (lElbow.getSelectedSensorPosition(0) > 3000) {
   	      // else if upper arm is not retracted, retract upper arm
