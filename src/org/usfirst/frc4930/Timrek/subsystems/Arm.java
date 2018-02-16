@@ -1,7 +1,6 @@
 package org.usfirst.frc4930.Timrek.subsystems;
 
 import org.usfirst.frc4930.Timrek.RobotMap;
-import org.usfirst.frc4930.Timrek.Values;
 import org.usfirst.frc4930.Timrek.Constants;
 import org.usfirst.frc4930.Timrek.commands.MoveArm;
 
@@ -97,12 +96,12 @@ public class Arm extends Subsystem
   private void extend(double speed) {
     // limit switches return false when pressed
     // if the upper arm is not fully extended, extend upper arm
-    if (lElbow.getSelectedSensorPosition(0) < Values.ELBOW_TO_BAR * 0.9) {
+    if (lElbow.getSelectedSensorPosition(0) < Constants.ELBOW_TO_BAR * 0.9) {
       // 0.05 will maintain the position
       lShoulder.set(0.05);
       // elbow moves faster than the shoulder
-      lElbow.set(speed * Values.ELBOW_RELATIVE_SPD);
-    } else if (lShoulder.getSelectedSensorPosition(0) < Values.SHOULDER_TO_BAR * 0.9) {
+      lElbow.set(speed * Constants.ELBOW_RELATIVE_SPD);
+    } else if (lShoulder.getSelectedSensorPosition(0) < Constants.SHOULDER_TO_BAR * 0.9) {
       // else if lower arm is not fully extended, extend lower arm
       lShoulder.set(speed);
       lElbow.set(0.05);
@@ -110,15 +109,15 @@ public class Arm extends Subsystem
     	System.out.println("extending both now....");
     	
     	// if both arms are past the bar, run each until they reach the limit
-	    if (lElbow.getSelectedSensorPosition(0) < Values.ELBOW_EXTENDED * 0.9) {
+	    if (lElbow.getSelectedSensorPosition(0) < Constants.ELBOW_EXTENDED * 0.9) {
 		      // elbow moves faster than the shoulder
-		      lElbow.set(speed * Values.ELBOW_RELATIVE_SPD);
+		      lElbow.set(speed * Constants.ELBOW_RELATIVE_SPD);
 	    } else {
 	    	// maintain if at the max
 	    	lElbow.set(0.05);
 	    }
 	    
-	    if (lShoulder.getSelectedSensorPosition(0) < Values.SHOULDER_EXTENDED * 0.9) {
+	    if (lShoulder.getSelectedSensorPosition(0) < Constants.SHOULDER_EXTENDED * 0.9) {
 		      lShoulder.set(speed);
 
 	    } else {
@@ -133,10 +132,10 @@ public class Arm extends Subsystem
     speed *= 0.3;
     // limit switches return false when pressed
     // if both are above the bar, move both at once
-    if(lShoulder.getSelectedSensorPosition(0) > Values.SHOULDER_TO_BAR && lElbow.getSelectedSensorPosition(0) > Values.ELBOW_TO_BAR) {
+    if(lShoulder.getSelectedSensorPosition(0) > Constants.SHOULDER_TO_BAR && lElbow.getSelectedSensorPosition(0) > Constants.ELBOW_TO_BAR) {
     		System.out.println("retracting both now....");
     		lShoulder.set(speed);
-    		lElbow.set(speed * Values.ELBOW_RELATIVE_SPD);
+    		lElbow.set(speed * Constants.ELBOW_RELATIVE_SPD);
 
     } else {
     	// don't slam
@@ -150,7 +149,7 @@ public class Arm extends Subsystem
   	      // else if upper arm is not retracted, retract upper arm
   	      lShoulder.set(0.05);
   	      // elbow moves faster than the shoulder
-  	      lElbow.set(speed * Values.ELBOW_RELATIVE_SPD);
+  	      lElbow.set(speed * Constants.ELBOW_RELATIVE_SPD);
   	    }
     	
     }
