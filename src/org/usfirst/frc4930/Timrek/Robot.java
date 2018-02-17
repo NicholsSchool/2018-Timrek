@@ -128,6 +128,8 @@ public class Robot extends TimedRobot
     SmartDashboard.putNumber("PositionPot", Robot.positionDial.getPosition());
     SmartDashboard.putNumber("DelayPot", Robot.timeDelayDial.getPosition());
     
+    SmartDashboard.putNumber("ARM_LERP_T: ", Constants.ARM_LERP_T);
+    
     // two button engage for the pto
     if(oi.j0b7.get() && oi.j0b8.get())
     {

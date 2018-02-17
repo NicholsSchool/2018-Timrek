@@ -43,12 +43,21 @@ public class Arm extends Subsystem
   }
 
   public void set(double speed) {
+	  
     if (speed > 0.1) {
     	updatePosition();
-    	extend(speed);
+    	// lerp the elbow and shoulder speeds
+    	double elbowSpd = lerp(lElbow.get(), speed, Constants.ARM_LERP_T) * Constants.ELBOW_RELATIVE_SPD;
+    	double shoulderSpd = lerp(lShoulder.get(), speed, Constants.ARM_LERP_T);
+    	
+    	extend(elbowSpd, shoulderSpd);
     } else if (speed < -0.1) {
     	updatePosition();
-    	retract(speed);
+    	
+    	double elbowSpd = lerp(lElbow.get(), speed, Constants.ARM_LERP_T) * Constants.ELBOW_RELATIVE_SPD;
+    	double shoulderSpd = lerp(lShoulder.get(), speed, Constants.ARM_LERP_T);
+    	
+    	retract(elbowSpd, shoulderSpd);
     } else {
     	/*if(lElbow.getSelectedSensorPosition(0) < position - 1000 || lElbow.getSelectedSensorPosition(0) >position + 1000 ){
     		System.out.println("Adjusting Elbow");
@@ -92,17 +101,17 @@ public class Arm extends Subsystem
 	  SmartDashboard.putNumber("shoulderPos", shoulderPos);
   }
   
-  private void extend(double speed) {
+  private void extend(double elbowSpd, double shoulderSpd) {
     // limit switches return false when pressed
     // if the upper arm is not fully extended, extend upper arm
     if (lElbow.getSelectedSensorPosition(0) < Constants.ELBOW_TO_BAR * 0.9) {
       // 0.05 will maintain the position
       lShoulder.set(0.05);
       // elbow moves faster than the shoulder
-      lElbow.set(speed * Constants.ELBOW_RELATIVE_SPD);
+      lElbow.set(elbowSpd);
     } else if (lShoulder.getSelectedSensorPosition(0) < Constants.SHOULDER_TO_BAR * 0.9) {
       // else if lower arm is not fully extended, extend lower arm
-      lShoulder.set(speed);
+      lShoulder.set(shoulderSpd);
       lElbow.set(0.05);
     } else {
     	System.out.println("extending both now....");
@@ -110,14 +119,14 @@ public class Arm extends Subsystem
     	// if both arms are past the bar, run each until they reach the limit
 	    if (lElbow.getSelectedSensorPosition(0) < Constants.ELBOW_EXTENDED * 0.9) {
 		      // elbow moves faster than the shoulder
-		      lElbow.set(speed * Constants.ELBOW_RELATIVE_SPD);
+		      lElbow.set(elbowSpd);
 	    } else {
 	    	// maintain if at the max
 	    	lElbow.set(0.05);
 	    }
 	    
 	    if (lShoulder.getSelectedSensorPosition(0) < Constants.SHOULDER_EXTENDED * 0.9) {
-		      lShoulder.set(speed);
+		      lShoulder.set(shoulderSpd);
 
 	    } else {
 	    	// maintain if at the max
@@ -126,32 +135,39 @@ public class Arm extends Subsystem
     }
   }
 
-  private void retract(double speed) {
+  private void retract(double elbowSpd, double shoulderSpd) {
     // gravity will help you retract
-    speed *= 0.3;
+    elbowSpd *= 0.4;
+    shoulderSpd *= 0.4;
     // limit switches return false when pressed
     // if both are above the bar, move both at once
     if(lShoulder.getSelectedSensorPosition(0) > Constants.SHOULDER_TO_BAR && lElbow.getSelectedSensorPosition(0) > Constants.ELBOW_TO_BAR) {
     		System.out.println("retracting both now....");
-    		lShoulder.set(speed);
-    		lElbow.set(speed * Constants.ELBOW_RELATIVE_SPD);
+    		lShoulder.set(shoulderSpd);
+    		lElbow.set(elbowSpd);
 
     } else {
     	// don't slam
-    	speed = 0.1;
+    	elbowSpd = 0.04;
+    	shoulderSpd = 0.07;
     	// if they are below the bar, move one at a time
         // if lower arm is not retracted, retract lower arm
     	if (lShoulder.getSelectedSensorPosition(0) > 200) {
-  	      lShoulder.set(speed);
+  	      lShoulder.set(shoulderSpd);
   	      lElbow.set(0.05);
   	    } else if (lElbow.getSelectedSensorPosition(0) > 3000) {
   	      // else if upper arm is not retracted, retract upper arm
   	      lShoulder.set(0.05);
   	      // elbow moves faster than the shoulder
-  	      lElbow.set(speed * Constants.ELBOW_RELATIVE_SPD);
+  	      lElbow.set(elbowSpd);
   	    }
     	
     }
+  }
+  
+  // linearly interpolate between a and b with factor t
+  private double lerp(double a, double b, double t) {
+	  return a + t * (b - a);
   }
 
 

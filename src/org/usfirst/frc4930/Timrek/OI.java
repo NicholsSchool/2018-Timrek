@@ -1,18 +1,7 @@
 
 package org.usfirst.frc4930.Timrek;
 
-import org.usfirst.frc4930.Timrek.commands.ClawClose;
-import org.usfirst.frc4930.Timrek.commands.ClawOpen;
-import org.usfirst.frc4930.Timrek.commands.DisengagePTO;
-import org.usfirst.frc4930.Timrek.commands.EngagePTO;
-import org.usfirst.frc4930.Timrek.commands.HighGear;
-import org.usfirst.frc4930.Timrek.commands.Intake;
-import org.usfirst.frc4930.Timrek.commands.LowGear;
-import org.usfirst.frc4930.Timrek.commands.LowerMast;
-import org.usfirst.frc4930.Timrek.commands.MoveDropWheel;
-import org.usfirst.frc4930.Timrek.commands.Outtake;
-import org.usfirst.frc4930.Timrek.commands.RaiseMast;
-import org.usfirst.frc4930.Timrek.commands.ToggleCamera;
+import org.usfirst.frc4930.Timrek.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;

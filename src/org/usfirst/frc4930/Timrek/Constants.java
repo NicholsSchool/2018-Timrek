@@ -35,6 +35,7 @@ public class Constants
   // speeds
   public static final double 
 	ELBOW_RELATIVE_SPD = 0.6,
+	ARM_LERP_T = 0.85,
   
   	INTAKE_SPEED = .4,
   	OUTTAKE_SPEED = -1.0,
