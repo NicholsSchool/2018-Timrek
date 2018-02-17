@@ -4,6 +4,7 @@ package org.usfirst.frc4930.Timrek;
 import org.usfirst.frc4930.Timrek.sensors.*;
 import org.usfirst.frc4930.Timrek.subsystems.*;
 import org.usfirst.frc4930.Timrek.autonomous.*;
+import org.usfirst.frc4930.Timrek.commands.EngagePTO;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -53,7 +54,7 @@ public class Robot extends TimedRobot
     positionDial = new Dial(RobotMap.positionPot);
     timeDelayDial = new Dial(RobotMap.timeDelayPot);
     arm = new Arm();
-//    cameras = new Cameras();
+    cameras = new Cameras();
     mast = new Mast();
     // OI must be constructed after subsystems.
     oi = new OI();
@@ -85,7 +86,6 @@ public class Robot extends TimedRobot
 
   @Override
   public void teleopInit() {
-	  new Delay(2).start();
     if (autonomousCommand != null)
       autonomousCommand.cancel();
     RobotMap.lShoulder.setSelectedSensorPosition(0, 0, 100);
@@ -127,5 +127,11 @@ public class Robot extends TimedRobot
     SmartDashboard.putNumber("DelayPot Raw: ", RobotMap.timeDelayPot.get());
     SmartDashboard.putNumber("PositionPot", Robot.positionDial.getPosition());
     SmartDashboard.putNumber("DelayPot", Robot.timeDelayDial.getPosition());
+    
+    // two button engage for the pto
+    if(oi.j0b7.get() && oi.j0b8.get())
+    {
+    	new EngagePTO().start();
+    }
   }
 }

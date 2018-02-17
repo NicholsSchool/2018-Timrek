@@ -14,6 +14,10 @@ public class OI {
 	public Joystick j1;
 	public Joystick j2;
 	
+	public JoystickButton j0b1;
+	public JoystickButton j0b7;
+	public JoystickButton j0b8;
+	
 	public JoystickButton j1b1;
 	public JoystickButton j1b4;
 	public JoystickButton j1b6;
@@ -35,6 +39,11 @@ public class OI {
         j1 = new Joystick(1);
         j2 = new Joystick(2);
 
+        j0b1 = new JoystickButton(j0, 1);
+        j0b7 = new JoystickButton(j0, 7);
+        j0b8 = new JoystickButton(j0, 8);
+        
+        
         j1b1 = new JoystickButton(j1, 1);
 
         j1b4 = new JoystickButton(j1, 4);
@@ -57,8 +66,8 @@ public class OI {
         j1b6.whenPressed(new HighGear());   //Set False
        
         //PTO (Solenoid 1)
-        j2b1.whenPressed(new DisengagePTO()); //Set True;
-        j2b2.whenPressed(new EngagePTO());  //Set False
+        j0b1.whenPressed(new DisengagePTO());
+//        j2b2.whenPressed(new EngagePTO());  //Set False
         
         //Gripper
         j2b3.whileHeld(new Intake());
