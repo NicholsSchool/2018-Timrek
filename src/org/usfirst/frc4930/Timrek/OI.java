@@ -1,19 +1,10 @@
 
 package org.usfirst.frc4930.Timrek;
 
-import org.usfirst.frc4930.Timrek.autonomous.ResetGyro;
-import org.usfirst.frc4930.Timrek.commands.ClawClose;
-import org.usfirst.frc4930.Timrek.commands.ClawOpen;
-import org.usfirst.frc4930.Timrek.commands.DisengagePTO;
-import org.usfirst.frc4930.Timrek.commands.EngagePTO;
-import org.usfirst.frc4930.Timrek.commands.HighGear;
-import org.usfirst.frc4930.Timrek.commands.Intake;
-import org.usfirst.frc4930.Timrek.commands.LowGear;
-import org.usfirst.frc4930.Timrek.commands.LowerMast;
-import org.usfirst.frc4930.Timrek.commands.MoveDropWheel;
-import org.usfirst.frc4930.Timrek.commands.Outtake;
-import org.usfirst.frc4930.Timrek.commands.RaiseMast;
-import org.usfirst.frc4930.Timrek.commands.ToggleCamera;
+import org.usfirst.frc4930.Timrek.autonomous.*;
+
+import org.usfirst.frc4930.Timrek.commands.*;
+
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -101,6 +92,9 @@ public class OI
 
     j2b7.whenPressed(new ToggleCamera());
     j0b7.whenPressed(new ResetGyro());
+    j0b5.whenPressed(new GoToAngle(90));
+    j0b4.whenPressed(new GoToAngle(-90));
+    j0b3.whenPressed(new GoToAngle(180));
   }
 
 }

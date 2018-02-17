@@ -4,6 +4,7 @@ package org.usfirst.frc4930.Timrek;
 import org.usfirst.frc4930.Timrek.sensors.*;
 import org.usfirst.frc4930.Timrek.subsystems.*;
 
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -42,6 +43,7 @@ public class Robot extends TimedRobot
   @Override
   public void robotInit() {
     RobotMap.init();
+    navX = new NavX(RobotMap.ahrs, PIDSourceType.kDisplacement);
     driveTrain = new DriveTrain();
     gripper = new Gripper();
     pto = new PTO();
@@ -54,7 +56,6 @@ public class Robot extends TimedRobot
     timeDelayDial = new Dial(RobotMap.timeDelayPot);
     arm = new Arm();
     cameras = new Cameras();
-    navX = new NavX(RobotMap.ahrs);
     mast = new Mast();
     // OI must be constructed after subsystems.
     oi = new OI();
@@ -63,12 +64,13 @@ public class Robot extends TimedRobot
 
   @Override
   public void disabledInit() {
-
+	 driveTrain.endLoop();
   }
 
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
+    driveTrain.endLoop();
   }
 
   @Override
@@ -124,7 +126,7 @@ public class Robot extends TimedRobot
     SmartDashboard.putNumber("LowerArmState: ", Robot.lowerArm.getState());
 
     SmartDashboard.putNumber("Get Angle", navX.getAngle());
-    SmartDashboard.putNumber("Get Yaw", navX.getYaw());
+//    SmartDashboard.putNumber("Get Yaw", navX.getYaw());
 
 
     SmartDashboard.putNumber("PositionPot Raw: ", RobotMap.positionPot.get());
