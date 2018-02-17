@@ -29,6 +29,7 @@ public class Robot extends TimedRobot
   public static Dial timeDelayDial;
   public static Arm arm;
   public static Cameras cameras;
+  public static NavX navX;
   public static Mast mast;
 
   // ALL THESE VALUES NEED TO BE CHECKED TO SEE HOW SOLENOID STATE RELATES TO ROBOT
@@ -53,6 +54,7 @@ public class Robot extends TimedRobot
     timeDelayDial = new Dial(RobotMap.timeDelayPot);
     arm = new Arm();
     cameras = new Cameras();
+    navX = new NavX(RobotMap.ahrs);
     mast = new Mast();
     // OI must be constructed after subsystems.
     oi = new OI();
@@ -72,6 +74,7 @@ public class Robot extends TimedRobot
   @Override
   public void autonomousInit() {
     autonomousCommand = chooser.getSelected();
+    RobotMap.ahrs.reset();
     // schedule the autonomous command (example)
     if (autonomousCommand != null)
       autonomousCommand.start();
@@ -91,6 +94,7 @@ public class Robot extends TimedRobot
     RobotMap.lDrvMSTR.setSelectedSensorPosition(0, 0, 100);
     RobotMap.rDrvMSTR.setSelectedSensorPosition(0, 0, 100);
     RobotMap.dropWhl.setSelectedSensorPosition(0, 0, 100);
+    RobotMap.ahrs.reset();
   }
 
   @Override
@@ -119,7 +123,9 @@ public class Robot extends TimedRobot
     SmartDashboard.putNumber("UpperArmState: ", Robot.upperArm.getState());
     SmartDashboard.putNumber("LowerArmState: ", Robot.lowerArm.getState());
 
-    SmartDashboard.putNumber("Gyro", RobotMap.ahrs.getAngle());
+    SmartDashboard.putNumber("Get Angle", navX.getAngle());
+    SmartDashboard.putNumber("Get Yaw", navX.getYaw());
+
 
     SmartDashboard.putNumber("PositionPot Raw: ", RobotMap.positionPot.get());
     SmartDashboard.putNumber("DelayPot Raw: ", RobotMap.timeDelayPot.get());

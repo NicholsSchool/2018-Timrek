@@ -1,6 +1,7 @@
 
 package org.usfirst.frc4930.Timrek;
 
+import org.usfirst.frc4930.Timrek.autonomous.ResetGyro;
 import org.usfirst.frc4930.Timrek.commands.ClawClose;
 import org.usfirst.frc4930.Timrek.commands.ClawOpen;
 import org.usfirst.frc4930.Timrek.commands.DisengagePTO;
@@ -99,7 +100,7 @@ public class OI
     j2b12.whileHeld(new LowerMast());
 
     j2b7.whenPressed(new ToggleCamera());
-
+    j0b7.whenPressed(new ResetGyro());
   }
 
 }
