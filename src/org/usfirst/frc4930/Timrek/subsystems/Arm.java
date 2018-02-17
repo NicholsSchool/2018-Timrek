@@ -82,11 +82,11 @@ public class Arm extends Subsystem
   // if was previously retracting and we must move the upper arm up
   private void adjustElbowUp(double position, boolean hasCube){
 	  	if(hasCube) {
-			lElbow.config_kP(0, 1.0, 100);
+			lElbow.config_kP(0, 0.4, 100);
 			lElbow.config_kI(0, 0.0, 100);
 			lElbow.config_kD(0, 1.0, 100);
 	  	} else {
-			lElbow.config_kP(0, 1.0, 100);
+			lElbow.config_kP(0, 0.4, 100);
 			lElbow.config_kI(0, 0.0, 100);
 			lElbow.config_kD(0, 1.0, 100);
 	  	}
