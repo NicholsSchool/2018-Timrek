@@ -21,6 +21,12 @@ public class DriveTrain extends Subsystem {
 
 
     public void move(double left, double right) {
+    	// if the pto is on, don't turn
+    	if(Robot.ptoOn) {
+    		double average = (left + right) / 2;
+    		left = average;
+    		right = average;
+    	}
     	RobotMap.driveTank.tankDrive(left, right);
     }
 

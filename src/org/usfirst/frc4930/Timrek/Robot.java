@@ -3,6 +3,8 @@ package org.usfirst.frc4930.Timrek;
 
 import org.usfirst.frc4930.Timrek.sensors.*;
 import org.usfirst.frc4930.Timrek.subsystems.*;
+import org.usfirst.frc4930.Timrek.autonomous.*;
+import org.usfirst.frc4930.Timrek.commands.EngagePTO;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -125,5 +127,11 @@ public class Robot extends TimedRobot
     SmartDashboard.putNumber("DelayPot Raw: ", RobotMap.timeDelayPot.get());
     SmartDashboard.putNumber("PositionPot", Robot.positionDial.getPosition());
     SmartDashboard.putNumber("DelayPot", Robot.timeDelayDial.getPosition());
+    
+    // two button engage for the pto
+    if(oi.j0b7.get() && oi.j0b8.get())
+    {
+    	new EngagePTO().start();
+    }
   }
 }
