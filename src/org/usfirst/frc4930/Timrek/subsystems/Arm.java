@@ -26,6 +26,8 @@ public class Arm extends Subsystem
   private double elbowPos = 0;
   private double shoulderPos = 0;
   
+  private boolean wasExtending = false;
+  
   // DigitalInput uArmDownLSwitch = RobotMap.uArmDownLSwitch;
   DigitalInput lArmDownLSwitch = RobotMap.lArmDownLSwitch;
 
@@ -45,6 +47,7 @@ public class Arm extends Subsystem
   public void set(double speed) {
 	  
     if (speed > 0.1) {
+    	wasExtending = true;
     	updatePosition();
     	// lerp the elbow and shoulder speeds
     	double elbowSpd = lerp(lElbow.get(), speed, Constants.ARM_LERP_T) * Constants.ELBOW_RELATIVE_SPD;
@@ -52,6 +55,7 @@ public class Arm extends Subsystem
     	
     	extend(elbowSpd, shoulderSpd);
     } else if (speed < -0.1) {
+    	wasExtending = false;
     	updatePosition();
     	
     	double elbowSpd = lerp(lElbow.get(), speed, Constants.ARM_LERP_T) * Constants.ELBOW_RELATIVE_SPD;
@@ -59,16 +63,13 @@ public class Arm extends Subsystem
     	
     	retract(elbowSpd, shoulderSpd);
     } else {
-    	/*if(lElbow.getSelectedSensorPosition(0) < position - 1000 || lElbow.getSelectedSensorPosition(0) >position + 1000 ){
-    		System.out.println("Adjusting Elbow");
-    		adjust(position);
+    	if(wasExtending) {
+    		adjustElbowDown(elbowPos, false);
+    		adjustShoulderDown(shoulderPos, false);
+    	} else {
+    		adjustElbowUp(elbowPos, false);
+    		adjustShoulderUp(shoulderPos, false);
     	}
-    	else {
-    		maintain();
-    	}*/
-    	
-    	adjustElbow(elbowPos);
-    	adjustShoulder(shoulderPos);
     }
   }
 
@@ -78,20 +79,61 @@ public class Arm extends Subsystem
     lElbow.set(0.0);
   }
 
-  private void adjustElbow(double position){
-		lElbow.config_kP(0, 0.03, 100);
-		lElbow.config_kI(0, 0, 100);
-		lElbow.config_kD(0, 0.05, 100);
+  private void adjustElbowUp(double position, boolean hasCube){
+	  	if(hasCube) {
+			lElbow.config_kP(0, 10.0, 100);
+			lElbow.config_kI(0, 0.0, 100);
+			lElbow.config_kD(0, 0.0, 100);
+	  	} else {
+			lElbow.config_kP(0, 10.0, 100);
+			lElbow.config_kI(0, 0.0, 100);
+			lElbow.config_kD(0, 0.0, 100);
+	  	}
 		
 		lElbow.set(ControlMode.Position, position);
   }
   
-  private void adjustShoulder(double position) {
-	  lShoulder.config_kP(0, 0.06, 0);
-	  lShoulder.config_kI(0, 0.0, 0);
-	  lShoulder.config_kD(0, 0.04, 0);
+  private void adjustElbowDown(double position, boolean hasCube) {
+		if(hasCube) {
+			lElbow.config_kP(0, 0.1, 100);
+			lElbow.config_kI(0, 0.0001, 100);
+			lElbow.config_kD(0, 0.0, 100);
+		} else {
+			lElbow.config_kP(0, 0.1, 100);
+			lElbow.config_kI(0, 0.0001, 100);
+			lElbow.config_kD(0, 0.0, 100);
+		}
+		
+		lElbow.set(ControlMode.Position, position);
+  }
+  
+  private void adjustShoulderUp(double position, boolean hasCube) {
+	  if(hasCube) {
+		  lShoulder.config_kP(0, 0.06, 0);
+		  lShoulder.config_kI(0, 0.0, 0);
+		  lShoulder.config_kD(0, 0.04, 0);
+	  } else {
+		  lShoulder.config_kP(0, 0.06, 0);
+		  lShoulder.config_kI(0, 0.0, 0);
+		  lShoulder.config_kD(0, 0.04, 0);
+	  }
 	  
 	  lShoulder.set(ControlMode.Position, position);
+  }
+  
+  private void adjustShoulderDown(double position, boolean hasCube) {
+	  if(hasCube) {
+		  lShoulder.config_kP(0, 0.06, 0);
+		  lShoulder.config_kI(0, 0.0, 0);
+		  lShoulder.config_kD(0, 0.04, 0);
+	  } else {
+		  lShoulder.config_kP(0, 0.06, 0);
+		  lShoulder.config_kI(0, 0.0, 0);
+		  lShoulder.config_kD(0, 0.04, 0);
+	  }
+	  
+	  lShoulder.set(ControlMode.Position, position);
+	  
   }
   
   public void updatePosition() {
@@ -148,8 +190,8 @@ public class Arm extends Subsystem
 
     } else {
     	// don't slam
-    	elbowSpd = 0.04;
-    	shoulderSpd = 0.07;
+    	elbowSpd += 0.12;
+    	shoulderSpd += 0.2;
     	// if they are below the bar, move one at a time
         // if lower arm is not retracted, retract lower arm
     	if (lShoulder.getSelectedSensorPosition(0) > 200) {

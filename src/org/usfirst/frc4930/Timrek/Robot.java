@@ -86,6 +86,7 @@ public class Robot extends TimedRobot
 
   @Override
   public void teleopInit() {
+	  arm.updatePosition();
     if (autonomousCommand != null)
       autonomousCommand.cancel();
     RobotMap.lShoulder.setSelectedSensorPosition(0, 0, 100);
