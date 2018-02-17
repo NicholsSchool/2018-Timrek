@@ -59,7 +59,6 @@ public class Arm extends Subsystem
     		maintain();
     	}*/
     	
-    	System.out.println("Adjusting....");
     	adjustElbow(elbowPos);
     	adjustShoulder(shoulderPos);
     }

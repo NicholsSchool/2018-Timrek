@@ -53,7 +53,7 @@ public class Robot extends TimedRobot
     positionDial = new Dial(RobotMap.positionPot);
     timeDelayDial = new Dial(RobotMap.timeDelayPot);
     arm = new Arm();
-    cameras = new Cameras();
+//    cameras = new Cameras();
     mast = new Mast();
     // OI must be constructed after subsystems.
     oi = new OI();
