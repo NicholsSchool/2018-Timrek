@@ -68,7 +68,7 @@ public class RobotMap
     rIntake = new WPI_TalonSRX(Constants.R_INTAKE_ID);
 
     lDrvMSTR = new WPI_TalonSRX(Constants.L_DRV_MSTR_ID);
-    lDrvSlv1 = new WPI_VictorSPX(Constants.R_DRV_SLV1_ID);
+    lDrvSlv1 = new WPI_VictorSPX(Constants.L_DRV_SLV1_ID);
     lDrvSlv2 = new WPI_VictorSPX(Constants.L_DRV_SLV2_ID);
 
     rDrvMSTR = new WPI_TalonSRX(Constants.R_DRV_MSTR_ID);
