@@ -79,29 +79,31 @@ public class Arm extends Subsystem
     lElbow.set(0.0);
   }
 
+  // if was previously retracting and we must move the upper arm up
   private void adjustElbowUp(double position, boolean hasCube){
 	  	if(hasCube) {
-			lElbow.config_kP(0, 10.0, 100);
+			lElbow.config_kP(0, 1.0, 100);
 			lElbow.config_kI(0, 0.0, 100);
-			lElbow.config_kD(0, 0.0, 100);
+			lElbow.config_kD(0, 1.0, 100);
 	  	} else {
-			lElbow.config_kP(0, 10.0, 100);
+			lElbow.config_kP(0, 1.0, 100);
 			lElbow.config_kI(0, 0.0, 100);
-			lElbow.config_kD(0, 0.0, 100);
+			lElbow.config_kD(0, 1.0, 100);
 	  	}
 		
 		lElbow.set(ControlMode.Position, position);
   }
   
+  // if was previously extending, meaning we must move the upper arm down
   private void adjustElbowDown(double position, boolean hasCube) {
 		if(hasCube) {
-			lElbow.config_kP(0, 0.1, 100);
-			lElbow.config_kI(0, 0.0001, 100);
-			lElbow.config_kD(0, 0.0, 100);
+			lElbow.config_kP(0, 0.7, 100);
+			lElbow.config_kI(0, 0.0, 100);
+			lElbow.config_kD(0, 1.0, 100);
 		} else {
-			lElbow.config_kP(0, 0.1, 100);
-			lElbow.config_kI(0, 0.0001, 100);
-			lElbow.config_kD(0, 0.0, 100);
+			lElbow.config_kP(0, 0.7, 100);
+			lElbow.config_kI(0, 0.0, 100);
+			lElbow.config_kD(0, 1.0, 100);
 		}
 		
 		lElbow.set(ControlMode.Position, position);
