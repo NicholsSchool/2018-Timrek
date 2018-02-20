@@ -1,6 +1,7 @@
 
 package org.usfirst.frc4930.Timrek;
 
+import org.usfirst.frc4930.Timrek.autonomous.GoToAngle;
 import org.usfirst.frc4930.Timrek.sensors.*;
 import org.usfirst.frc4930.Timrek.subsystems.*;
 
@@ -75,7 +76,7 @@ public class Robot extends TimedRobot
 
   @Override
   public void autonomousInit() {
-    autonomousCommand = chooser.getSelected();
+    autonomousCommand = new GoToAngle(90);
     RobotMap.ahrs.reset();
     // schedule the autonomous command (example)
     if (autonomousCommand != null)
@@ -85,6 +86,7 @@ public class Robot extends TimedRobot
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+ 
   }
 
   @Override

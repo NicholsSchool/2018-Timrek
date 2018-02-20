@@ -92,9 +92,11 @@ public class OI
 
     j2b7.whenPressed(new ToggleCamera());
     j0b7.whenPressed(new ResetGyro());
+    j0b6.whenPressed(new BreakGoToAngle());
     j0b5.whenPressed(new GoToAngle(90));
     j0b4.whenPressed(new GoToAngle(-90));
     j0b3.whenPressed(new GoToAngle(180));
+    j0b11.whenPressed(new GoDistance(3));
   }
 
 }

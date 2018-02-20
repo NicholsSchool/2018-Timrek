@@ -39,6 +39,7 @@ public class Arm extends Subsystem
     // if the lower arm is down, reset the encoders
     if (!lArmDownLSwitch.get()) {
       lShoulder.setSelectedSensorPosition(0, 0, 0);
+      shoulderPos = 0;
     }
   }
 
@@ -58,9 +59,9 @@ public class Arm extends Subsystem
     		maintain();
     	}*/
     	
-    	System.out.println("Adjusting....");
-    	adjustElbow(elbowPos);
-    	adjustShoulder(shoulderPos);
+//    	System.out.println("Adjusting....");
+//    	adjustElbow(elbowPos);
+//    	adjustShoulder(shoulderPos);
     }
   }
 
