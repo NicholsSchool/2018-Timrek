@@ -96,7 +96,10 @@ public class OI
     j0b5.whenPressed(new GoToAngle(90));
     j0b4.whenPressed(new GoToAngle(-90));
     j0b3.whenPressed(new GoToAngle(180));
-    j0b11.whenPressed(new GoDistance(3));
+    j0b11.whenPressed(new BBGoDistance(10));
+    j0b10.whenPressed(new ResetEncoders());
+    j0b8.whenPressed(new BBGoToAngle(90));
+    j0b9.whenPressed(new BBGoToAngle(-90));
   }
 
 }

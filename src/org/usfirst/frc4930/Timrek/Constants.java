@@ -54,7 +54,7 @@ public class Constants
 
   // values for Auto
   public static final int
-  	TICKS_PER_REVOULTION = 1600, //NEEDS TO BE TESTED
+  	TICKS_PER_REVOULTION = 900, //NEEDS TO BE TESTED
   	WHEEL_DIAMETER = 2;
   
   

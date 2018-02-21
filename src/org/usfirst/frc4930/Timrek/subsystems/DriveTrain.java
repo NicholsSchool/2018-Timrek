@@ -18,6 +18,7 @@ public class DriveTrain extends Subsystem {
 	PIDController rightTurnController;
 	
 	public boolean goingToAngle = false;
+	public boolean goingDistance = false;
     @Override
     public void initDefaultCommand() {
     	setDefaultCommand(new TankDrive());
@@ -64,27 +65,48 @@ public class DriveTrain extends Subsystem {
         }
         System.out.println("Going To Angle");
     	
-//    	double currentAngle = Robot.navX.getAngle();
-//    	if(angle > 180 ){
-//    		angle -= 360;
-//    	}
-//    	if(currentAngle > angle + 5 || currentAngle  < angle - 5 ){
-//    		
-//    		double angleDif =  angle - currentAngle;
-//    		double change = angleDif /360;
-//    		
-//    		double lSpeed = 0.5 * change;
-//    		double rSpeed = -0.5 * change;
-//    		
-//
-//    		move(lSpeed, rSpeed);
-//    		System.out.println("Going To Angle");
-//    	}    	
-//    	else {
-//    		stop();
-//    		System.out.println("Stopping at Angle");
-//    	}
 
+
+    }
+    
+    public void BBGoToAngle(double angle){
+    	double currentAngle = Robot.navX.getAngle();
+    	if(currentAngle > angle + 5 || currentAngle  < angle - 5 ){
+    		goingToAngle = true;
+    		double angleDif =  angle - currentAngle;
+    		double change = angleDif /180;
+    		double lSpeed;
+    		double rSpeed;
+    		if(angle > 0){
+    			lSpeed= 0.65;
+    			rSpeed = -0.65;
+    		}
+    		else {
+    			lSpeed = -0.65;
+    			rSpeed = 0.65;
+    		}
+    		move(lSpeed, rSpeed);
+    		System.out.println("Going To Angle");
+    	}    	
+    	else {
+    		goingToAngle = false;
+    		stop();
+    		System.out.println("Stopping at Angle");
+    	}
+    }
+    
+    public void BBGoDistance(double distance) {
+    	if(RobotMap.lDrvMSTR.getSelectedSensorPosition(0) <= distance - 1000){
+    		double speed = 0.75;
+    		move(speed, speed);
+    		goingDistance = true;
+    		System.out.println("Going to Distance");
+    	}
+    	else {
+    		goingDistance = false;
+    		stop();
+    		System.out.println("Stopping at Distance");
+    	}
     }
     
     public void endLoop() {
