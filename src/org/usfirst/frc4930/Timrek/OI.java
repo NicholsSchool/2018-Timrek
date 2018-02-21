@@ -1,6 +1,7 @@
 
 package org.usfirst.frc4930.Timrek;
 
+import org.usfirst.frc4930.Timrek.autonomous.ArmToPosition;
 import org.usfirst.frc4930.Timrek.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -88,6 +89,8 @@ public class OI {
        j2b12.whileHeld(new LowerMast());
  
        j2b7.whenPressed(new ToggleCamera());
+       
+       j2b11.whenPressed(new ArmToPosition(80000, 100000, 5));
     
     }
 
