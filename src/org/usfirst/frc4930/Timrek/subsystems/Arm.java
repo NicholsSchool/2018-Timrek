@@ -26,8 +26,6 @@ public class Arm extends Subsystem
   private double elbowPos = 0;
   private double shoulderPos = 0;
   
-  private boolean wasExtending = false;
-  
   // DigitalInput uArmDownLSwitch = RobotMap.uArmDownLSwitch;
   DigitalInput lArmDownLSwitch = RobotMap.lArmDownLSwitch;
 
@@ -41,35 +39,19 @@ public class Arm extends Subsystem
     // if the lower arm is down, reset the encoders
     if (!lArmDownLSwitch.get()) {
       lShoulder.setSelectedSensorPosition(0, 0, 0);
+      shoulderPos = 0;
     }
   }
 
   public void set(double speed) {
 	  
-    if (speed > 0.1) {
-    	wasExtending = true;
-    	updatePosition();
-    	// lerp the elbow and shoulder speeds
-    	double elbowSpd = lerp(lElbow.get(), speed, Constants.ARM_LERP_T) * Constants.ELBOW_RELATIVE_SPD;
-    	double shoulderSpd = lerp(lShoulder.get(), speed, Constants.ARM_LERP_T);
-    	
-    	extend(elbowSpd, shoulderSpd);
-    } else if (speed < -0.1) {
-    	wasExtending = false;
-    	updatePosition();
-    	
-    	double elbowSpd = lerp(lElbow.get(), speed, Constants.ARM_LERP_T) * Constants.ELBOW_RELATIVE_SPD;
-    	double shoulderSpd = lerp(lShoulder.get(), speed, Constants.ARM_LERP_T);
-    	
-    	retract(elbowSpd, shoulderSpd);
+    if (speed > 0.2) {
+    	extend();
+    } else if (speed < -0.2) {    	
+    	retract();
     } else {
-    	if(wasExtending) {
-    		adjustElbowDown(elbowPos, false);
-    		adjustShoulderDown(shoulderPos, false);
-    	} else {
-    		adjustElbowUp(elbowPos, false);
-    		adjustShoulderUp(shoulderPos, false);
-    	}
+    	adjustElbow(elbowPos);
+    	adjustShoulder(shoulderPos);
     }
   }
 
@@ -78,61 +60,21 @@ public class Arm extends Subsystem
     lShoulder.set(0.0);
     lElbow.set(0.0);
   }
-
-  // if was previously retracting and we must move the upper arm up
-  private void adjustElbowUp(double position, boolean hasCube){
-	  	if(hasCube) {
-			lElbow.config_kP(0, 0.4, 100);
-			lElbow.config_kI(0, 0.0, 100);
-			lElbow.config_kD(0, 1.0, 100);
-	  	} else {
-			lElbow.config_kP(0, 0.4, 100);
-			lElbow.config_kI(0, 0.0, 100);
-			lElbow.config_kD(0, 1.0, 100);
-	  	}
-		
-		lElbow.set(ControlMode.Position, position);
-  }
   
   // if was previously extending, meaning we must move the upper arm down
-  private void adjustElbowDown(double position, boolean hasCube) {
-		if(hasCube) {
-			lElbow.config_kP(0, 0.7, 100);
-			lElbow.config_kI(0, 0.0, 100);
-			lElbow.config_kD(0, 1.0, 100);
-		} else {
-			lElbow.config_kP(0, 0.7, 100);
-			lElbow.config_kI(0, 0.0, 100);
-			lElbow.config_kD(0, 1.0, 100);
-		}
+  private void adjustElbow(double position) {
+		lElbow.config_kP(0, 0.3, 100);
+		lElbow.config_kI(0, 0.0, 100);
+		lElbow.config_kD(0, 0.0, 100);
 		
 		lElbow.set(ControlMode.Position, position);
   }
+
   
-  private void adjustShoulderUp(double position, boolean hasCube) {
-	  if(hasCube) {
-		  lShoulder.config_kP(0, 0.06, 0);
-		  lShoulder.config_kI(0, 0.0, 0);
-		  lShoulder.config_kD(0, 0.04, 0);
-	  } else {
-		  lShoulder.config_kP(0, 0.06, 0);
-		  lShoulder.config_kI(0, 0.0, 0);
-		  lShoulder.config_kD(0, 0.04, 0);
-	  }
-	  
-	  lShoulder.set(ControlMode.Position, position);
-  }
-  
-  private void adjustShoulderDown(double position, boolean hasCube) {
-	  if(hasCube) {
-		  lShoulder.config_kP(0, 0.06, 0);
-		  lShoulder.config_kI(0, 0.0, 0);
-		  lShoulder.config_kD(0, 0.04, 0);
-	  } else {
-		  lShoulder.config_kP(0, 0.06, 0);
-		  lShoulder.config_kI(0, 0.0, 0);
-		  lShoulder.config_kD(0, 0.04, 0);
-	  }
+  private void adjustShoulder(double position) {
+	  lShoulder.config_kP(0, 0.8, 0);
+	  lShoulder.config_kI(0, 0.0, 0);
+	  lShoulder.config_kD(0, 0.0, 0);
 	  
 	  lShoulder.set(ControlMode.Position, position);
 	  
@@ -145,76 +87,83 @@ public class Arm extends Subsystem
 	  SmartDashboard.putNumber("shoulderPos", shoulderPos);
   }
   
-  private void extend(double elbowSpd, double shoulderSpd) {
+  private void extend() {
     // limit switches return false when pressed
     // if the upper arm is not fully extended, extend upper arm
-    if (lElbow.getSelectedSensorPosition(0) < Constants.ELBOW_TO_BAR * 0.9) {
+    if (lElbow.getSelectedSensorPosition(0) < Constants.ELBOW_TO_BAR) {
       // 0.05 will maintain the position
       lShoulder.set(0.05);
-      // elbow moves faster than the shoulder
-      lElbow.set(elbowSpd);
-    } else if (lShoulder.getSelectedSensorPosition(0) < Constants.SHOULDER_TO_BAR * 0.9) {
+      lElbow.set(Constants.ELBOW_RAISE_SPD_BELOW_BAR);
+      System.out.println("EXTENDING ELBOW");
+    } else if (lShoulder.getSelectedSensorPosition(0) < Constants.SHOULDER_TO_BAR) {
       // else if lower arm is not fully extended, extend lower arm
-      lShoulder.set(shoulderSpd);
-      lElbow.set(0.05);
+      lShoulder.set(Constants.SHOULDER_RAISE_SPD_BELOW_BAR);
+      lElbow.set(0.1);
+      System.out.println("EXTENDING SHOULDER");
     } else {
-    	System.out.println("extending both now....");
-    	
+    	System.out.println("EXTENDING BOTH");
     	// if both arms are past the bar, run each until they reach the limit
-	    if (lElbow.getSelectedSensorPosition(0) < Constants.ELBOW_EXTENDED * 0.9) {
+	    if (lElbow.getSelectedSensorPosition(0) < Constants.ELBOW_EXTENDED) {
 		      // elbow moves faster than the shoulder
-		      lElbow.set(elbowSpd);
+		      lElbow.set(Constants.ELBOW_RAISE_SPD_ABOVE_BAR);
 	    } else {
 	    	// maintain if at the max
 	    	lElbow.set(0.05);
 	    }
 	    
-	    if (lShoulder.getSelectedSensorPosition(0) < Constants.SHOULDER_EXTENDED * 0.9) {
-		      lShoulder.set(shoulderSpd);
+	    if (lShoulder.getSelectedSensorPosition(0) < Constants.SHOULDER_EXTENDED) {
+		      lShoulder.set(Constants.SHOULDER_RAISE_SPD_ABOVE_BAR);
 
 	    } else {
 	    	// maintain if at the max
 	    	lShoulder.set(0.05);
 	    }
     }
+    
+    updatePosition();
   }
 
-  private void retract(double elbowSpd, double shoulderSpd) {
-    // gravity will help you retract
-    elbowSpd *= 0.4;
-    shoulderSpd *= 0.4;
-    // limit switches return false when pressed
+  private void retract() {
     // if both are above the bar, move both at once
-    if(lShoulder.getSelectedSensorPosition(0) > Constants.SHOULDER_TO_BAR && lElbow.getSelectedSensorPosition(0) > Constants.ELBOW_TO_BAR) {
-    		System.out.println("retracting both now....");
-    		lShoulder.set(shoulderSpd);
-    		lElbow.set(elbowSpd);
+    if(lShoulder.getSelectedSensorPosition(0) > Constants.SHOULDER_TO_BAR
+    		&& lElbow.getSelectedSensorPosition(0) > Constants.ELBOW_TO_BAR) {
+    	
+    		System.out.println("RETRACTING BOTH");
+    		lShoulder.set(Constants.SHOULDER_LOWER_SPD_ABOVE_BAR);
+    		lElbow.set(Constants.ELBOW_LOWER_SPD_ABOVE_BAR);
 
     } else {
-    	// don't slam
-    	elbowSpd += 0.12;
-    	shoulderSpd += 0.2;
     	// if they are below the bar, move one at a time
         // if lower arm is not retracted, retract lower arm
-    	if (lShoulder.getSelectedSensorPosition(0) > 200) {
-  	      lShoulder.set(shoulderSpd);
+    	if (lShoulder.getSelectedSensorPosition(0) > 0) {
+    		System.out.println("RETRACTING SHOULDER");
+  	      lShoulder.set(Constants.SHOULDER_LOWER_SPD_BELOW_BAR);
   	      lElbow.set(0.05);
-  	    } else if (lElbow.getSelectedSensorPosition(0) > 3000) {
+  	    } else if (lElbow.getSelectedSensorPosition(0) > 0) {
+  	    	System.out.println("RETRACTING ELBOW");
   	      // else if upper arm is not retracted, retract upper arm
   	      lShoulder.set(0.05);
-  	      // elbow moves faster than the shoulder
-  	      lElbow.set(elbowSpd);
+  	      lElbow.set(Constants.ELBOW_LOWER_SPD_BELOW_BAR);
   	    }
     	
     }
+    
+    updatePosition();
   }
   
-  // linearly interpolate between a and b with factor t
-  private double lerp(double a, double b, double t) {
-	  return a + t * (b - a);
+  public void MoveToPosition(int elbowPos, int shoulderPos) {
+	  if(lElbow.getSelectedSensorPosition(0) > elbowPos && lShoulder.getSelectedSensorPosition(0) > shoulderPos) {
+		  retract();
+	  } else if(lElbow.getSelectedSensorPosition(0) < elbowPos && lShoulder.getSelectedSensorPosition(0) < shoulderPos) {
+		  extend();
+	  } else {
+		  adjustElbow(this.elbowPos);
+		  adjustShoulder(this.shoulderPos);
+	  }
   }
 
 
+  
   public void resetEncoders() {
     lShoulder.setSelectedSensorPosition(0, 0, 0);
     lElbow.setSelectedSensorPosition(0, 0, 0);

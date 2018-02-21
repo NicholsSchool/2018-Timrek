@@ -86,7 +86,6 @@ public class Robot extends TimedRobot
 
   @Override
   public void teleopInit() {
-	  arm.updatePosition();
     if (autonomousCommand != null)
       autonomousCommand.cancel();
     RobotMap.lShoulder.setSelectedSensorPosition(0, 0, 100);
@@ -94,6 +93,7 @@ public class Robot extends TimedRobot
     RobotMap.lDrvMSTR.setSelectedSensorPosition(0, 0, 100);
     RobotMap.rDrvMSTR.setSelectedSensorPosition(0, 0, 100);
     RobotMap.dropWhl.setSelectedSensorPosition(0, 0, 100);
+	  arm.updatePosition();
   }
 
   @Override
@@ -108,9 +108,9 @@ public class Robot extends TimedRobot
 
     SmartDashboard.putNumber("LeftShoulder", RobotMap.lShoulder.get());
 
-    SmartDashboard.putNumber("Left Shoulder Encoder(21):",
+    SmartDashboard.putNumber("SHOULDER ENCODER: ",
         RobotMap.lShoulder.getSelectedSensorPosition(0));
-    SmartDashboard.putNumber("Left Elbow Encoder(25):",
+    SmartDashboard.putNumber("ELBOW ENCODER: ",
         RobotMap.lElbow.getSelectedSensorPosition(0));
     SmartDashboard.putNumber("Left Master Encoder(22):",
         RobotMap.lDrvMSTR.getSelectedSensorPosition(0));
@@ -130,6 +130,11 @@ public class Robot extends TimedRobot
     SmartDashboard.putNumber("DelayPot", Robot.timeDelayDial.getPosition());
     
     SmartDashboard.putNumber("ARM_LERP_T: ", Constants.ARM_LERP_T);
+    
+    SmartDashboard.putBoolean("LOWER ARM DOWN: ", RobotMap.lArmDownLSwitch.get());
+    
+    SmartDashboard.putNumber("SHOULDER POWER: ", RobotMap.lShoulder.get());
+    SmartDashboard.putNumber("ELBOW POWER: ", RobotMap.lElbow.get());
     
     // two button engage for the pto
     if(oi.j0b7.get() && oi.j0b8.get())
