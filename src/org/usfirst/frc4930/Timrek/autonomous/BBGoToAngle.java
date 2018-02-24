@@ -12,7 +12,9 @@ public class BBGoToAngle extends Command {
 		desiredAngle = angle;
 	}
 	  protected void initialize() {
-		  Robot.navX.reset();
+		  if(desiredAngle != 0){
+			  Robot.navX.reset();
+		  }
 		  new DisengagePTO().start();
 	  }
 
@@ -21,7 +23,8 @@ public class BBGoToAngle extends Command {
 	  }
 
 	  protected boolean isFinished() {
-	    return !Robot.driveTrain.goingToAngle;
+		double currentAngle = Robot.navX.getAngle();
+	    return (currentAngle < desiredAngle + 5 && currentAngle  > desiredAngle - 5) ;
 	  }
 
 	  protected void end() {

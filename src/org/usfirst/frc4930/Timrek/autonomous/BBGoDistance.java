@@ -2,6 +2,7 @@ package org.usfirst.frc4930.Timrek.autonomous;
 
 import org.usfirst.frc4930.Timrek.Constants;
 import org.usfirst.frc4930.Timrek.Robot;
+import org.usfirst.frc4930.Timrek.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -20,15 +21,15 @@ public class BBGoDistance extends Command {
 	  }
 
 	  protected void execute() {
-//		  if(Robot.navX.getAngle() != 0){
-//			  Robot.driveTrain.BBGoToAngle(0);
-//		  }
+		  if(Math.abs(Robot.navX.getAngle()) >=  1){
+			  Robot.driveTrain.BBGoToAngle(0);
+		  }
 		  Robot.driveTrain.BBGoDistance(desiredDistance);
 		  System.out.println("Distance: " + desiredDistance);
 	  }
 
 	  protected boolean isFinished() {
-	    return !Robot.driveTrain.goingDistance;
+	    return RobotMap.lDrvMSTR.getSelectedSensorPosition(0) >= desiredDistance - 1000;
 	  }
 
 	  protected void end() {

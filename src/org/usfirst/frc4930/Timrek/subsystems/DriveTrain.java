@@ -70,11 +70,11 @@ public class DriveTrain extends Subsystem {
     }
     
     public void BBGoToAngle(double angle){
-    	double currentAngle = Robot.navX.getAngle();
-    	if(currentAngle > angle + 5 || currentAngle  < angle - 5 ){
+//    	double currentAngle = Robot.navX.getAngle();
+//    	if(currentAngle > angle + 5 || currentAngle  < angle - 5 ){
     		goingToAngle = true;
-    		double angleDif =  angle - currentAngle;
-    		double change = angleDif /180;
+//    		double angleDif =  angle - currentAngle;
+//    		double change = angleDif /180;
     		double lSpeed;
     		double rSpeed;
     		if(angle > 0){
@@ -87,26 +87,26 @@ public class DriveTrain extends Subsystem {
     		}
     		move(lSpeed, rSpeed);
     		System.out.println("Going To Angle");
-    	}    	
-    	else {
-    		goingToAngle = false;
-    		stop();
-    		System.out.println("Stopping at Angle");
-    	}
+//    	}    	
+//    	else {
+//    		goingToAngle = false;
+//    		stop();
+//    		System.out.println("Stopping at Angle");
+//    	}
     }
     
     public void BBGoDistance(double distance) {
-    	if(RobotMap.lDrvMSTR.getSelectedSensorPosition(0) <= distance - 1000){
+//    	if(RobotMap.lDrvMSTR.getSelectedSensorPosition(0) <= distance - 1000){
     		double speed = 0.75;
     		move(speed, speed);
     		goingDistance = true;
     		System.out.println("Going to Distance");
-    	}
-    	else {
-    		goingDistance = false;
-    		stop();
-    		System.out.println("Stopping at Distance");
-    	}
+//    	}
+//    	else {
+//    		goingDistance = false;
+//    		stop();
+//    		System.out.println("Stopping at Distance");
+//    	}
     }
     
     public void endLoop() {
