@@ -1,6 +1,7 @@
 package org.usfirst.frc4930.Timrek.autonomous;
 
 import org.usfirst.frc4930.Timrek.Robot;
+import org.usfirst.frc4930.Timrek.commands.MoveArm;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -9,17 +10,17 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ArmToPosition extends Command {
 	
-	private int timeOut;
 	private int elbowPos;
 	private int shoulderPos;
 
-    public ArmToPosition(int elbowPos, int shoulderPos, int timeOut) {
+    public ArmToPosition(int elbowPos, int shoulderPos) {
+    	requires(Robot.arm);
     	this.elbowPos = elbowPos;
     	this.shoulderPos = shoulderPos;
-        this.timeOut = timeOut;
     }
 
     protected void initialize() {
+    	Robot.arm.atPosition = false;
     }
 
     protected void execute() {
@@ -27,10 +28,11 @@ public class ArmToPosition extends Command {
     }
 
     protected boolean isFinished() {
-        return timeSinceInitialized() > timeOut;
+        return Robot.arm.atPosition;
     }
 
     protected void end() {
+    	new MoveArm().start();
     }
 
     protected void interrupted() {
