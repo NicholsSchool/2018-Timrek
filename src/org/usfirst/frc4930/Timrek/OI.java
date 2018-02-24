@@ -86,9 +86,7 @@ public class OI
     j2b4.whenPressed(new ClawOpen()); // Set True
     j2b6.whenPressed(new ClawClose()); // Set False
 
-    // Mast
-    j2b10.whileHeld(new RaiseMast());
-    j2b12.whileHeld(new LowerMast());
+
 
     j2b7.whenPressed(new ToggleCamera());
     j0b7.whenPressed(new ResetGyro());
@@ -96,10 +94,12 @@ public class OI
     j0b5.whenPressed(new GoToAngle(90));
     j0b4.whenPressed(new GoToAngle(-90));
     j0b3.whenPressed(new GoToAngle(180));
-    j0b11.whenPressed(new BBGoDistance(10));
+    j0b11.whenPressed(new BBGoDistance(6));
     j0b10.whenPressed(new ResetEncoders());
     j0b8.whenPressed(new BBGoToAngle(90));
     j0b9.whenPressed(new BBGoToAngle(-90));
+
+    
   }
 
 }

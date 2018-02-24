@@ -21,11 +21,12 @@ public class BBGoDistance extends Command {
 	  }
 
 	  protected void execute() {
-		  if(Math.abs(Robot.navX.getAngle()) >=  1){
-			  Robot.driveTrain.BBGoToAngle(0);
-		  }
+//		  if(Math.abs(Robot.navX.getAngle()) >=  0.5){
+//			  Robot.driveTrain.BBGoToAngle(0);
+//		  }
 		  Robot.driveTrain.BBGoDistance(desiredDistance);
 		  System.out.println("Distance: " + desiredDistance);
+		  System.out.println("Distance Left: " + (desiredDistance - RobotMap.lDrvMSTR.getSelectedSensorPosition(0)));
 	  }
 
 	  protected boolean isFinished() {

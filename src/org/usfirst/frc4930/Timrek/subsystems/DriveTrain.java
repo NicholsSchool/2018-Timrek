@@ -78,12 +78,12 @@ public class DriveTrain extends Subsystem {
     		double lSpeed;
     		double rSpeed;
     		if(angle > 0){
-    			lSpeed= 0.65;
-    			rSpeed = -0.65;
+    			lSpeed= 0.85;
+    			rSpeed = -0.85;
     		}
     		else {
-    			lSpeed = -0.65;
-    			rSpeed = 0.65;
+    			lSpeed = -0.85;
+    			rSpeed = 0.85;
     		}
     		move(lSpeed, rSpeed);
     		System.out.println("Going To Angle");
@@ -98,9 +98,14 @@ public class DriveTrain extends Subsystem {
     public void BBGoDistance(double distance) {
 //    	if(RobotMap.lDrvMSTR.getSelectedSensorPosition(0) <= distance - 1000){
     		double speed = 0.75;
+//    		if(RobotMap.lDrvMSTR.getSelectedSensorPosition(0) > (distance/3.0) *2.0){
+//    			speed /= 3.0;
+//    		}
+    		System.out.println("Speed =" + speed );
     		move(speed, speed);
     		goingDistance = true;
     		System.out.println("Going to Distance");
+    	
 //    	}
 //    	else {
 //    		goingDistance = false;
