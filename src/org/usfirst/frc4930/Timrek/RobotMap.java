@@ -132,8 +132,8 @@ public class RobotMap
     solenoid5 = new Solenoid(50, 5);
 
     solenoid0.set(true);
-    solenoid1.set(true);
-    solenoid2.set(true);
+    solenoid1.set(false);
+    solenoid2.set(false);
     solenoid4.set(true);
     solenoid5.set(true);
   }

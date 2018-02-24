@@ -23,7 +23,7 @@ public class ArmToPosition extends Command {
     }
 
     protected void execute() {
-    	Robot.arm.MoveToPosition(elbowPos, shoulderPos);
+    	Robot.arm.moveToPosition(elbowPos, shoulderPos);
     }
 
     protected boolean isFinished() {

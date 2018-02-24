@@ -151,7 +151,7 @@ public class Arm extends Subsystem
     updatePosition();
   }
   
-  public void MoveToPosition(int elbowPos, int shoulderPos) {
+  public void moveToPosition(int elbowPos, int shoulderPos) {
 	  if(lElbow.getSelectedSensorPosition(0) > elbowPos && lShoulder.getSelectedSensorPosition(0) > shoulderPos) {
 		  retract();
 	  } else if(lElbow.getSelectedSensorPosition(0) < elbowPos && lShoulder.getSelectedSensorPosition(0) < shoulderPos) {

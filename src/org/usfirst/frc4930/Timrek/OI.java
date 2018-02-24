@@ -90,7 +90,8 @@ public class OI {
  
        j2b7.whenPressed(new ToggleCamera());
        
-       j2b11.whenPressed(new ArmToPosition(80000, 100000, 5));
+       j2b11.whenPressed(new ArmToPosition(Constants.ELBOW_TO_BAR, 1000, 3));
+       j2b12.whenPressed(new ArmToPosition(Constants.ELBOW_EXTENDED, Constants.SHOULDER_EXTENDED, 5));
     
     }
 
