@@ -121,7 +121,7 @@ public class RobotMap
     ahrs = new AHRS(SPI.Port.kMXP);
     positionPot = new AnalogPotentiometer(Constants.POSITIONPOT_CHNL, 360, 0);
     timeDelayPot = new AnalogPotentiometer(Constants.DELAYPOT_CHNL, 360, 0);
-    lArmDownLSwitch = new DigitalInput(0);
+    lArmDownLSwitch = new DigitalInput(Constants.LARM_DOWN_LSWITCH_CHNL);
 
     // Pneumatics
     compressor = new Compressor(50);
@@ -132,7 +132,7 @@ public class RobotMap
     solenoid5 = new Solenoid(50, 5);
 
     solenoid0.set(true);
-    solenoid1.set(true);
+    solenoid1.set(false);
     solenoid2.set(false);
     solenoid4.set(true);
     solenoid5.set(true);

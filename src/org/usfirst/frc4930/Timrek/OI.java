@@ -5,15 +5,11 @@ import org.usfirst.frc4930.Timrek.autonomous.*;
 
 import org.usfirst.frc4930.Timrek.commands.*;
 
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-public class OI
-{
-  public Joystick j0;
-  public Joystick j1;
-  public Joystick j2;
+
+public class OI {
 
   public JoystickButton j0b1, j0b2, j0b3, j0b4, j0b5, j0b6, j0b7, j0b8, j0b9, j0b10, j0b11, j0b12;
 
@@ -98,8 +94,7 @@ public class OI
     j0b10.whenPressed(new ResetEncoders());
     j0b8.whenPressed(new BBGoToAngle(90));
     j0b9.whenPressed(new BBGoToAngle(-90));
-
-    
+    j2b11.whenPressed(new ArmToPosition(Constants.ELBOW_TO_BAR, 1000));
+    j2b12.whenPressed(new ArmToPosition(Constants.ELBOW_EXTENDED * 2, Constants.SHOULDER_EXTENDED)); 
   }
-
 }

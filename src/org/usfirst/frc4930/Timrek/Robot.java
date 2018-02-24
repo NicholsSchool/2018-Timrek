@@ -5,6 +5,8 @@ import org.usfirst.frc4930.Timrek.autonomous.GoToAngle;
 import org.usfirst.frc4930.Timrek.autonomous.PickAuto;
 import org.usfirst.frc4930.Timrek.sensors.*;
 import org.usfirst.frc4930.Timrek.subsystems.*;
+import org.usfirst.frc4930.Timrek.autonomous.*;
+import org.usfirst.frc4930.Timrek.commands.EngagePTO;
 
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -100,6 +102,7 @@ public class Robot extends TimedRobot
     RobotMap.rDrvMSTR.setSelectedSensorPosition(0, 0, 100);
     RobotMap.dropWhl.setSelectedSensorPosition(0, 0, 100);
     RobotMap.ahrs.reset();
+    arm.updatePosition();
   }
 
   @Override
@@ -114,9 +117,9 @@ public class Robot extends TimedRobot
 
     SmartDashboard.putNumber("LeftShoulder", RobotMap.lShoulder.get());
 
-    SmartDashboard.putNumber("Left Shoulder Encoder(21):",
+    SmartDashboard.putNumber("SHOULDER ENCODER: ",
         RobotMap.lShoulder.getSelectedSensorPosition(0));
-    SmartDashboard.putNumber("Left Elbow Encoder(25):",
+    SmartDashboard.putNumber("ELBOW ENCODER: ",
         RobotMap.lElbow.getSelectedSensorPosition(0));
     SmartDashboard.putNumber("Left Master Encoder(22):",
         RobotMap.lDrvMSTR.getSelectedSensorPosition(0));
@@ -136,5 +139,17 @@ public class Robot extends TimedRobot
     SmartDashboard.putNumber("DelayPot Raw: ", RobotMap.timeDelayPot.get());
     SmartDashboard.putNumber("PositionPot", Robot.positionDial.getPosition());
     SmartDashboard.putNumber("DelayPot", Robot.timeDelayDial.getPosition());
+    
+    
+    SmartDashboard.putBoolean("LOWER ARM DOWN: ", RobotMap.lArmDownLSwitch.get());
+    
+    SmartDashboard.putNumber("SHOULDER POWER: ", RobotMap.lShoulder.get());
+    SmartDashboard.putNumber("ELBOW POWER: ", RobotMap.lElbow.get());
+    
+    // two button engage for the pto
+    if(oi.j0b7.get() && oi.j0b8.get())
+    {
+    	new EngagePTO().start();
+    }
   }
 }
