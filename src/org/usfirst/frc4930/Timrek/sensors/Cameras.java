@@ -20,34 +20,34 @@ public class Cameras extends Subsystem
     // TODO Auto-generated method stub
 
   }
-
-  public Cameras() {
-    CameraServer cs = CameraServer.getInstance();
-    // start usb cameras
-    firstCam = cs.startAutomaticCapture("cam0", 0);
-    secondCam = cs.startAutomaticCapture("cam1", 1);
-    // settings for cam 1
-    firstCam.setResolution(Constants.LENGTH, Constants.HEIGHT);
-    firstCam.setFPS(Constants.FRAMES_PER_SECOND);
-    // settings for cam 2
-    secondCam.setResolution(Constants.LENGTH, Constants.HEIGHT);
-    secondCam.setFPS(Constants.FRAMES_PER_SECOND);
-    cs.addCamera(firstCam);
-    cs.addCamera(secondCam);
-    server = cs.getServer();
-    server.setSource(firstCam);
-
-  }
-
-  public void toggleCamera() {
-    if (currentCam) {
-      server.setSource(secondCam);
-      SmartDashboard.putString("c", "Second Camera");
-    } else {
-      server.setSource(firstCam);
-      SmartDashboard.putString("c", "First Camera");
-    }
-    currentCam = !currentCam;
-
-  }
+//
+//  public Cameras() {
+//    CameraServer cs = CameraServer.getInstance();
+//    // start usb cameras
+//    firstCam = cs.startAutomaticCapture("cam0", 0);
+//    secondCam = cs.startAutomaticCapture("cam1", 1);
+//    // settings for cam 1
+//    firstCam.setResolution(Constants.LENGTH, Constants.HEIGHT);
+//    firstCam.setFPS(Constants.FRAMES_PER_SECOND);
+//    // settings for cam 2
+//    secondCam.setResolution(Constants.LENGTH, Constants.HEIGHT);
+//    secondCam.setFPS(Constants.FRAMES_PER_SECOND);
+//    cs.addCamera(firstCam);
+//    cs.addCamera(secondCam);
+//    server = cs.getServer();
+//    server.setSource(firstCam);
+//
+//  }
+//
+//  public void toggleCamera() {
+//    if (currentCam) {
+//      server.setSource(secondCam);
+//      SmartDashboard.putString("c", "Second Camera");
+//    } else {
+//      server.setSource(firstCam);
+//      SmartDashboard.putString("c", "First Camera");
+//    }
+//    currentCam = !currentCam;
+//
+//  }
 }

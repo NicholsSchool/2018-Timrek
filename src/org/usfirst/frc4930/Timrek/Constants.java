@@ -61,7 +61,13 @@ public class Constants
   	ELBOW_TO_BAR = 70000,
     LOWER_ARM_INCRAMENTS = 40000;
 
-
+  // values for Auto
+  public static final int
+  	TICKS_PER_REVOULTION = 900, //NEEDS TO BE TESTED
+  	WHEEL_DIAMETER = 2;
+  
+  
+  
   // inverts
   public static final int 
   	INVERT_JOYSTICK = -1;

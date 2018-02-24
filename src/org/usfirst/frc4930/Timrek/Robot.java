@@ -1,11 +1,14 @@
 
 package org.usfirst.frc4930.Timrek;
 
+import org.usfirst.frc4930.Timrek.autonomous.GoToAngle;
+import org.usfirst.frc4930.Timrek.autonomous.PickAuto;
 import org.usfirst.frc4930.Timrek.sensors.*;
 import org.usfirst.frc4930.Timrek.subsystems.*;
 import org.usfirst.frc4930.Timrek.autonomous.*;
 import org.usfirst.frc4930.Timrek.commands.EngagePTO;
 
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -31,6 +34,7 @@ public class Robot extends TimedRobot
   public static Dial timeDelayDial;
   public static Arm arm;
   public static Cameras cameras;
+  public static NavX navX;
   public static Mast mast;
 
   // ALL THESE VALUES NEED TO BE CHECKED TO SEE HOW SOLENOID STATE RELATES TO ROBOT
@@ -43,6 +47,7 @@ public class Robot extends TimedRobot
   @Override
   public void robotInit() {
     RobotMap.init();
+    navX = new NavX(RobotMap.ahrs, PIDSourceType.kDisplacement);
     driveTrain = new DriveTrain();
     gripper = new Gripper();
     pto = new PTO();
@@ -63,17 +68,19 @@ public class Robot extends TimedRobot
 
   @Override
   public void disabledInit() {
-
+	 driveTrain.endLoop();
   }
 
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
+    driveTrain.endLoop();
   }
 
   @Override
   public void autonomousInit() {
-    autonomousCommand = chooser.getSelected();
+    autonomousCommand = new PickAuto();
+    RobotMap.ahrs.reset();
     // schedule the autonomous command (example)
     if (autonomousCommand != null)
       autonomousCommand.start();
@@ -82,6 +89,7 @@ public class Robot extends TimedRobot
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+ 
   }
 
   @Override
@@ -93,7 +101,8 @@ public class Robot extends TimedRobot
     RobotMap.lDrvMSTR.setSelectedSensorPosition(0, 0, 100);
     RobotMap.rDrvMSTR.setSelectedSensorPosition(0, 0, 100);
     RobotMap.dropWhl.setSelectedSensorPosition(0, 0, 100);
-	  arm.updatePosition();
+    RobotMap.ahrs.reset();
+    arm.updatePosition();
   }
 
   @Override
@@ -122,7 +131,9 @@ public class Robot extends TimedRobot
     SmartDashboard.putNumber("UpperArmState: ", Robot.upperArm.getState());
     SmartDashboard.putNumber("LowerArmState: ", Robot.lowerArm.getState());
 
-    SmartDashboard.putNumber("Gyro", RobotMap.ahrs.getAngle());
+    SmartDashboard.putNumber("Get Angle", navX.getAngle());
+//    SmartDashboard.putNumber("Get Yaw", navX.getYaw());
+
 
     SmartDashboard.putNumber("PositionPot Raw: ", RobotMap.positionPot.get());
     SmartDashboard.putNumber("DelayPot Raw: ", RobotMap.timeDelayPot.get());

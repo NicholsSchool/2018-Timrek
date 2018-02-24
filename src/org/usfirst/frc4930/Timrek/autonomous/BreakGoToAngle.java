@@ -1,23 +1,23 @@
-package org.usfirst.frc4930.Timrek.commands;
+package org.usfirst.frc4930.Timrek.autonomous;
 
 import org.usfirst.frc4930.Timrek.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ToggleCamera extends Command{
-	
-
+public class BreakGoToAngle extends Command {
 	  protected void initialize() {}
 
 	  protected void execute() {
-	//    Robot.cameras.toggleCamera();
+		  Robot.driveTrain.endLoop();
 	  }
 
 	  protected boolean isFinished() {
 	    return true;
 	  }
 
-	  protected void end() {}
+	  protected void end() {
+		  Robot.driveTrain.stop();
+	  }
 
 	  protected void interrupted() {
 	    end();

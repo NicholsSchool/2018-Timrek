@@ -114,7 +114,7 @@ public class RobotMap
     dropWhl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 100);
 
     // Invert Necessary Encoders
-    lDrvMSTR.setSensorPhase(true);
+    rDrvMSTR.setSensorPhase(true);
     driveTank = new DifferentialDrive(lDrvMSTR, rDrvMSTR);
     driveTank.setSafetyEnabled(false);
 
