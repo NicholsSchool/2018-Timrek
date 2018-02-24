@@ -129,7 +129,6 @@ public class Robot extends TimedRobot
     SmartDashboard.putNumber("PositionPot", Robot.positionDial.getPosition());
     SmartDashboard.putNumber("DelayPot", Robot.timeDelayDial.getPosition());
     
-    SmartDashboard.putNumber("ARM_LERP_T: ", Constants.ARM_LERP_T);
     
     SmartDashboard.putBoolean("LOWER ARM DOWN: ", RobotMap.lArmDownLSwitch.get());
     
