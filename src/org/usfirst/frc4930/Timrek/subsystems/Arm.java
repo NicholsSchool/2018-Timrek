@@ -2,6 +2,7 @@ package org.usfirst.frc4930.Timrek.subsystems;
 
 import org.usfirst.frc4930.Timrek.RobotMap;
 import org.usfirst.frc4930.Timrek.Constants;
+import org.usfirst.frc4930.Timrek.Robot;
 import org.usfirst.frc4930.Timrek.commands.MoveArm;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -25,6 +26,7 @@ public class Arm extends Subsystem
   
   private double elbowPos = 0;
   private double shoulderPos = 0;
+  private boolean shouldMaintain = true;
   
   // DigitalInput uArmDownLSwitch = RobotMap.uArmDownLSwitch;
   DigitalInput lArmDownLSwitch = RobotMap.lArmDownLSwitch;
@@ -40,6 +42,14 @@ public class Arm extends Subsystem
     if (!lArmDownLSwitch.get()) {
       lShoulder.setSelectedSensorPosition(0, 0, 0);
       shoulderPos = 0;
+    }
+    
+    // two buttons for disabling and enabling pid maintaining
+    if(Robot.oi.j2b10.get()) {
+    	shouldMaintain = false;
+    }
+    if(Robot.oi.j2b9.get()) {
+    	shouldMaintain = true;
     }
   }
 
@@ -67,7 +77,13 @@ public class Arm extends Subsystem
 		lElbow.config_kI(0, 0.0, 100);
 		lElbow.config_kD(0, 0.0, 100);
 		
-		lElbow.set(ControlMode.Position, position);
+		if(shouldMaintain) {
+			lElbow.set(ControlMode.Position, position);
+		} else {
+			lElbow.set(0.0);
+			// make sure to update the position if the robot is not maintaining
+			updatePosition();
+		}
   }
 
   
@@ -76,7 +92,12 @@ public class Arm extends Subsystem
 	  lShoulder.config_kI(0, 0.0, 0);
 	  lShoulder.config_kD(0, 0.0, 0);
 	  
-	  lShoulder.set(ControlMode.Position, position);
+	  if(shouldMaintain) {
+		  lShoulder.set(ControlMode.Position, position);
+	  } else {
+		  lShoulder.set(0.0);
+		  updatePosition();
+	  }
 	  
   }
   
