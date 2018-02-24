@@ -125,17 +125,17 @@ public class RobotMap
 
     // Pneumatics
     compressor = new Compressor(50);
-    solenoid0 = new Solenoid(50, 0);
-    solenoid1 = new Solenoid(50, 1);
-    solenoid2 = new Solenoid(50, 2);
-    solenoid4 = new Solenoid(50, 4);
-    solenoid5 = new Solenoid(50, 5);
+    solenoid0 = new Solenoid(50, 0); // Shifter
+    solenoid1 = new Solenoid(50, 1); // PTO
+    solenoid2 = new Solenoid(50, 2); // DropWheel
+    solenoid4 = new Solenoid(50, 4); // Claw
+    solenoid5 = new Solenoid(50, 5); // Extra
 
-    solenoid0.set(true);
-    solenoid1.set(false);
-    solenoid2.set(false);
-    solenoid4.set(true);
-    solenoid5.set(true);
+    solenoid0.set(true); // Shifter
+    solenoid1.set(false); // PTO
+    solenoid2.set(false); // DropWheel
+    solenoid4.set(true); // Claw
+    solenoid5.set(true); // Extra
   }
 
 }

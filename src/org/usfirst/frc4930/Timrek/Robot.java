@@ -1,8 +1,8 @@
 
 package org.usfirst.frc4930.Timrek;
 
-import org.usfirst.frc4930.Timrek.autonomous.GoToAngle;
-import org.usfirst.frc4930.Timrek.autonomous.PickAuto;
+
+
 import org.usfirst.frc4930.Timrek.sensors.*;
 import org.usfirst.frc4930.Timrek.subsystems.*;
 import org.usfirst.frc4930.Timrek.autonomous.*;
