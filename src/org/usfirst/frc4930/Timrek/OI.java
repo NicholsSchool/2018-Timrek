@@ -63,16 +63,16 @@ public class OI {
     j2b12 = new JoystickButton(j2, 12);
 
     // Shifter (Solenoid 0)
-    j1b4.whenPressed(new LowGear()); // Set True
-    j1b6.whenPressed(new HighGear()); // Set False
+    j0b1.whenPressed(new LowGear()); // Set True
+    j0b1.whenReleased(new HighGear()); // Set False
 
     // PTO (Solenoid 1)
-    j2b1.whenPressed(new DisengagePTO()); // Set True;
-    j2b2.whenPressed(new EngagePTO()); // Set False
+    j2b8.whenPressed(new DisengagePTO()); // Set True;
+    j2b6.whenPressed(new EngagePTO()); // Set False
 
     // Gripper
-    j2b3.whileHeld(new Intake());
-    j2b5.whileHeld(new Outtake());
+    j2b1.whileHeld(new Intake());
+    j2b4.whileHeld(new Outtake());
 
     // DropWheel (Solenoid 2)
     // j1b9.whenPressed(new LowerDropWheel()); //Set True
@@ -80,18 +80,15 @@ public class OI {
     j1b1.whileHeld(new MoveDropWheel());
 
     // Claw (Solenoid 4)
-    j2b4.whenPressed(new ClawOpen()); // Set True
-    j2b6.whenPressed(new ClawClose()); // Set False
+    j2b3.whenPressed(new ClawOpen()); // Set True
+    j2b5.whenPressed(new ClawClose()); // Set False
 
 
 
     j2b7.whenPressed(new ToggleCamera());
     j0b7.whenPressed(new ResetGyro());
     j0b6.whenPressed(new BreakGoToAngle());
-    j0b5.whenPressed(new GoToAngle(90));
-    j0b4.whenPressed(new GoToAngle(-90));
-    j0b3.whenPressed(new GoToAngle(180));
-    j0b11.whenPressed(new BBGoDistance(6));
+    j0b11.whenPressed(new BBGoDistance(3));
     j0b10.whenPressed(new ResetEncoders());
     j0b8.whenPressed(new BBGoToAngle(90));
     j0b9.whenPressed(new BBGoToAngle(-90));

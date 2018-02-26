@@ -51,7 +51,9 @@ public class Constants
 	ELBOW_LOWER_SPD_BELOW_BAR = -0.1,
 	SHOULDER_LOWER_SPD_BELOW_BAR = -0.05,
 	ELBOW_LOWER_SPD_ABOVE_BAR = -0.15,
-	SHOULDER_LOWER_SPD_ABOVE_BAR = -0.25;
+	SHOULDER_LOWER_SPD_ABOVE_BAR = -0.25,
+  
+  	BB_GO_DISTANCE_SPEED = 0.75;
 
   // encoder values for the arm
   public static final int 

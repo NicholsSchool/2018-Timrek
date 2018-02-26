@@ -26,7 +26,7 @@ public class Arm extends Subsystem
   
   private double elbowPos = 0;
   private double shoulderPos = 0;
-  private boolean shouldMaintain = true;
+  public boolean shouldMaintain = true;
   
   // DigitalInput uArmDownLSwitch = RobotMap.uArmDownLSwitch;
   DigitalInput lArmDownLSwitch = RobotMap.lArmDownLSwitch;

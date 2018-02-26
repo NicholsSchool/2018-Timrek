@@ -7,9 +7,19 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class BBGoToAngle extends Command {
 	double desiredAngle;
+	double lSpeed;
+	double rSpeed;
 	
 	public BBGoToAngle(double angle){
 		desiredAngle = angle;
+		if(angle > 0){
+			lSpeed= 0.85;
+			rSpeed = -0.85;
+		}
+		else {
+			lSpeed = -0.85;
+			rSpeed = 0.85;
+		}
 	}
 	  protected void initialize() {
 		  if(desiredAngle != 0){
@@ -19,7 +29,8 @@ public class BBGoToAngle extends Command {
 	  }
 
 	  protected void execute() {
-		  Robot.driveTrain.BBGoToAngle(desiredAngle);
+		  Robot.driveTrain.move(lSpeed, rSpeed);
+		//  Robot.driveTrain.BBGoToAngle(desiredAngle);
 	  }
 
 	  protected boolean isFinished() {

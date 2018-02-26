@@ -6,6 +6,7 @@ package org.usfirst.frc4930.Timrek;
 import org.usfirst.frc4930.Timrek.sensors.*;
 import org.usfirst.frc4930.Timrek.subsystems.*;
 import org.usfirst.frc4930.Timrek.autonomous.*;
+import org.usfirst.frc4930.Timrek.commands.DisengagePTO;
 import org.usfirst.frc4930.Timrek.commands.EngagePTO;
 
 import edu.wpi.first.wpilibj.PIDSourceType;
@@ -109,12 +110,28 @@ public class Robot extends TimedRobot
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
 
-    SmartDashboard.putBoolean("Compressor Enabled: ", RobotMap.compressor.enabled());
-    SmartDashboard.putBoolean("Shifter (Solenoid 0)", RobotMap.solenoid0.get());
-    SmartDashboard.putBoolean("PTO (Solenoid 1)", RobotMap.solenoid1.get());
-    SmartDashboard.putBoolean("DropWheel (Solenoid 2)", RobotMap.solenoid2.get());
-    SmartDashboard.putBoolean("Claw (Solenoid 4)", RobotMap.solenoid4.get());
-
+    // two button engage for the pto
+    if(oi.j1b9.get() && oi.j1b10.get() && !ptoOn)
+    {
+    	new EngagePTO().start();
+    }
+    if(oi.j1b9.get() && oi.j1b10.get() && ptoOn){
+    	new DisengagePTO().start();
+    }
+//    if(oi.j1b9.get() && oi.j1b10.get()){
+//    	new QuickPTO().start();
+//    }
+    
+    
+    if(oi.j0b10.get()){
+    	RobotMap.lElbow.setSelectedSensorPosition(0, 0, 0);
+    //	Robot.arm.resetElbowPosition();
+    }
+    if(oi.j0b9.get()){
+    	RobotMap.lShoulder.setSelectedSensorPosition(0, 0, 0);
+    //	Robot.arm.resetShoulderPosition();
+    }
+  
     SmartDashboard.putNumber("LeftShoulder", RobotMap.lShoulder.get());
 
     SmartDashboard.putNumber("SHOULDER ENCODER: ",
@@ -127,13 +144,11 @@ public class Robot extends TimedRobot
         RobotMap.rDrvMSTR.getSelectedSensorPosition(0));
     SmartDashboard.putNumber("Drop Wheel Encoder(34):",
         RobotMap.dropWhl.getSelectedSensorPosition(0));
-
-    SmartDashboard.putNumber("UpperArmState: ", Robot.upperArm.getState());
-    SmartDashboard.putNumber("LowerArmState: ", Robot.lowerArm.getState());
-
+    
     SmartDashboard.putNumber("Get Angle", navX.getAngle());
 //    SmartDashboard.putNumber("Get Yaw", navX.getYaw());
 
+    SmartDashboard.putBoolean("ARM STABLIZE: ", Robot.arm.shouldMaintain);
 
     SmartDashboard.putNumber("PositionPot Raw: ", RobotMap.positionPot.get());
     SmartDashboard.putNumber("DelayPot Raw: ", RobotMap.timeDelayPot.get());
@@ -145,6 +160,9 @@ public class Robot extends TimedRobot
     
     SmartDashboard.putNumber("SHOULDER POWER: ", RobotMap.lShoulder.get());
     SmartDashboard.putNumber("ELBOW POWER: ", RobotMap.lElbow.get());
+    
+    SmartDashboard.putNumber("LEFT DRIVE", RobotMap.lDrvMSTR.get());
+    SmartDashboard.putNumber("RIGHT DRIVE", RobotMap.rDrvMSTR.get());
     
     // two button engage for the pto
     if(oi.j0b7.get() && oi.j0b8.get())

@@ -3,6 +3,7 @@
 package org.usfirst.frc4930.Timrek.subsystems;
 
 
+import org.usfirst.frc4930.Timrek.Constants;
 import org.usfirst.frc4930.Timrek.Robot;
 import org.usfirst.frc4930.Timrek.RobotMap;
 import org.usfirst.frc4930.Timrek.commands.TankDrive;
@@ -27,11 +28,11 @@ public class DriveTrain extends Subsystem {
 
     public void move(double left, double right) {
     	// if the pto is on, don't turn
-    	if(Robot.ptoOn) {
-    		double average = (left + right) / 2;
-    		left = average;
-    		right = average;
-    	}
+//    	if(Robot.ptoOn) {
+//    		double average = (left + right) / 2;
+//    		left = average;
+//    		right = average;
+//    	}
     	RobotMap.driveTank.tankDrive(left, right);
     }
 
@@ -103,13 +104,11 @@ public class DriveTrain extends Subsystem {
     
     public void BBGoDistance(double distance) {
 //    	if(RobotMap.lDrvMSTR.getSelectedSensorPosition(0) <= distance - 1000){
-    		double speed = 0.75;
-//    		if(RobotMap.lDrvMSTR.getSelectedSensorPosition(0) > (distance/3.0) *2.0){
-//    			speed /= 3.0;
-//    		}
+    		double speed = Constants.BB_GO_DISTANCE_SPEED;
+
     		System.out.println("Speed =" + speed );
-    		move(speed, speed);
-    		goingDistance = true;
+    		move(Constants.BB_GO_DISTANCE_SPEED, Constants.BB_GO_DISTANCE_SPEED);
+    	
     		System.out.println("Going to Distance");
     	
 //    	}
