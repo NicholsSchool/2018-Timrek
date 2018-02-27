@@ -45,12 +45,12 @@ public class Arm extends Subsystem
     }
     
     // two buttons for disabling and enabling pid maintaining
-    if(Robot.oi.j2b10.get()) {
-    	shouldMaintain = false;
-    }
-    if(Robot.oi.j2b9.get()) {
-    	shouldMaintain = true;
-    }
+//    if(Robot.oi.j2b10.get()) {
+//    	shouldMaintain = false;
+//    }
+//    if(Robot.oi.j2b9.get()) {
+//    	shouldMaintain = true;
+//    }
   }
 
   public void set(double speed) {

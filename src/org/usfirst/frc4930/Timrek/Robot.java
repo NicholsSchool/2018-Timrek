@@ -40,7 +40,7 @@ public class Robot extends TimedRobot
 
   // ALL THESE VALUES NEED TO BE CHECKED TO SEE HOW SOLENOID STATE RELATES TO ROBOT
   public static boolean shifterInLowGear = true;
-  public static boolean ptoOn = true;
+  public static boolean ptoOn = false;
   public static boolean dropped = false;
   public static boolean clawOpen = false;
 
@@ -111,13 +111,13 @@ public class Robot extends TimedRobot
     Scheduler.getInstance().run();
 
     // two button engage for the pto
-    if(oi.j1b9.get() && oi.j1b10.get() && !ptoOn)
-    {
-    	new EngagePTO().start();
-    }
-    if(oi.j1b9.get() && oi.j1b10.get() && ptoOn){
-    	new DisengagePTO().start();
-    }
+//    if(oi.j1b9.get() && oi.j1b10.get() && !ptoOn)
+//    {
+//    	new EngagePTO().start();
+//    }
+//    if(oi.j1b9.get() && oi.j1b10.get() && ptoOn){
+//    	new DisengagePTO().start();
+//    }
 //    if(oi.j1b9.get() && oi.j1b10.get()){
 //    	new QuickPTO().start();
 //    }
@@ -165,9 +165,9 @@ public class Robot extends TimedRobot
     SmartDashboard.putNumber("RIGHT DRIVE", RobotMap.rDrvMSTR.get());
     
     // two button engage for the pto
-    if(oi.j0b7.get() && oi.j0b8.get())
-    {
-    	new EngagePTO().start();
-    }
+//    if(oi.j0b7.get() && oi.j0b8.get())
+//    {
+//    	new EngagePTO().start();
+//    }
   }
 }

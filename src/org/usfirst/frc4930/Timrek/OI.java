@@ -63,8 +63,8 @@ public class OI {
     j2b12 = new JoystickButton(j2, 12);
 
     // Shifter (Solenoid 0)
-    j0b1.whenPressed(new LowGear()); // Set True
-    j0b1.whenReleased(new HighGear()); // Set False
+    j0b1.whenPressed(new HighGear()); // Set True
+    j0b1.whenReleased(new LowGear()); // Set False
 
     // PTO (Solenoid 1)
     j2b8.whenPressed(new DisengagePTO()); // Set True;
@@ -83,15 +83,17 @@ public class OI {
     j2b3.whenPressed(new ClawOpen()); // Set True
     j2b5.whenPressed(new ClawClose()); // Set False
 
-
+    j2b9.whenPressed(new ArmMaintainOn());
+    j2b10.whenPressed(new ArmMaintainOff());
 
     j2b7.whenPressed(new ToggleCamera());
     j0b7.whenPressed(new ResetGyro());
     j0b6.whenPressed(new BreakGoToAngle());
-    j0b11.whenPressed(new BBGoDistance(3));
+    j0b11.whenPressed(new BBGoDistance(6));
     j0b10.whenPressed(new ResetEncoders());
     j0b8.whenPressed(new BBGoToAngle(90));
     j0b9.whenPressed(new BBGoToAngle(-90));
+    j0b12.whenPressed(new Test());
     j2b11.whenPressed(new ArmToPosition(Constants.ELBOW_TO_BAR, 1000));
     j2b12.whenPressed(new ArmToPosition(Constants.ELBOW_EXTENDED * 2, Constants.SHOULDER_EXTENDED)); 
   }

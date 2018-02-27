@@ -8,8 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class BBGoDistance extends Command {
 	
-		double desiredDistance;
+	  double desiredDistance;
 	  public BBGoDistance(double distance) {
+		  requires(Robot.driveTrain);
 		  double inches = distance*12;
 		  double revolutions = (inches/(Constants.WHEEL_DIAMETER * Math.PI)) ;
 		  desiredDistance =  Constants.TICKS_PER_REVOULTION * revolutions;
@@ -33,6 +34,7 @@ public class BBGoDistance extends Command {
 
 	  protected void end() {
 		  Robot.driveTrain.stop();
+		  Robot.driveTrain.resetEncoders();
 	  }
 
 	  protected void interrupted() {
