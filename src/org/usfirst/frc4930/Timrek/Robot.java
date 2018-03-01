@@ -25,8 +25,6 @@ public class Robot extends TimedRobot
   public static OI oi;
   public static DriveTrain driveTrain;
   public static Gripper gripper;
-  public static LowerArm lowerArm;
-  public static UpperArm upperArm;
   public static PTO pto;
   public static Claw claw;
   public static Shifter shifter;
@@ -55,8 +53,6 @@ public class Robot extends TimedRobot
     claw = new Claw();
     dropWheel = new DropWheel();
     shifter = new Shifter();
-    lowerArm = new LowerArm();
-    upperArm = new UpperArm();
     positionDial = new Dial(RobotMap.positionPot);
     timeDelayDial = new Dial(RobotMap.timeDelayPot);
     arm = new Arm();
@@ -80,7 +76,7 @@ public class Robot extends TimedRobot
 
   @Override
   public void autonomousInit() {
-    autonomousCommand = new PickAuto();
+    autonomousCommand = new AutoStartPositions();
     RobotMap.ahrs.reset();
     // schedule the autonomous command (example)
     if (autonomousCommand != null)
@@ -123,11 +119,11 @@ public class Robot extends TimedRobot
 //    }
     
     
-    if(oi.j0b10.get()){
+    if(oi.j1b10.get()){
     	RobotMap.lElbow.setSelectedSensorPosition(0, 0, 0);
     //	Robot.arm.resetElbowPosition();
     }
-    if(oi.j0b9.get()){
+    if(oi.j1b9.get()){
     	RobotMap.lShoulder.setSelectedSensorPosition(0, 0, 0);
     //	Robot.arm.resetShoulderPosition();
     }

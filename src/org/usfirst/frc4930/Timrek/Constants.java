@@ -51,9 +51,9 @@ public class Constants
 	ELBOW_LOWER_SPD_BELOW_BAR = -0.1,
 	SHOULDER_LOWER_SPD_BELOW_BAR = -0.05,
 	ELBOW_LOWER_SPD_ABOVE_BAR = -0.15,
-	SHOULDER_LOWER_SPD_ABOVE_BAR = -0.25,
+	SHOULDER_LOWER_SPD_ABOVE_BAR = -0.25;
   
-  	BB_GO_DISTANCE_SPEED = 0.75;
+
 
   // encoder values for the arm
   public static final int 
@@ -66,9 +66,19 @@ public class Constants
   // values for Auto
   public static final int
   	TICKS_PER_REVOULTION = 1300, //NEEDS TO BE TESTED
-  	WHEEL_DIAMETER = 4;
+  	WHEEL_DIAMETER = 4,
   
+  	BB_G0_TO_ANGLE_OFFSET = 8,
+  	
+  	AUTO_TO_BAR_ELBOW_VALUE = ELBOW_TO_BAR,
+  	AUTO_TO_BAR_SHOULDER_VALUE = 1000,
+  	AUTO_FULL_RAISE_ELBOW_VALUE = ELBOW_EXTENDED * 2,
+  	AUTO_FULL_RAISE_SHOULDER_VALUE = SHOULDER_EXTENDED;
   
+  // speeds for Auto
+  public static final double
+  	BB_GO_DISTANCE_SPEED = 0.75,
+  	BB_GO_TO_ANGLE_SPEED = 0.8;
   
   // inverts
   public static final int 

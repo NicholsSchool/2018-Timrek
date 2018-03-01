@@ -17,9 +17,6 @@ public class DriveTrain extends Subsystem {
 
 	PIDController leftTurnController;
 	PIDController rightTurnController;
-	
-	public boolean goingToAngle = false;
-	public boolean goingDistance = false;
     @Override
     public void initDefaultCommand() {
     	setDefaultCommand(new TankDrive());
@@ -47,7 +44,7 @@ public class DriveTrain extends Subsystem {
         rightTurnController = new PIDController(0.015, 0.00, 0, Robot.navX, RobotMap.rDrvMSTR);
         leftTurnController.setInputRange(-180.0f, 180.0f);
         rightTurnController.setInputRange(-180.0f, 180.0f);
-        goingToAngle = true;
+  //      goingToAngle = true;
 
         leftTurnController.setPercentTolerance(30.0);
         rightTurnController.setPercentTolerance(30.0);
@@ -68,55 +65,12 @@ public class DriveTrain extends Subsystem {
         System.out.println("Left Speed: " + RobotMap.lDrvMSTR.get());
         System.out.println("Right Speed: " + RobotMap.rDrvMSTR.get());
         if (!leftTurnController.isEnabled() && !rightTurnController.isEnabled()) {
-          goingToAngle = false;
+   //       goingToAngle = false;
         }
         System.out.println("Going To Angle");
     	
 
 
-    }
-    
-    public void BBGoToAngle(double angle){
-//    	double currentAngle = Robot.navX.getAngle();
-//    	if(currentAngle > angle + 5 || currentAngle  < angle - 5 ){
-    		goingToAngle = true;
-//    		double angleDif =  angle - currentAngle;
-//    		double change = angleDif /180;
-    		double lSpeed;
-    		double rSpeed;
-    		if(angle > 0){
-    			lSpeed= 0.85;
-    			rSpeed = -0.85;
-    		}
-    		else {
-    			lSpeed = -0.85;
-    			rSpeed = 0.85;
-    		}
-    		move(lSpeed, rSpeed);
-    		System.out.println("Going To Angle");
-//    	}    	
-//    	else {
-//    		goingToAngle = false;
-//    		stop();
-//    		System.out.println("Stopping at Angle");
-//    	}
-    }
-    
-    public void BBGoDistance(double distance) {
-//    	if(RobotMap.lDrvMSTR.getSelectedSensorPosition(0) <= distance - 1000){
-    		double speed = Constants.BB_GO_DISTANCE_SPEED;
-
-    		System.out.println("Speed =" + speed );
-    		move(Constants.BB_GO_DISTANCE_SPEED, Constants.BB_GO_DISTANCE_SPEED);
-    	
-    		System.out.println("Going to Distance");
-    	
-//    	}
-//    	else {
-//    		goingDistance = false;
-//    		stop();
-//    		System.out.println("Stopping at Distance");
-//    	}
     }
     
     public void endLoop() {
