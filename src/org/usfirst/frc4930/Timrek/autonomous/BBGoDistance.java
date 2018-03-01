@@ -23,13 +23,13 @@ public class BBGoDistance extends Command {
 
 	  protected void execute() {
 
-		  Robot.driveTrain.move(Constants.BB_GO_DISTANCE_SPEED, Constants.BB_GO_DISTANCE_SPEED);
+		  Robot.driveTrain.move(Constants.BB_GO_DISTANCE_SPEED + 0.03, Constants.BB_GO_DISTANCE_SPEED);
 		  System.out.println("Distance: " + desiredDistance);
 		  System.out.println("Distance Left: " + (desiredDistance - RobotMap.lDrvMSTR.getSelectedSensorPosition(0)));
 	  }
 
 	  protected boolean isFinished() {
-	    return RobotMap.lDrvMSTR.getSelectedSensorPosition(0) >= desiredDistance - 1000;
+	    return RobotMap.lDrvMSTR.getSelectedSensorPosition(0) >= desiredDistance;
 	  }
 
 	  protected void end() {

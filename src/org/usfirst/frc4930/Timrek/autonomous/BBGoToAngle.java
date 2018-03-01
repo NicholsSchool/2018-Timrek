@@ -15,7 +15,7 @@ public class BBGoToAngle extends Command {
 		requires(Robot.driveTrain);
 		desiredAngle = angle;
 		
-		if(angle > 0){
+		if(desiredAngle > 0){
 			lSpeed = Constants.BB_GO_TO_ANGLE_SPEED;
 		}
 		else {
@@ -24,10 +24,8 @@ public class BBGoToAngle extends Command {
 		rSpeed = -lSpeed;
 	}
 	  protected void initialize() {
-		
-		  if(desiredAngle != 0){
-			  Robot.navX.reset();
-		  }
+		  Robot.navX.reset();
+		  
 		  new DisengagePTO().start();
 	  }
 
