@@ -114,28 +114,29 @@ public class RobotMap
     dropWhl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 100);
 
     // Invert Necessary Encoders
-    lDrvMSTR.setSensorPhase(true);
+    rDrvMSTR.setSensorPhase(true);
     driveTank = new DifferentialDrive(lDrvMSTR, rDrvMSTR);
     driveTank.setSafetyEnabled(false);
 
+    //Sensors
     ahrs = new AHRS(SPI.Port.kMXP);
     positionPot = new AnalogPotentiometer(Constants.POSITIONPOT_CHNL, 360, 0);
     timeDelayPot = new AnalogPotentiometer(Constants.DELAYPOT_CHNL, 360, 0);
-    lArmDownLSwitch = new DigitalInput(0);
+    lArmDownLSwitch = new DigitalInput(Constants.LARM_DOWN_LSWITCH_CHNL);
 
     // Pneumatics
     compressor = new Compressor(50);
-    solenoid0 = new Solenoid(50, 0);
-    solenoid1 = new Solenoid(50, 1);
-    solenoid2 = new Solenoid(50, 2);
-    solenoid4 = new Solenoid(50, 4);
-    solenoid5 = new Solenoid(50, 5);
+    solenoid0 = new Solenoid(50, 0); // Shifter
+    solenoid1 = new Solenoid(50, 1); // PTO
+    solenoid2 = new Solenoid(50, 2); // DropWheel
+    solenoid4 = new Solenoid(50, 4); // Claw
+    solenoid5 = new Solenoid(50, 5); // Extra
 
-    solenoid0.set(true);
-    solenoid1.set(true);
-    solenoid2.set(true);
-    solenoid4.set(true);
-    solenoid5.set(true);
+    solenoid0.set(true); // Shifter
+    solenoid1.set(true); // PTO
+    solenoid2.set(false); // DropWheel
+    solenoid4.set(true); // Claw
+    solenoid5.set(true); // Extra
   }
 
 }

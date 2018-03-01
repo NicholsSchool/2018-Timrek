@@ -1,16 +1,17 @@
-package org.usfirst.frc4930.Timrek.commands;
+package org.usfirst.frc4930.Timrek.autonomous;
 
 import org.usfirst.frc4930.Timrek.Robot;
+import org.usfirst.frc4930.Timrek.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ToggleCamera extends Command{
-	
-
-	  protected void initialize() {}
-
+public class ResetEncoders extends Command{
+	  protected void initialize() {
+		  
+	  }
+	  
 	  protected void execute() {
-	//    Robot.cameras.toggleCamera();
+		  Robot.driveTrain.resetEncoders();
 	  }
 
 	  protected boolean isFinished() {

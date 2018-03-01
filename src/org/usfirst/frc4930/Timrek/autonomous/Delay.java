@@ -2,9 +2,6 @@ package org.usfirst.frc4930.Timrek.autonomous;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class Delay extends Command {
 
 	private double seconds;

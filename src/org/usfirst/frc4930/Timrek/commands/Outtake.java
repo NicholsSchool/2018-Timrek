@@ -7,7 +7,16 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class Outtake extends Command
 {
-
+  
+  private int runTime;
+  public Outtake(int seconds){
+	  runTime = seconds;
+  }
+  
+  public Outtake(){
+	  runTime = 0;
+  } 
+  
   protected void initialize() {
 
   }
@@ -18,8 +27,12 @@ public class Outtake extends Command
 
   @Override
   protected boolean isFinished() {
-
-    return false;
+	  if(runTime != 0){
+		  return timeSinceInitialized() > runTime;
+	  }
+	  else{
+		  return false;
+	  }
   }
 
   protected void end() {

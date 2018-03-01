@@ -9,8 +9,6 @@ public class MoveArm extends Command
 
   public MoveArm() {
     requires(Robot.arm);
-    requires(Robot.upperArm);
-    requires(Robot.lowerArm);
   }
 
   protected void initialize() {}

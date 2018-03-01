@@ -18,11 +18,6 @@ import org.usfirst.frc4930.Timrek.Constants;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 
-/**
- *
- */
-
-
 public class Gripper extends Subsystem {
 
 	@Override
