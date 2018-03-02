@@ -14,13 +14,13 @@ public class PTO extends Subsystem {
 	}
 	
 	public void turnOff() {
-		RobotMap.solenoid1.set(true);
+		RobotMap.solenoid1.set(false);
 		Robot.ptoOn = false;
 		
 	}
 	
 	public void turnOn() {
-		RobotMap.solenoid1.set(false);
+		RobotMap.solenoid1.set(true);
 		Robot.ptoOn = true;
 	}
 

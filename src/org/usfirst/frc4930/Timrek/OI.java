@@ -83,10 +83,10 @@ public class OI
     j0b1.whenReleased(new LowGear()); // Set False
 
     // PTO (Solenoid 1)
-    j2b8.whenPressed(new DisengagePTO()); // Set True;
-    j2b6.whenPressed(new EngagePTO()); // Set False
+    j2b8.whenPressed(new EngagePTO()); // Set True;
+    j2b6.whenPressed(new DisengagePTO()); // Set False
     j1b8.whenPressed(new EngagePTO());
-    j2b7.whenPressed(new EngagePTO());
+    j1b7.whenPressed(new DisengagePTO());
 
     // Gripper
     j2b1.whileHeld(new Intake());
