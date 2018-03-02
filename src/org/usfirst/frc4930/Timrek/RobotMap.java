@@ -118,7 +118,7 @@ public class RobotMap
     driveTank = new DifferentialDrive(lDrvMSTR, rDrvMSTR);
     driveTank.setSafetyEnabled(false);
 
-    //Sensors
+    // Sensors
     ahrs = new AHRS(SPI.Port.kMXP);
     positionPot = new AnalogPotentiometer(Constants.POSITIONPOT_CHNL, 360, 0);
     timeDelayPot = new AnalogPotentiometer(Constants.DELAYPOT_CHNL, 360, 0);
@@ -133,7 +133,7 @@ public class RobotMap
     solenoid5 = new Solenoid(50, 5); // Extra
 
     solenoid0.set(true); // Shifter
-    solenoid1.set(true); // PTO
+    solenoid1.set(false); // PTO
     solenoid2.set(false); // DropWheel
     solenoid4.set(true); // Claw
     solenoid5.set(true); // Extra

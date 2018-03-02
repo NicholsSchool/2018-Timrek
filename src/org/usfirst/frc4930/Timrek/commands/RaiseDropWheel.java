@@ -4,21 +4,25 @@ import org.usfirst.frc4930.Timrek.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class EngagePTO extends Command
+/**
+ *
+ */
+public class RaiseDropWheel extends Command
 {
-  public EngagePTO() {
-    requires(Robot.pto);
+
+  public RaiseDropWheel() {
+    requires(Robot.dropWheel);
   }
 
-  protected void initialize() {}
-
-  protected void execute() {
-    if (Robot.oi.j1b7.get() || (Robot.oi.j2b7.get()))
-      Robot.pto.turnOn();
+  protected void initialize() {
+    Robot.dropWheel.raise();
   }
 
+  protected void execute() {}
+
+  @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   protected void end() {}

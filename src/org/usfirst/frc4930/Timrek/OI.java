@@ -1,16 +1,32 @@
 
 package org.usfirst.frc4930.Timrek;
 
-import org.usfirst.frc4930.Timrek.autonomous.*;
-
-import org.usfirst.frc4930.Timrek.commands.*;
+import org.usfirst.frc4930.Timrek.autonomous.ArmToPosition;
+import org.usfirst.frc4930.Timrek.autonomous.BBGoDistance;
+import org.usfirst.frc4930.Timrek.autonomous.BBGoToAngle;
+import org.usfirst.frc4930.Timrek.autonomous.ResetEncoders;
+import org.usfirst.frc4930.Timrek.autonomous.ResetGyro;
+import org.usfirst.frc4930.Timrek.autonomous.Test;
+import org.usfirst.frc4930.Timrek.commands.ArmMaintainOff;
+import org.usfirst.frc4930.Timrek.commands.ArmMaintainOn;
+import org.usfirst.frc4930.Timrek.commands.ClawClose;
+import org.usfirst.frc4930.Timrek.commands.ClawOpen;
+import org.usfirst.frc4930.Timrek.commands.DisengagePTO;
+import org.usfirst.frc4930.Timrek.commands.EngagePTO;
+import org.usfirst.frc4930.Timrek.commands.HighGear;
+import org.usfirst.frc4930.Timrek.commands.Intake;
+import org.usfirst.frc4930.Timrek.commands.LowGear;
+import org.usfirst.frc4930.Timrek.commands.MoveDropWheel;
+import org.usfirst.frc4930.Timrek.commands.Outtake;
+import org.usfirst.frc4930.Timrek.commands.RaiseDropWheel;
+import org.usfirst.frc4930.Timrek.commands.ToggleCamera;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-
-public class OI {
-	public Joystick j0, j1, j2;
+public class OI
+{
+  public Joystick j0, j1, j2;
 
   public JoystickButton j0b1, j0b2, j0b3, j0b4, j0b5, j0b6, j0b7, j0b8, j0b9, j0b10, j0b11, j0b12;
 
@@ -69,6 +85,8 @@ public class OI {
     // PTO (Solenoid 1)
     j2b8.whenPressed(new DisengagePTO()); // Set True;
     j2b6.whenPressed(new EngagePTO()); // Set False
+    j1b8.whenPressed(new EngagePTO());
+    j2b7.whenPressed(new EngagePTO());
 
     // Gripper
     j2b1.whileHeld(new Intake());
@@ -77,7 +95,8 @@ public class OI {
     // DropWheel (Solenoid 2)
     // j1b9.whenPressed(new LowerDropWheel()); //Set True
     // j1b10.whenPressed(new RaiseDropWheel()); //Set False
-    j1b1.whileHeld(new MoveDropWheel());
+    j1b1.whenPressed(new MoveDropWheel());
+    j1b1.whenReleased(new RaiseDropWheel());
 
     // Claw (Solenoid 4)
     j2b3.whenPressed(new ClawOpen()); // Set True
@@ -88,15 +107,17 @@ public class OI {
 
     j2b7.whenPressed(new ToggleCamera());
     j0b7.whenPressed(new ResetGyro());
-    j0b6.whenPressed(new Outtake(3));  //Need to test
+    j0b6.whenPressed(new Outtake(3)); // Need to test
     j0b11.whenPressed(new BBGoDistance(6));
     j0b10.whenPressed(new ResetEncoders());
     j0b8.whenPressed(new BBGoToAngle(90));
     j0b9.whenPressed(new BBGoToAngle(-90));
     j0b12.whenPressed(new Test());
-    
-    //Made previous values into Constants, needs to be tested.
-    j2b11.whenPressed(new ArmToPosition(Constants.AUTO_TO_BAR_ELBOW_VALUE, Constants.AUTO_TO_BAR_SHOULDER_VALUE));
-    j2b12.whenPressed(new ArmToPosition(Constants.AUTO_FULL_RAISE_ELBOW_VALUE, Constants.AUTO_FULL_RAISE_SHOULDER_VALUE)); 
+
+    // Made previous values into Constants, needs to be tested.
+    j2b11.whenPressed(
+        new ArmToPosition(Constants.AUTO_TO_BAR_ELBOW_VALUE, Constants.AUTO_TO_BAR_SHOULDER_VALUE));
+    j2b12.whenPressed(new ArmToPosition(Constants.AUTO_FULL_RAISE_ELBOW_VALUE,
+        Constants.AUTO_FULL_RAISE_SHOULDER_VALUE));
   }
 }
