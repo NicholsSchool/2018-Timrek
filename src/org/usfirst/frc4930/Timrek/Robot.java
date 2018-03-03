@@ -2,7 +2,7 @@
 package org.usfirst.frc4930.Timrek;
 
 import org.usfirst.frc4930.Timrek.autonomous.AutoStartPositions;
-import org.usfirst.frc4930.Timrek.autonomous.ShortPaths;
+import org.usfirst.frc4930.Timrek.autonomous.AutoPaths;
 import org.usfirst.frc4930.Timrek.sensors.Cameras;
 import org.usfirst.frc4930.Timrek.sensors.Dial;
 import org.usfirst.frc4930.Timrek.sensors.NavX;
@@ -87,7 +87,7 @@ public class Robot extends TimedRobot
 	//  RobotMap.solenoid4.set(false);
 	 inAuto = true;
 	  
-    autonomousCommand = new ShortPaths();
+    autonomousCommand = new AutoPaths();
     RobotMap.ahrs.reset();
     // schedule the autonomous command (example)
     if (autonomousCommand != null)
