@@ -98,14 +98,12 @@ public class Robot extends TimedRobot
   public void teleopInit() {
     if (autonomousCommand != null)
       autonomousCommand.cancel();
-    RobotMap.lShoulder.setSelectedSensorPosition(0, 0, 100);
-    RobotMap.lElbow.setSelectedSensorPosition(0, 0, 100);
     RobotMap.lDrvMSTR.setSelectedSensorPosition(0, 0, 100);
     RobotMap.rDrvMSTR.setSelectedSensorPosition(0, 0, 100);
     RobotMap.dropWhl.setSelectedSensorPosition(0, 0, 100);
     RobotMap.ahrs.reset();
     RobotMap.solenoid1.set(false);
-    arm.updatePosition();
+    arm.setEncoders(50000, 0);
   }
 
   @Override

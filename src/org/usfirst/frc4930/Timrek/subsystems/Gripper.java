@@ -13,7 +13,7 @@
 package org.usfirst.frc4930.Timrek.subsystems;
 
 import org.usfirst.frc4930.Timrek.RobotMap;
-import org.usfirst.frc4930.Timrek.Constants;
+import org.usfirst.frc4930.Timrek.commands.HoldCube;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -22,8 +22,7 @@ public class Gripper extends Subsystem {
 
 	@Override
 	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
-		
+		setDefaultCommand(new HoldCube());
 	}
 
 	public void grip(double speed) {
@@ -32,8 +31,10 @@ public class Gripper extends Subsystem {
 	}
 	
 	public void stop() {
-		RobotMap.lIntake.stopMotor();
-		RobotMap.rIntake.stopMotor();
+//		RobotMap.lIntake.stopMotor();
+//		RobotMap.rIntake.stopMotor();
+		RobotMap.lIntake.set(0.0);
+		RobotMap.rIntake.set(0.0);
 	}
 }
 

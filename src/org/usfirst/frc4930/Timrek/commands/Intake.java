@@ -24,6 +24,7 @@ public class Intake extends Command
 
   protected void end() {
     Robot.gripper.stop();
+    new HoldCube().start();
   }
 
   protected void interrupted() {
