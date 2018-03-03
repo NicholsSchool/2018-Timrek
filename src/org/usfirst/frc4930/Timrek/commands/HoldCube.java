@@ -18,8 +18,10 @@ public class HoldCube extends Command {
     }
 
     protected void execute() {
-    	if(Robot.gripper.hasCube) {
+    	if(!Robot.clawOpen) {
         	Robot.gripper.grip(Constants.GRIPPER_HOLD_SPD);
+    	} else {
+    		Robot.gripper.stop();
     	}
     }
 

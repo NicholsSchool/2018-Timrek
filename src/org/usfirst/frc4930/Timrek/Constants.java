@@ -40,17 +40,21 @@ public class Constants
   	INTAKE_SPEED = -1.0,
   	OUTTAKE_SPEED = 1.0,
   	
+  	GRIPPER_HOLD_SPD = -0.1,
+
+  	
   	LOWER_MAST_SPEED = -0.4,
     RAISE_MAST_SPEED = 0.4,
     
 	ELBOW_RAISE_SPD = 1.0,
-  	ELBOW_LOWER_SPD = -0.2,
-  	
+  	ELBOW_LOWER_SPD = -0.3,
   	SHOULDER_RAISE_SPD = 0.8,
   	SHOULDER_LOWER_SPD = -0.1,
   	
-  	GRIPPER_HOLD_SPD = -0.1;
-  
+  	ELBOW_RAISE_SPD_CUBE = 1.0,
+  	ELBOW_LOWER_SPD_CUBE = -0.3,
+  	SHOULDER_RAISE_SPD_CUBE = 0.8,
+  	SHOULDER_LOWER_SPD_CUBE = -0.1;
 
 
   // encoder values for the arm

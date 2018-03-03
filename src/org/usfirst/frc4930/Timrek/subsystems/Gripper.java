@@ -19,7 +19,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 
 public class Gripper extends Subsystem {
-	public boolean hasCube = false;
 
 	@Override
 	protected void initDefaultCommand() {

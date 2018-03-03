@@ -101,6 +101,11 @@ public class Arm extends Subsystem
 	  
   }
   
+  public void setEncoders(int elbow, int shoulder) {
+	  lElbow.setSelectedSensorPosition(0, 0, 0);
+	  lShoulder.setSelectedSensorPosition(0, 0, 0);
+  }
+  
   public void updatePosition() {
 	  elbowPos = lElbow.getSelectedSensorPosition(0);
 	  shoulderPos = lShoulder.getSelectedSensorPosition(0);
@@ -109,15 +114,24 @@ public class Arm extends Subsystem
   }
   
   private void extend() {
+	  double elbowSpd = 0.0;
+	  double shoulderSpd = 0.0;
+	  if(Robot.clawOpen) {
+		  elbowSpd = Constants.ELBOW_RAISE_SPD;
+		  shoulderSpd = Constants.SHOULDER_RAISE_SPD;
+	  } else {
+		  elbowSpd = Constants.ELBOW_RAISE_SPD_CUBE;
+		  shoulderSpd = Constants.SHOULDER_RAISE_SPD_CUBE;
+	  }
     // limit switches return false when pressed
     // if the upper arm is not fully extended, extend upper arm
     if (lElbow.getSelectedSensorPosition(0) < Constants.ELBOW_EXTENDED) {
       // 0.05 will maintain the position
       lShoulder.set(0.05);
-      lElbow.set(Constants.ELBOW_RAISE_SPD);
+      lElbow.set(elbowSpd);
     } else if (lShoulder.getSelectedSensorPosition(0) < Constants.SHOULDER_EXTENDED) {
       // else if lower arm is not fully extended, extend lower arm
-      lShoulder.set(Constants.SHOULDER_RAISE_SPD);
+      lShoulder.set(shoulderSpd);
       lElbow.set(0.05);
     }
     
@@ -125,14 +139,23 @@ public class Arm extends Subsystem
   }
 
   private void retract() {
+	  double elbowSpd = 0.0;
+	  double shoulderSpd = 0.0;
+	  if(Robot.clawOpen) {
+		  elbowSpd = Constants.ELBOW_LOWER_SPD;
+		  shoulderSpd = Constants.SHOULDER_LOWER_SPD;
+	  } else {
+		  elbowSpd = Constants.ELBOW_LOWER_SPD_CUBE;
+		  shoulderSpd = Constants.SHOULDER_LOWER_SPD_CUBE;
+	  }
         // if lower arm is not retracted, retract lower arm
     	if (lShoulder.getSelectedSensorPosition(0) > 0) {
-  	      lShoulder.set(Constants.SHOULDER_LOWER_SPD);
+  	      lShoulder.set(shoulderSpd);
   	      lElbow.set(0.05);
   	    } else if (lElbow.getSelectedSensorPosition(0) > 0) {
   	      // else if upper arm is not retracted, retract upper arm
   	      lShoulder.set(0.05);
-  	      lElbow.set(Constants.ELBOW_LOWER_SPD);
+  	      lElbow.set(elbowSpd);
   	    }
     
     updatePosition();

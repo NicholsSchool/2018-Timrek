@@ -99,6 +99,8 @@ public class Robot extends TimedRobot
     RobotMap.rDrvMSTR.setSelectedSensorPosition(0, 0, 100);
     RobotMap.dropWhl.setSelectedSensorPosition(0, 0, 100);
     RobotMap.ahrs.reset();
+    RobotMap.solenoid1.set(false);
+    arm.setEncoders(40000, 0);
     arm.updatePosition();
   }
 
