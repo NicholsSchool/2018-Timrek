@@ -33,18 +33,18 @@ public class AutoPaths extends CommandGroup{
 		runPreference1 = checkPreference(preference1);
 		runPreference2 = checkPreference(preference2);
 		
+		
+		System.out.println("RUNNING AUTO");
+		
 		if(runPreference1){
 			runPath(preference1);
 		}
-		else if((!runPreference1) && runPreference2 ){
+		else if(runPreference2){
 			runPath(preference2);
 		}
 		else {
 			driveForward();
 		}
-		
-		System.out.println("RUNNING AUTO");
-		correspondingScale(scaleLeft);
 	}
 	
 	private void runPath(int pathNum){
