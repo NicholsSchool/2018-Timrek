@@ -19,6 +19,7 @@ public class BBGoDistance extends Command {
 	  }
 	  protected void initialize() {
 		  Robot.driveTrain.resetEncoders();
+		  
 		  System.out.println("INITAL ENCODER POSITION: " + RobotMap.lDrvMSTR.getSelectedSensorPosition(0));
 		  Robot.navX.reset();
 		  System.out.println("STARTING DISTANCE COMMAND TO " + desiredDistance);
