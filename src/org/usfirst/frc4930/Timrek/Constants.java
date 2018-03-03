@@ -47,7 +47,9 @@ public class Constants
   	ELBOW_LOWER_SPD = -0.2,
   	
   	SHOULDER_RAISE_SPD = 0.8,
-  	SHOULDER_LOWER_SPD = -0.1;
+  	SHOULDER_LOWER_SPD = -0.1,
+  	
+  	GRIPPER_HOLD_SPD = -0.1;
   
 
 
