@@ -41,6 +41,7 @@ public class BBGoToAngle extends Command {
 
 	  protected void end() {
 		  Robot.driveTrain.stop();
+		  Robot.driveTrain.resetEncoders(); 
 	  }
 
 	  protected void interrupted() {

@@ -56,12 +56,12 @@ public class Arm extends Subsystem
   public void set(double speed) {
 	  
     if (speed > 0.2) {
-    	extend();
+    	//extend();
     } else if (speed < -0.2) {    	
-    	retract();
+    	//retract();
     } else {
-    	adjustElbow(elbowPos);
-    	adjustShoulder(shoulderPos);
+    	//adjustElbow(elbowPos);
+    	//adjustShoulder(shoulderPos);
     }
   }
 
@@ -166,9 +166,9 @@ public class Arm extends Subsystem
   public boolean atPosition;
   public void moveToPosition(int elbowPos, int shoulderPos) {
 	  if(lElbow.getSelectedSensorPosition(0) > elbowPos && lShoulder.getSelectedSensorPosition(0) > shoulderPos) {
-		  retract();
+		 // retract();
 	  } else if(lElbow.getSelectedSensorPosition(0) < elbowPos && lShoulder.getSelectedSensorPosition(0) < shoulderPos) {
-		  extend();
+		 // extend();
 	  } else {
 		  atPosition = true;
 	  }
