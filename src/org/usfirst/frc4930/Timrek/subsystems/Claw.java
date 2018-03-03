@@ -14,12 +14,12 @@ public class Claw extends Subsystem{
 	}
 	
 	public void open() {
-		RobotMap.solenoid4.set(false);
+		RobotMap.solenoid4.set(true);
 		Robot.clawOpen = true;
 	}
 	
 	public void close() {
-		RobotMap.solenoid4.set(true);
+		RobotMap.solenoid4.set(false);
 		Robot.clawOpen = false;
 	}
 

@@ -78,6 +78,7 @@ public class Arm extends Subsystem
 		lElbow.config_kD(0, 0.0, 100);
 		
 		if(shouldMaintain) {
+			System.out.println("GOING TO: " + position);
 			lElbow.set(ControlMode.Position, position);
 		} else {
 			lElbow.set(0.0);
@@ -102,8 +103,9 @@ public class Arm extends Subsystem
   }
   
   public void setEncoders(int elbow, int shoulder) {
-	  lElbow.setSelectedSensorPosition(0, 0, 0);
-	  lShoulder.setSelectedSensorPosition(0, 0, 0);
+	  lElbow.setSelectedSensorPosition(elbow, 0, 0);
+	  lShoulder.setSelectedSensorPosition(shoulder, 0, 0);
+	  updatePosition();
   }
   
   public void updatePosition() {
