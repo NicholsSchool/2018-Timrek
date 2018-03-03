@@ -46,10 +46,6 @@ public class ShortPaths extends CommandGroup{
 					break;
 			}
 		}
-		
-		
-
-	
 	}
 	
 	private void leftPathEndOutside() {
