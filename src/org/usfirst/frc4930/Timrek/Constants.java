@@ -51,7 +51,7 @@ public class Constants
   	SHOULDER_RAISE_SPD = 0.8,
   	SHOULDER_LOWER_SPD = -0.1,
   	
-  	ELBOW_RAISE_SPD_CUBE = 0.6, //changed from 1
+  	ELBOW_RAISE_SPD_CUBE = 0.7, //changed from 1
   	ELBOW_LOWER_SPD_CUBE = -0.4,
   	SHOULDER_RAISE_SPD_CUBE = 0.8,
   	SHOULDER_LOWER_SPD_CUBE = -0.3;
