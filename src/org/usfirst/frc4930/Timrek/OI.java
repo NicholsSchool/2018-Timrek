@@ -108,8 +108,8 @@ public class OI
 
   //  j0b8.whenPressed(new BBGoDistance(4, true, 0.8));
     
-    j0b10.whenPressed(new ArmToPosition(Arm.SWITCH_POSITION, 1.0));
-    j0b11.whenPressed(new ArmToPosition(Arm.SCALE_POSITION, 1.0));
-    j0b12.whenPressed(new ArmToPosition(Arm.DOWN_POSITION, 1.0));
+//    j0b10.whenPressed(new ArmToPosition(Arm.SWITCH_POSITION, 1.0));
+//    j0b11.whenPressed(new ArmToPosition(Arm.SCALE_POSITION, 1.0));
+//    j0b12.whenPressed(new ArmToPosition(Arm.DOWN_POSITION, 1.0));
   }
 }
