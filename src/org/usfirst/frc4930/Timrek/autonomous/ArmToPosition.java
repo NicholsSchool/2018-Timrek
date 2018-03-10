@@ -30,7 +30,7 @@ public class ArmToPosition extends Command {
     }
 
     protected void end() {
-    	new MoveArm().start();
+   // 	new MoveArm().start();
     }
 
     protected void interrupted() {

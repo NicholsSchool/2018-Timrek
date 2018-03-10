@@ -5,8 +5,11 @@ import org.usfirst.frc4930.Timrek.Robot;
 import org.usfirst.frc4930.Timrek.RobotMap;
 import org.usfirst.frc4930.Timrek.commands.ClawClose;
 import org.usfirst.frc4930.Timrek.commands.ClawOpen;
+import org.usfirst.frc4930.Timrek.commands.HighGear;
 import org.usfirst.frc4930.Timrek.commands.Intake;
+import org.usfirst.frc4930.Timrek.commands.LowGear;
 import org.usfirst.frc4930.Timrek.commands.Outtake;
+import org.usfirst.frc4930.Timrek.subsystems.Arm;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -62,6 +65,8 @@ public class AutoPaths extends CommandGroup{
 				break;
 		case 5: oppositeSideScale(startingLeft);
 				break;
+		case 9: middlePathHighGear(switchLeft);
+				break;
 		case 10: middlePath(switchLeft);
 				break;
 		default: driveForward();
@@ -72,7 +77,7 @@ public class AutoPaths extends CommandGroup{
 	private boolean checkPreference(int pathNum) {
 		boolean runPreference;
 		
-		if(pathNum == 0 || pathNum == 10){
+		if(pathNum == 0 || pathNum == 10 || pathNum == 9){
 			runPreference = true;
 		}
 		else if( pathNum <= 2){
@@ -198,14 +203,14 @@ public class AutoPaths extends CommandGroup{
 			 *                    *
 			 */
 		}
-		addSequential(new BBGoDistance(23));
+		addSequential(new BBGoDistance(22, false, 0.75));
 	//	addSequential(new BBGoDistance(7));
 		
 		
 //		addSequential(new BBGoToAngle(turn));
 //		addSequential(new BBGoDistance(1.8));
-		// addSequential(new ArmToPosition(Constants.AUTO_FULL_RAISE_ELBOW_VALUE, Constants.AUTO_FULL_RAISE_SHOULDER_VALUE));
-		addSequential(new Outtake(1, 0.9));
+	    addSequential(new ArmToPosition(Arm.SCALE_POSITION, 1.0));
+		addSequential(new Outtake(1, 0.7));
 	}
 	
 	//4 WORKING
@@ -286,6 +291,47 @@ public class AutoPaths extends CommandGroup{
 		addSequential(new BBGoToAngle(-turn));
 		addSequential(new BBGoDistance(2));
 		addSequential(new Outtake(1, 0.8));
+	}
+	
+	//9 
+	private void middlePathHighGear(boolean goLeft){
+		double turn;
+		double secondTurn;
+		if(goLeft){
+			turn = -30;
+			secondTurn = 27;
+			/*
+			 * 		   {}------{}
+			 * 	     
+			 *           
+			 * 		          
+			 * 		   {}------{} 
+			 *           \
+			 *            \
+			 *             *
+			 */
+		}
+		else {
+			turn = 30;
+			secondTurn = -27;
+			/*
+			 * 		   {}------{}
+			 * 	     
+			 *           
+			 * 		          
+			 * 		   {}------{} 
+			 *                / 
+			 *               /
+			 *             *
+			 */
+		}
+		addSequential(new BBGoDistance(0.5));
+		addSequential(new BBGoToAngle(turn, true));
+		addSequential(new HighGear());
+		addSequential(new BBGoDistance(9, true, 1.0));
+		addSequential(new BBGoToAngle(secondTurn));
+		addSequential(new BBGoDistance(0.75));
+		addSequential(new Outtake(5, 0.6));
 	}
 	
 	//10 WORKING

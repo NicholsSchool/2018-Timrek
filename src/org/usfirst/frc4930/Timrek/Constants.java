@@ -70,7 +70,8 @@ public class Constants
 
   // values for Auto
   public static final int
-  	TICKS_PER_REVOULTION = 1300, //NEEDS TO BE TESTED
+  	TICKS_PER_REVOULTION_LOW_GEAR = 1300, //NEEDS TO BE TESTED
+  	TICKS_PER_REVOLUTION_HIGH_GEAR = 350,
   	WHEEL_DIAMETER = 4,
   
   	BB_G0_TO_ANGLE_OFFSET = 5,

@@ -17,9 +17,30 @@ public class BBGoDistance extends Command {
 		  requires(Robot.driveTrain);
 		  double inches = distance*12;
 		  double revolutions = (inches/(Constants.WHEEL_DIAMETER * Math.PI)) ;
-		  desiredDistance =  Constants.TICKS_PER_REVOULTION * revolutions;
+		  desiredDistance =  Constants.TICKS_PER_REVOULTION_LOW_GEAR * revolutions;
 		  startPosition = 0;
 		  currentPosition = 0;
+	
+		  if(desiredDistance > 0){
+			  speed = Constants.BB_GO_DISTANCE_SPEED;
+		  }
+		  else {
+			  speed = -Constants.BB_GO_DISTANCE_SPEED;
+		  }
+	  }
+	  public BBGoDistance(double distance, boolean highGear, double driveSpeed){
+		  requires(Robot.driveTrain);
+		  double inches = distance*12;
+		  double revolutions = (inches/(Constants.WHEEL_DIAMETER * Math.PI)) ;
+		  if(highGear){
+			  desiredDistance =  Constants.TICKS_PER_REVOLUTION_HIGH_GEAR * revolutions;
+		  }
+		  else {
+			  desiredDistance =  Constants.TICKS_PER_REVOULTION_LOW_GEAR * revolutions;
+		  }
+		  startPosition = 0;
+		  currentPosition = 0;
+		  speed = driveSpeed;
 	  }
 	  protected void initialize() {
 //		  Robot.driveTrain.resetEncoders();
@@ -29,12 +50,6 @@ public class BBGoDistance extends Command {
 //		  System.out.println("INITAL ENCODER POSITION: " + RobotMap.lDrvMSTR.getSelectedSensorPosition(0));
 //		  System.out.println("STARTING DISTANCE COMMAND TO " + desiredDistance);
 		  
-		  if(desiredDistance > 0){
-			  speed = Constants.BB_GO_DISTANCE_SPEED;
-		  }
-		  else {
-			  speed = -Constants.BB_GO_DISTANCE_SPEED;
-		  }
 	  }
 
 	  protected void execute() {
