@@ -9,28 +9,64 @@ import edu.wpi.first.wpilibj.command.Command;
 public class BBGoDistance extends Command {
 	
 	  double desiredDistance;
+	  double speed;
+	  double startPosition;
+	  double currentPosition;
+	  boolean ranOnce;
 	  public BBGoDistance(double distance) {
 		  requires(Robot.driveTrain);
 		  double inches = distance*12;
 		  double revolutions = (inches/(Constants.WHEEL_DIAMETER * Math.PI)) ;
-		  desiredDistance =  Constants.TICKS_PER_REVOULTION * revolutions;
-		  
+		  desiredDistance =  Constants.TICKS_PER_REVOULTION_LOW_GEAR * revolutions;
+		  startPosition = 0;
+		  currentPosition = 0;
+	
+		  if(desiredDistance > 0){
+			  speed = Constants.BB_GO_DISTANCE_SPEED;
+		  }
+		  else {
+			  speed = -Constants.BB_GO_DISTANCE_SPEED;
+		  }
+	  }
+	  public BBGoDistance(double distance, boolean highGear, double driveSpeed){
+		  requires(Robot.driveTrain);
+		  double inches = distance*12;
+		  double revolutions = (inches/(Constants.WHEEL_DIAMETER * Math.PI)) ;
+		  if(highGear){
+			  desiredDistance =  Constants.TICKS_PER_REVOLUTION_HIGH_GEAR * revolutions;
+		  }
+		  else {
+			  desiredDistance =  Constants.TICKS_PER_REVOULTION_LOW_GEAR * revolutions;
+		  }
+		  startPosition = 0;
+		  currentPosition = 0;
+		  speed = driveSpeed;
 	  }
 	  protected void initialize() {
-		  Robot.driveTrain.resetEncoders();
 		  Robot.navX.reset();
+		  startPosition = RobotMap.lDrvMSTR.getSelectedSensorPosition(0);
+
 	  }
 
 	  protected void execute() {
-
-		  Robot.driveTrain.move(Constants.BB_GO_DISTANCE_SPEED + 0.03, Constants.BB_GO_DISTANCE_SPEED);
-		  System.out.println("Distance: " + desiredDistance);
-		  System.out.println("Distance Left: " + (desiredDistance - RobotMap.lDrvMSTR.getSelectedSensorPosition(0)));
+		  currentPosition = RobotMap.lDrvMSTR.getSelectedSensorPosition(0) - startPosition; 
+		 
+		  if(desiredDistance > 0){
+			  Robot.driveTrain.move(speed + Constants.BB_GO_DISTANCE_OFFEST, speed);
+		  }
+		  else {
+			  Robot.driveTrain.move(speed - Constants.BB_GO_DISTANCE_OFFEST, speed);
+		  }
 	  }
 
 	  protected boolean isFinished() {
-	    return RobotMap.lDrvMSTR.getSelectedSensorPosition(0) >= desiredDistance;
-	  }
+		  if(desiredDistance > 0){
+			  return currentPosition >= desiredDistance;
+		  }
+		  else {
+			  return currentPosition <= desiredDistance;
+		  }
+	}
 
 	  protected void end() {
 		  Robot.driveTrain.stop();

@@ -24,13 +24,13 @@ public class Constants
 
   // sensors
   public static final int 
-  	GRIPPER_LSWITCH_CHNL = 0, 
-  	UARM_UP_LSWITCH_CHNL = 0,
-    UARM_DOWN_LSWITCH_CHNL = 0, 
+  	TOGGLE_SWITCH_CHNL = 6, 
+  	UARM_UP_LSWITCH_CHNL = 7,
+    UARM_DOWN_LSWITCH_CHNL = 9, 
     LARM_DOWN_LSWITCH_CHNL = 8,
 
-    POSITIONPOT_CHNL = 0,
-    DELAYPOT_CHNL = 1;
+    PREFERENCE1_POT_CHNL = 0,
+    PREFERENCE2_POT_CHNL = 1;
 
   // speeds
   public static final double 
@@ -46,41 +46,57 @@ public class Constants
   	LOWER_MAST_SPEED = -0.4,
     RAISE_MAST_SPEED = 0.4,
     
-	ELBOW_RAISE_SPD = 0.9,
+	ELBOW_RAISE_SPD = 0.5, //changed from .9
   	ELBOW_LOWER_SPD = -0.4,
   	SHOULDER_RAISE_SPD = 0.8,
   	SHOULDER_LOWER_SPD = -0.1,
   	
-  	ELBOW_RAISE_SPD_CUBE = 1.0,
+
+  	ELBOW_RAISE_SPD_CUBE = 0.9, //changed from 1
   	ELBOW_LOWER_SPD_CUBE = -0.4,
   	SHOULDER_RAISE_SPD_CUBE = 0.8,
-  	SHOULDER_LOWER_SPD_CUBE = -0.1;
+  	SHOULDER_LOWER_SPD_CUBE = -0.3;
 
 
   // encoder values for the arm
   public static final int 
+  	ELBOW_START_POSITION = 90000,
+  
   	SHOULDER_EXTENDED = 190000,
-  	ELBOW_EXTENDED = 90000,
+  	ELBOW_EXTENDED = 100000,
   	SHOULDER_TO_BAR = 100000,
-  	ELBOW_TO_BAR = 70000,
-    LOWER_ARM_INCRAMENTS = 40000;
-
+  	ELBOW_TO_BAR = 70000;
+  
+  //Other arm values
+  public static final double 
+  	ARM_JOYSTICK_OFFSET = 0.2;
+  
+  
   // values for Auto
   public static final int
-  	TICKS_PER_REVOULTION = 1300, //NEEDS TO BE TESTED
+  	TICKS_PER_REVOULTION_LOW_GEAR = 1300, //NEEDS TO BE TESTED
+  	TICKS_PER_REVOLUTION_HIGH_GEAR = 350,
   	WHEEL_DIAMETER = 4,
   
-  	BB_G0_TO_ANGLE_OFFSET = 8,
-  	
+  	BB_G0_TO_ANGLE_OFFSET = 5,
+  	TURN_RIGHT = 90,
+  	TURN_LEFT = -90,
+  		  	
   	AUTO_TO_BAR_ELBOW_VALUE = ELBOW_TO_BAR,
   	AUTO_TO_BAR_SHOULDER_VALUE = 1000,
   	AUTO_FULL_RAISE_ELBOW_VALUE = ELBOW_EXTENDED * 2,
   	AUTO_FULL_RAISE_SHOULDER_VALUE = SHOULDER_EXTENDED;
   
+  public static final double 
+	BB_GO_DISTANCE_OFFEST = 0.015;
+  
+  
   // speeds for Auto
   public static final double
-  	BB_GO_DISTANCE_SPEED = 0.75,
-  	BB_GO_TO_ANGLE_SPEED = 0.8;
+  	BB_GO_DISTANCE_SPEED = 0.9,
+  	BB_GO_TO_ANGLE_SPEED = 0.6;
+  
+  
   
   // inverts
   public static final int 

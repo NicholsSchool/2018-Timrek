@@ -50,9 +50,12 @@ public class RobotMap
   public static Solenoid solenoid5;
 
   public static AHRS ahrs;
-  public static AnalogPotentiometer positionPot;
-  public static AnalogPotentiometer timeDelayPot;
+  public static AnalogPotentiometer preference1Pot;
+  public static AnalogPotentiometer preference2Pot;
   public static DigitalInput lArmDownLSwitch;
+  public static DigitalInput uArmDownLSwitch;
+  public static DigitalInput uArmUpLSwitch;
+  public static DigitalInput toggleSwitch;
 
   public static DifferentialDrive driveTank;
 
@@ -120,10 +123,13 @@ public class RobotMap
 
     // Sensors
     ahrs = new AHRS(SPI.Port.kMXP);
-    positionPot = new AnalogPotentiometer(Constants.POSITIONPOT_CHNL, 360, 0);
-    timeDelayPot = new AnalogPotentiometer(Constants.DELAYPOT_CHNL, 360, 0);
+    preference1Pot = new AnalogPotentiometer(Constants.PREFERENCE1_POT_CHNL, 360, 0);
+    preference2Pot = new AnalogPotentiometer(Constants.PREFERENCE2_POT_CHNL, 360, 0);
     lArmDownLSwitch = new DigitalInput(Constants.LARM_DOWN_LSWITCH_CHNL);
-
+    uArmDownLSwitch = new DigitalInput(Constants.UARM_DOWN_LSWITCH_CHNL);
+    uArmUpLSwitch = new DigitalInput(Constants.UARM_UP_LSWITCH_CHNL);
+    toggleSwitch = new DigitalInput(Constants.TOGGLE_SWITCH_CHNL);
+    
     // Pneumatics
     compressor = new Compressor(50);
     solenoid0 = new Solenoid(50, 0); // Shifter
@@ -132,7 +138,7 @@ public class RobotMap
     solenoid4 = new Solenoid(50, 4); // Claw
     solenoid5 = new Solenoid(50, 5); // Extra
 
-    solenoid0.set(true); // Shifter
+    solenoid0.set(false); // Shifter
     solenoid1.set(false); // PTO
     solenoid2.set(false); // DropWheel
     solenoid4.set(false); // Claw

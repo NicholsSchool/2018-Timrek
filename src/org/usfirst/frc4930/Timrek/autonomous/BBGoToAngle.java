@@ -23,7 +23,21 @@ public class BBGoToAngle extends Command {
 		}
 		rSpeed = -lSpeed;
 	}
-	  protected void initialize() {
+	public BBGoToAngle(double angle, boolean oneSide){
+		requires(Robot.driveTrain);
+		desiredAngle = angle;
+		
+		if(desiredAngle > 0){
+			lSpeed = 1.0;
+			rSpeed = 0;
+		}
+		else {
+			lSpeed = 0;
+			rSpeed = 1.0;
+		}
+	}
+	
+	protected void initialize() {
 		  Robot.navX.reset();
 		  
 		  new DisengagePTO().start();
@@ -41,6 +55,7 @@ public class BBGoToAngle extends Command {
 
 	  protected void end() {
 		  Robot.driveTrain.stop();
+		  Robot.driveTrain.resetEncoders(); 
 	  }
 
 	  protected void interrupted() {

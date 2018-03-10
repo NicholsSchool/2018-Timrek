@@ -10,29 +10,27 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ArmToPosition extends Command {
 	
-	private int elbowPos;
-	private int shoulderPos;
+	private int position;
+	private double speed;
 
-    public ArmToPosition(int elbowPos, int shoulderPos) {
+    public ArmToPosition(int position, double speed) {
     	requires(Robot.arm);
-    	this.elbowPos = elbowPos;
-    	this.shoulderPos = shoulderPos;
+    	this.position = position;
+    	this.speed = speed;
     }
 
     protected void initialize() {
-    	Robot.arm.atPosition = false;
     }
 
     protected void execute() {
-    	Robot.arm.moveToPosition(elbowPos, shoulderPos);
     }
 
     protected boolean isFinished() {
-        return Robot.arm.atPosition;
+        return Robot.arm.moveToPosition(position, speed);
     }
 
     protected void end() {
-    	new MoveArm().start();
+   // 	new MoveArm().start();
     }
 
     protected void interrupted() {

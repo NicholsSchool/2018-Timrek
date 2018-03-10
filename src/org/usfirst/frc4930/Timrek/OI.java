@@ -20,6 +20,7 @@ import org.usfirst.frc4930.Timrek.commands.MoveDropWheel;
 import org.usfirst.frc4930.Timrek.commands.Outtake;
 import org.usfirst.frc4930.Timrek.commands.RaiseDropWheel;
 import org.usfirst.frc4930.Timrek.commands.ToggleCamera;
+import org.usfirst.frc4930.Timrek.subsystems.Arm;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -79,8 +80,8 @@ public class OI
     j2b12 = new JoystickButton(j2, 12);
 
     // Shifter (Solenoid 0)
-    j0b1.whenPressed(new HighGear()); // Set True
-    j0b1.whenReleased(new LowGear()); // Set False
+    j0b1.whenPressed(new LowGear()); // Set True
+    j0b1.whenReleased(new HighGear()); // Set False
 
     // PTO (Solenoid 1)
     j2b8.whenPressed(new EngagePTO()); // Set True;
@@ -89,8 +90,8 @@ public class OI
     j1b10.whenPressed(new DisengagePTO()); // Set False
 
     // Gripper
-    j2b1.whileHeld(new Intake());
-    j2b4.whileHeld(new Outtake());
+    j2b3.whileHeld(new Intake());
+    j2b5.whileHeld(new Outtake());
 
     // DropWheel (Solenoid 2)
     // j1b9.whenPressed(new LowerDropWheel()); //Set True
@@ -99,25 +100,16 @@ public class OI
     j1b1.whenReleased(new RaiseDropWheel());
 
     // Claw (Solenoid 4)
-    j2b3.whenPressed(new ClawOpen()); // Set True
-    j2b5.whenPressed(new ClawClose()); // Set False
+    j2b1.whileHeld(new ClawOpen()); // Set True 
+    j2b1.whenReleased(new ClawClose()); // Set False 
 
     j2b9.whenPressed(new ArmMaintainOn());
     j2b10.whenPressed(new ArmMaintainOff());
 
-    j2b7.whenPressed(new ToggleCamera());
-    j0b7.whenPressed(new ResetGyro());
-    j0b6.whenPressed(new Outtake(3)); // Need to test
-    j0b11.whenPressed(new BBGoDistance(6));
-    j0b10.whenPressed(new ResetEncoders());
-    j0b8.whenPressed(new BBGoToAngle(90));
-    j0b9.whenPressed(new BBGoToAngle(-90));
-    j0b12.whenPressed(new Test());
-
-    // Made previous values into Constants, needs to be tested.
-    j2b11.whenPressed(
-        new ArmToPosition(Constants.AUTO_TO_BAR_ELBOW_VALUE, Constants.AUTO_TO_BAR_SHOULDER_VALUE));
-    j2b12.whenPressed(new ArmToPosition(Constants.AUTO_FULL_RAISE_ELBOW_VALUE,
-        Constants.AUTO_FULL_RAISE_SHOULDER_VALUE));
+  //  j0b8.whenPressed(new BBGoDistance(4, true, 0.8));
+    
+//    j0b10.whenPressed(new ArmToPosition(Arm.SWITCH_POSITION, 1.0));
+//    j0b11.whenPressed(new ArmToPosition(Arm.SCALE_POSITION, 1.0));
+//    j0b12.whenPressed(new ArmToPosition(Arm.DOWN_POSITION, 1.0));
   }
 }

@@ -1,6 +1,7 @@
 package org.usfirst.frc4930.Timrek.commands;
 
 import org.usfirst.frc4930.Timrek.Robot;
+import org.usfirst.frc4930.Timrek.autonomous.Delay;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -9,17 +10,22 @@ public class ClawOpen extends Command{
 		    requires(Robot.claw);
 		  }
 
-		  protected void initialize() {}
+		  protected void initialize() {
+			  Robot.claw.open();
+		  }
 
 		  protected void execute() {
-		    Robot.claw.open();
+	    if(timeSinceInitialized() > 0.25){
+		    new Intake().execute();
+			  }
 		  }
 
 		  protected boolean isFinished() {
-		    return true;
+		    return !Robot.clawOpen;
 		  }
 
-		  protected void end() {}
+		  protected void end() {
+		  }
 
 		  protected void interrupted() {
 		    end();

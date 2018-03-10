@@ -12,6 +12,6 @@ public class Test extends CommandGroup {
 		addSequential(new BBGoToAngle(90));
 		addSequential(new BBGoDistance(5));
 		addSequential(new ArmToPosition(Constants.ELBOW_TO_BAR, 1000));
-		addSequential(new Outtake(3));
+		addSequential(new Outtake(3, 0.8));
 	}
 }

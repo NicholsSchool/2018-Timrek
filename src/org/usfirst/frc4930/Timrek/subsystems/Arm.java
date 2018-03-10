@@ -28,7 +28,8 @@ public class Arm extends Subsystem
   private double shoulderPos = 0;
   public boolean shouldMaintain = true;
   
-  // DigitalInput uArmDownLSwitch = RobotMap.uArmDownLSwitch;
+  DigitalInput uArmUpLSwitch = RobotMap.uArmUpLSwitch;
+  DigitalInput uArmDownLSwitch = RobotMap.uArmDownLSwitch;
   DigitalInput lArmDownLSwitch = RobotMap.lArmDownLSwitch;
 
   @Override
@@ -43,25 +44,23 @@ public class Arm extends Subsystem
       lShoulder.setSelectedSensorPosition(0, 0, 0);
       shoulderPos = 0;
     }
+    if(!uArmDownLSwitch.get()){
+    	 lElbow.setSelectedSensorPosition(0, 0, 0);
+         elbowPos = 0;
+    }
     
-    // two buttons for disabling and enabling pid maintaining
-//    if(Robot.oi.j2b10.get()) {
-//    	shouldMaintain = false;
-//    }
-//    if(Robot.oi.j2b9.get()) {
-//    	shouldMaintain = true;
-//    }
+
   }
 
   public void set(double speed) {
 	  
-    if (speed > 0.2) {
-    	extend();
-    } else if (speed < -0.2) {    	
-    	retract();
+    if (speed > Constants.ARM_JOYSTICK_OFFSET) {
+    	extend(speed);
+    } else if (speed < -Constants.ARM_JOYSTICK_OFFSET) {    	
+    	retract(speed);
     } else {
-    	adjustElbow(elbowPos);
-    	adjustShoulder(shoulderPos);
+    	//adjustElbow(elbowPos);
+    	//adjustShoulder(shoulderPos);
     }
   }
 
@@ -115,23 +114,26 @@ public class Arm extends Subsystem
 	  SmartDashboard.putNumber("shoulderPos", shoulderPos);
   }
   
-  private void extend() {
+  private void extend(double joystickVal) {
 	  double elbowSpd = 0.0;
 	  double shoulderSpd = 0.0;
+	  joystickVal = Math.abs(joystickVal);
 	  if(Robot.clawOpen) {
-		  elbowSpd = Constants.ELBOW_RAISE_SPD;
-		  shoulderSpd = Constants.SHOULDER_RAISE_SPD;
+		  elbowSpd = Constants.ELBOW_RAISE_SPD * joystickVal;
+		  shoulderSpd = Constants.SHOULDER_RAISE_SPD * joystickVal;
 	  } else {
-		  elbowSpd = Constants.ELBOW_RAISE_SPD_CUBE;
-		  shoulderSpd = Constants.SHOULDER_RAISE_SPD_CUBE;
+		  elbowSpd = Constants.ELBOW_RAISE_SPD_CUBE * joystickVal;
+		  shoulderSpd = Constants.SHOULDER_RAISE_SPD_CUBE * joystickVal;
 	  }
     // limit switches return false when pressed
     // if the upper arm is not fully extended, extend upper arm
-    if (lElbow.getSelectedSensorPosition(0) < Constants.ELBOW_EXTENDED) {
+   // if (lElbow.getSelectedSensorPosition(0) < Constants.ELBOW_EXTENDED) \
+	 if(uArmUpLSwitch.get()){
       // 0.05 will maintain the position
-      lShoulder.set(0.05);
+      lShoulder.set(0.05); // changed to .05
       lElbow.set(elbowSpd);
-    } else if (lShoulder.getSelectedSensorPosition(0) < Constants.SHOULDER_EXTENDED) {
+    }
+    else if (lShoulder.getSelectedSensorPosition(0) < Constants.SHOULDER_EXTENDED) {
       // else if lower arm is not fully extended, extend lower arm
       lShoulder.set(shoulderSpd);
       lElbow.set(0.05);
@@ -140,37 +142,68 @@ public class Arm extends Subsystem
     updatePosition();
   }
 
-  private void retract() {
+  private void retract(double joystickVal) {
 	  double elbowSpd = 0.0;
 	  double shoulderSpd = 0.0;
+	  joystickVal = Math.abs(joystickVal);
 	  if(Robot.clawOpen) {
-		  elbowSpd = Constants.ELBOW_LOWER_SPD;
-		  shoulderSpd = Constants.SHOULDER_LOWER_SPD;
+		  elbowSpd = Constants.ELBOW_LOWER_SPD * joystickVal;
+		  shoulderSpd = Constants.SHOULDER_LOWER_SPD * joystickVal;
 	  } else {
-		  elbowSpd = Constants.ELBOW_LOWER_SPD_CUBE;
-		  shoulderSpd = Constants.SHOULDER_LOWER_SPD_CUBE;
+		  elbowSpd = Constants.ELBOW_LOWER_SPD_CUBE * joystickVal;
+		  shoulderSpd = Constants.SHOULDER_LOWER_SPD_CUBE * joystickVal;
 	  }
         // if lower arm is not retracted, retract lower arm
-    	if (lShoulder.getSelectedSensorPosition(0) > 0) {
+    	if (lArmDownLSwitch.get()) {
+    		System.out.println(shoulderSpd);
   	      lShoulder.set(shoulderSpd);
   	      lElbow.set(0.05);
-  	    } else if (lElbow.getSelectedSensorPosition(0) > 0) {
+  	    } 
+    	else if (uArmDownLSwitch.get()) {
   	      // else if upper arm is not retracted, retract upper arm
-  	      lShoulder.set(0.05);
+  	      lShoulder.set(0.05);//was .05 
   	      lElbow.set(elbowSpd);
   	    }
     
     updatePosition();
   }
   
-  public boolean atPosition;
-  public void moveToPosition(int elbowPos, int shoulderPos) {
-	  if(lElbow.getSelectedSensorPosition(0) > elbowPos && lShoulder.getSelectedSensorPosition(0) > shoulderPos) {
-		  retract();
-	  } else if(lElbow.getSelectedSensorPosition(0) < elbowPos && lShoulder.getSelectedSensorPosition(0) < shoulderPos) {
-		  extend();
-	  } else {
-		  atPosition = true;
+  public static final int
+  	SWITCH_POSITION = 1,
+  	SCALE_POSITION = 2,
+  	DOWN_POSITION = 3;
+  public boolean moveToPosition(int position, double speed) {
+	  switch(position) {
+	  	case SWITCH_POSITION:
+	  		// press only the upper arm up switch
+	  		if(uArmUpLSwitch.get()) {
+	  			extend(speed);
+	  			return false;
+	  		} else {
+	  			System.out.println("At Position");
+	  			return true;
+	  		}
+	  	case SCALE_POSITION:
+	  		// move until shoulder up
+	  		if(lShoulder.getSelectedSensorPosition(0) < Constants.SHOULDER_EXTENDED) {
+	  			extend(speed);
+	  			return false;
+	  		} else {
+	  			System.out.println("At Position");
+	  			return true;
+	  		}
+	  	case DOWN_POSITION:
+	  		// press both down switches
+	  		if(uArmDownLSwitch.get()) {
+	  			retract(speed);
+	  			return false;
+	  		} else {
+	  			System.out.println("At Position");
+	  			return true;
+	  		}
+	  	default:
+	  		System.out.println("Problem while running moveToPosition(): Invalid input");
+	  		return true;
 	  }
   }
 
