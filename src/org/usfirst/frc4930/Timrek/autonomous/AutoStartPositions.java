@@ -19,8 +19,8 @@ public class AutoStartPositions extends CommandGroup{
 	
 	public AutoStartPositions() {
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		dialNum = Robot.positionDial.getPosition();
-		delay = Robot.timeDelayDial.getPosition();
+		dialNum = Robot.preference1Dial.getPosition();
+		delay = Robot.preference2Dial.getPosition();
 		goToSwitch = true; //Only Because Timrek does not have autoSwitch on it
 		
 		double distanceToPlatform;

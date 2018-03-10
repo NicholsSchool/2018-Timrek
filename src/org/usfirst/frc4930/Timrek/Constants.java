@@ -24,13 +24,13 @@ public class Constants
 
   // sensors
   public static final int 
-  	GRIPPER_LSWITCH_CHNL = 0, 
+  	TOGGLE_SWITCH_CHNL = 6, 
   	UARM_UP_LSWITCH_CHNL = 7,
     UARM_DOWN_LSWITCH_CHNL = 9, 
     LARM_DOWN_LSWITCH_CHNL = 8,
 
-    POSITIONPOT_CHNL = 0,
-    DELAYPOT_CHNL = 1;
+    PREFERENCE1_POT_CHNL = 0,
+    PREFERENCE2_POT_CHNL = 1;
 
   // speeds
   public static final double 

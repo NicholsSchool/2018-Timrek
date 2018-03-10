@@ -15,12 +15,15 @@ import org.usfirst.frc4930.Timrek.subsystems.Mast;
 import org.usfirst.frc4930.Timrek.subsystems.PTO;
 import org.usfirst.frc4930.Timrek.subsystems.Shifter;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.networktables.*;
 
 public class Robot extends TimedRobot
 {
@@ -35,13 +38,19 @@ public class Robot extends TimedRobot
   public static Claw claw;
   public static Shifter shifter;
   public static DropWheel dropWheel;
-  public static Dial positionDial;
-  public static Dial timeDelayDial;
+  public static Dial preference1Dial;
+  public static Dial preference2Dial;
   public static Arm arm;
  // public static Cameras cameras;
   public static NavX navX;
   public static Mast mast;
-
+  public static NetworkTableEntry state;
+  public static NetworkTableEntry toggle;
+  public static NetworkTableEntry detaunt1;
+  public static NetworkTableEntry detaunt2;
+  
+  public static String status = "Disabled";
+  
   // ALL THESE VALUES NEED TO BE CHECKED TO SEE HOW SOLENOID STATE RELATES TO ROBOT
   public static boolean shifterInLowGear = false;
   public static boolean ptoOn = false;
@@ -60,14 +69,37 @@ public class Robot extends TimedRobot
     claw = new Claw();
     dropWheel = new DropWheel();
     shifter = new Shifter();
-    positionDial = new Dial(RobotMap.positionPot);
-    timeDelayDial = new Dial(RobotMap.timeDelayPot);
+    preference1Dial = new Dial(RobotMap.preference1Pot);
+    preference2Dial = new Dial(RobotMap.preference2Pot);
     arm = new Arm();
    // cameras = new Cameras();
     mast = new Mast();
+    NetworkTableInstance inst = NetworkTableInstance.getDefault();
+    NetworkTable table = inst.getTable("RaspberryPi");
+    state = table.getEntry("state");
+    toggle = table.getEntry("toggle");
+    detaunt1 = table.getEntry("detaunt1");
+    detaunt2 = table.getEntry("detaunt2");
+
     // OI must be constructed after subsystems.
     oi = new OI();
 
+  }
+  
+  public void robotPeriodic() {
+//	  state.setString(status);
+//	  int pref1 = preference1Dial.getPosition();
+//	  int pref2 = preference2Dial.getPosition();
+//	  int toggleNum = ((RobotMap.toggleSwitch.get()) ? 1 : 0);
+//	  
+//	  System.out.println(status + " " + toggleNum  + " " + pref1  + " " + pref2 );
+	  
+//	  System.out.println((RobotMap.toggleSwitch.get()) ? 1 : 0);
+//	  System.out.println("detaunt1: " + preference1Dial.getPosition());
+//	  System.out.println("detaunt2: " + preference2Dial.getPosition());
+//	  toggle.setNumber( (RobotMap.toggleSwitch.get()) ? 1 : 0);
+//	  detaunt1.setNumber(preference1Dial.getPosition());
+//	  detaunt2.setNumber(preference2Dial.getPosition());
   }
 
   @Override
@@ -79,16 +111,21 @@ public class Robot extends TimedRobot
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
     driveTrain.endLoop();
-
+	  state.setString(status);
+	  toggle.setNumber( (RobotMap.toggleSwitch.get()) ? 1 : 0);
+	  detaunt1.setNumber(preference1Dial.getPosition());
+	  detaunt2.setNumber(preference2Dial.getPosition());
   }
 
   @Override
   public void autonomousInit() {
-	//  RobotMap.solenoid4.set(false);
 	 inAuto = true;
+	 status = "Auto";
+	 RobotMap.ahrs.reset();
 	 RobotMap.solenoid0.set(true);
+	 
     autonomousCommand = new AutoPaths();
-    RobotMap.ahrs.reset();
+  
     // schedule the autonomous command (example)
     if (autonomousCommand != null)
       autonomousCommand.start();
@@ -97,14 +134,20 @@ public class Robot extends TimedRobot
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
-
+	  state.setString(status);
+	  toggle.setNumber( (RobotMap.toggleSwitch.get()) ? 1 : 0);
+	  detaunt1.setNumber(preference1Dial.getPosition());
+	  detaunt2.setNumber(preference2Dial.getPosition());
   }
 
   @Override
   public void teleopInit() {
 	  inAuto = false;
+	  status = "TeleOp";
+	  
     if (autonomousCommand != null)
       autonomousCommand.cancel();
+    
     RobotMap.lDrvMSTR.setSelectedSensorPosition(0, 0, 100);
     RobotMap.rDrvMSTR.setSelectedSensorPosition(0, 0, 100);
     RobotMap.dropWhl.setSelectedSensorPosition(0, 0, 100);
@@ -116,7 +159,16 @@ public class Robot extends TimedRobot
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-
+	  state.setString(status);
+	  toggle.setNumber( (RobotMap.toggleSwitch.get()) ? 1 : 0);
+	  detaunt1.setNumber(preference1Dial.getPosition());
+	  detaunt2.setNumber(preference2Dial.getPosition());
+      int pref1 = preference1Dial.getPosition();
+	  int pref2 = preference2Dial.getPosition();
+	  int toggleNum = ((RobotMap.toggleSwitch.get()) ? 1 : 0);
+	  
+	  System.out.println(status + " " + toggleNum  + " " + pref1  + " " + pref2 );
+    
     if (oi.j1b10.get()) {
       RobotMap.lElbow.setSelectedSensorPosition(0, 0, 0);
       // Robot.arm.resetElbowPosition();
@@ -142,10 +194,10 @@ public class Robot extends TimedRobot
 
     SmartDashboard.putBoolean("ARM STABLIZE: ", Robot.arm.shouldMaintain);
 
-    SmartDashboard.putNumber("PositionPot Raw: ", RobotMap.positionPot.get());
-    SmartDashboard.putNumber("DelayPot Raw: ", RobotMap.timeDelayPot.get());
-    SmartDashboard.putNumber("PositionPot", Robot.positionDial.getPosition());
-    SmartDashboard.putNumber("DelayPot", Robot.timeDelayDial.getPosition());
+    SmartDashboard.putNumber("PositionPot Raw: ", RobotMap.preference1Pot.get());
+    SmartDashboard.putNumber("DelayPot Raw: ", RobotMap.preference2Pot.get());
+    SmartDashboard.putNumber("PositionPot", Robot.preference1Dial.getPosition());
+    SmartDashboard.putNumber("DelayPot", Robot.preference2Dial.getPosition());
 
     SmartDashboard.putBoolean("LOWER ARM DOWN: ", RobotMap.lArmDownLSwitch.get());
 
@@ -157,10 +209,13 @@ public class Robot extends TimedRobot
     
     SmartDashboard.putBoolean("UPPER ARM UP LSWICTH", RobotMap.uArmUpLSwitch.get());
 
+    SmartDashboard.putBoolean("TOGGLE SWITCH: ", RobotMap.toggleSwitch.get());
     // two button engage for the pto
     // if(oi.j0b7.get() && oi.j0b8.get())
     // {
     // new EngagePTO().start();
     // }
   }
+  
+ 
 }

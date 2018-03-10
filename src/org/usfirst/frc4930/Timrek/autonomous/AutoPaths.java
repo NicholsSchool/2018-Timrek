@@ -2,6 +2,7 @@ package org.usfirst.frc4930.Timrek.autonomous;
 
 import org.usfirst.frc4930.Timrek.Constants;
 import org.usfirst.frc4930.Timrek.Robot;
+import org.usfirst.frc4930.Timrek.RobotMap;
 import org.usfirst.frc4930.Timrek.commands.ClawClose;
 import org.usfirst.frc4930.Timrek.commands.ClawOpen;
 import org.usfirst.frc4930.Timrek.commands.Intake;
@@ -24,12 +25,12 @@ public class AutoPaths extends CommandGroup{
 		
 	public AutoPaths() {
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		preference1 = Robot.positionDial.getPosition();
-		preference2 = Robot.timeDelayDial.getPosition();
+		preference1 = Robot.preference1Dial.getPosition();
+		preference2 = Robot.preference2Dial.getPosition();
 		switchLeft = gameData.charAt(0) == 'L';
 		scaleLeft = gameData.charAt(1) == 'L';
-//		startingLeft = sideLSwitch.get()  // Timrek does not have this limit switch, defaulting to true
-		startingLeft = true;
+    	startingLeft = RobotMap.toggleSwitch.get();  
+    	
 		runPreference1 = checkPreference(preference1);
 		runPreference2 = checkPreference(preference2);
 		
@@ -207,7 +208,7 @@ public class AutoPaths extends CommandGroup{
 		addSequential(new Outtake(1, 0.9));
 	}
 	
-	//4 NEEDS TO BE TESTED
+	//4 WORKING
 	private void oppositeSideSwitchFromBack(boolean startingLeft){
 		double turn;
 		if(startingLeft){
@@ -287,13 +288,13 @@ public class AutoPaths extends CommandGroup{
 		addSequential(new Outtake(1, 0.8));
 	}
 	
-	//10 NEEDS TO BE TESTED
+	//10 WORKING
 	private void middlePath(boolean goLeft) {
 		double turn;
 		double secondTurn;
 		if(goLeft){
 			turn = -30;
-			secondTurn = 22;
+			secondTurn = 27;
 			/*
 			 * 		   {}------{}
 			 * 	     
@@ -307,7 +308,7 @@ public class AutoPaths extends CommandGroup{
 		}
 		else {
 			turn = 30;
-			secondTurn = -22;
+			secondTurn = -27;
 			/*
 			 * 		   {}------{}
 			 * 	     
@@ -321,9 +322,10 @@ public class AutoPaths extends CommandGroup{
 		}
 		addSequential(new BBGoDistance(0.5));
 		addSequential(new BBGoToAngle(turn));
-		addSequential(new BBGoDistance(6.8));
+		addSequential(new BBGoDistance(7.8));
 		addSequential(new BBGoToAngle(secondTurn));
-		addSequential(new Outtake(1, 0.9));
+		addSequential(new BBGoDistance(0.5));
+		addSequential(new Outtake(1, 0.8));
 	}
 	
 	private void middlePath2Cube(){
