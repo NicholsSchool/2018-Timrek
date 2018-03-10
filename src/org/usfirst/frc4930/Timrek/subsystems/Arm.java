@@ -151,12 +151,12 @@ public class Arm extends Subsystem
 		  shoulderSpd = Constants.SHOULDER_LOWER_SPD_CUBE * -joystickVal;
 	  }
         // if lower arm is not retracted, retract lower arm
-    	if (lShoulder.getSelectedSensorPosition(0) > 0) {
+    	if (lArmDownLSwitch.get()) {
     		System.out.println(shoulderSpd);
   	      lShoulder.set(shoulderSpd);
   	      lElbow.set(0.05);
   	    } 
-    	else if (lElbow.getSelectedSensorPosition(0) > 0) {
+    	else if (uArmDownLSwitch.get()) {
   	      // else if upper arm is not retracted, retract upper arm
   	      lShoulder.set(0.05);//was .05 
   	      lElbow.set(elbowSpd);

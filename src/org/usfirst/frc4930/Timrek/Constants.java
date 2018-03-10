@@ -59,6 +59,8 @@ public class Constants
 
   // encoder values for the arm
   public static final int 
+  	ELBOW_START_POSITION = 90000,
+  
   	SHOULDER_EXTENDED = 190000,
   	ELBOW_EXTENDED = 100000,
   	SHOULDER_TO_BAR = 100000,

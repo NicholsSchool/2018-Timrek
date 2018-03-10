@@ -108,11 +108,11 @@ public class OI
 //    j2b7.whenPressed(new ToggleCamera());
 //    j0b7.whenPressed(new ResetGyro());
 //    j0b6.whenPressed(new Outtake(3, 0.8)); // Need to test
-//    j0b11.whenPressed(new BBGoDistance(-2));
+    j0b11.whenPressed(new BBGoDistance(2));
 //    j0b10.whenPressed(new ResetEncoders());
 //    j0b8.whenPressed(new BBGoToAngle(90));
 //    j0b9.whenPressed(new BBGoToAngle(-90));
-//    j0b12.whenPressed(new Test());
+    j0b12.whenPressed(new BBGoDistance(-2));
 
     // Made previous values into Constants, needs to be tested.
 //    j2b11.whenPressed(
