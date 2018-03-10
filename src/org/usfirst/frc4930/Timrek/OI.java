@@ -79,8 +79,8 @@ public class OI
     j2b12 = new JoystickButton(j2, 12);
 
     // Shifter (Solenoid 0)
-    j0b1.whenPressed(new HighGear()); // Set True
-    j0b1.whenReleased(new LowGear()); // Set False
+    j0b1.whenPressed(new LowGear()); // Set True
+    j0b1.whenReleased(new HighGear()); // Set False
 
     // PTO (Solenoid 1)
     j2b8.whenPressed(new EngagePTO()); // Set True;

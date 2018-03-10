@@ -51,7 +51,7 @@ public class Constants
   	SHOULDER_RAISE_SPD = 0.8,
   	SHOULDER_LOWER_SPD = -0.1,
   	
-  	ELBOW_RAISE_SPD_CUBE = 0.6, //changed from 1
+  	ELBOW_RAISE_SPD_CUBE = 0.9, //changed from 1
   	ELBOW_LOWER_SPD_CUBE = -0.4,
   	SHOULDER_RAISE_SPD_CUBE = 0.8,
   	SHOULDER_LOWER_SPD_CUBE = -0.3;
@@ -72,7 +72,7 @@ public class Constants
   	TICKS_PER_REVOULTION = 1300, //NEEDS TO BE TESTED
   	WHEEL_DIAMETER = 4,
   
-  	BB_G0_TO_ANGLE_OFFSET = 8,
+  	BB_G0_TO_ANGLE_OFFSET = 5,
   	TURN_RIGHT = 90,
   	TURN_LEFT = -90,
   		  	
@@ -95,8 +95,8 @@ public class Constants
   
   // speeds for Auto
   public static final double
-  	BB_GO_DISTANCE_SPEED = 0.75,
-  	BB_GO_TO_ANGLE_SPEED = 0.8;
+  	BB_GO_DISTANCE_SPEED = 0.9,
+  	BB_GO_TO_ANGLE_SPEED = 0.6;
   
   // inverts
   public static final int 

@@ -136,7 +136,7 @@ public class RobotMap
     solenoid4 = new Solenoid(50, 4); // Claw
     solenoid5 = new Solenoid(50, 5); // Extra
 
-    solenoid0.set(true); // Shifter
+    solenoid0.set(false); // Shifter
     solenoid1.set(false); // PTO
     solenoid2.set(false); // DropWheel
     solenoid4.set(false); // Claw

@@ -99,9 +99,10 @@ public class AutoPaths extends CommandGroup{
 	
 	//1 WORKING
 	private void correspondingSwitch(boolean startingLeft) {
+		System.out.println("RUNNING CORRESPONDING SWITCH");
 		double turn;
 		if(startingLeft){
-			turn = Constants.TURN_RIGHT;
+			turn = 80;
 			/*
 			 * 		   {}------{}
 			 * 	     
@@ -114,7 +115,7 @@ public class AutoPaths extends CommandGroup{
 			 */
 		}
 		else {
-			turn = Constants.TURN_LEFT;
+			turn = -80;
 			/*
 			 * 		   {}------{}
 			 * 	                 
@@ -128,15 +129,15 @@ public class AutoPaths extends CommandGroup{
 		}
 		//Starting from Left side
 		
-	//	addSequential(new BBGoDistance(11));
-		addSequential(new BBGoDistance(5));
+		addSequential(new BBGoDistance(12));
+	//	addSequential(new BBGoDistance(5));
 		
 		addSequential(new BBGoToAngle(turn));
 		
-		//addSequential(new BBGoDistance(2.5));
-		addSequential(new BBGoDistance(1));
+	//	addSequential(new BBGoDistance(2.5));
+		addSequential(new BBGoDistance(0.5));
 		
-		addSequential(new Outtake(1, 0.7));
+		addSequential(new Outtake(1, 0.4));
 	}
 
 	//2 IN TEST PHASE
@@ -171,7 +172,7 @@ public class AutoPaths extends CommandGroup{
 	private void correspondingScale(boolean startingLeft) {
 		double turn;
 		if(startingLeft){
-			turn = 55;
+			turn = 45;
 			/*
 			 * 		   {}------{}
 			 * 	     /
@@ -184,7 +185,7 @@ public class AutoPaths extends CommandGroup{
 			 */
 		}
 		else {
-			turn = -55;
+			turn = -45;
 			/*
 			 * 		   {}------{}
 			 * 	                 \
@@ -196,12 +197,12 @@ public class AutoPaths extends CommandGroup{
 			 *                    *
 			 */
 		}
-	//	addSequential(new BBGoDistance(21));
-		addSequential(new BBGoDistance(7));
+		addSequential(new BBGoDistance(23));
+	//	addSequential(new BBGoDistance(7));
 		
 		
-		addSequential(new BBGoToAngle(turn));
-		addSequential(new BBGoDistance(1.8));
+//		addSequential(new BBGoToAngle(turn));
+//		addSequential(new BBGoDistance(1.8));
 		// addSequential(new ArmToPosition(Constants.AUTO_FULL_RAISE_ELBOW_VALUE, Constants.AUTO_FULL_RAISE_SHOULDER_VALUE));
 		addSequential(new Outtake(1, 0.9));
 	}
@@ -210,7 +211,7 @@ public class AutoPaths extends CommandGroup{
 	private void oppositeSideSwitchFromBack(boolean startingLeft){
 		double turn;
 		if(startingLeft){
-			turn = Constants.TURN_RIGHT;
+			turn = 80;
 			/*
 			 * 		   {}------{}
 			 * 	     
@@ -223,7 +224,7 @@ public class AutoPaths extends CommandGroup{
 			 */
 		}
 		else {
-			turn = Constants.TURN_LEFT;
+			turn = -80;
 			/*
 			 * 		   {}------{}
 			 * 	                 
@@ -238,12 +239,12 @@ public class AutoPaths extends CommandGroup{
 		
 
 		
+		addSequential(new BBGoDistance(18));
+		addSequential(new BBGoToAngle(turn));
 		addSequential(new BBGoDistance(14));
 		addSequential(new BBGoToAngle(turn));
-		addSequential(new BBGoDistance(11));
-		addSequential(new BBGoToAngle(turn));
-		addSequential(new BBGoDistance(1));
-		addSequential(new Outtake(1, 0.8));
+		addSequential(new BBGoDistance(0.5));
+		addSequential(new Outtake(1, 0.75));
 	}
 	
 	//5 NEEDS TO BE TESTED
@@ -289,8 +290,10 @@ public class AutoPaths extends CommandGroup{
 	//10 NEEDS TO BE TESTED
 	private void middlePath(boolean goLeft) {
 		double turn;
+		double secondTurn;
 		if(goLeft){
-			turn = -45;
+			turn = -30;
+			secondTurn = 22;
 			/*
 			 * 		   {}------{}
 			 * 	     
@@ -303,6 +306,8 @@ public class AutoPaths extends CommandGroup{
 			 */
 		}
 		else {
+			turn = 30;
+			secondTurn = -22;
 			/*
 			 * 		   {}------{}
 			 * 	     
@@ -313,11 +318,11 @@ public class AutoPaths extends CommandGroup{
 			 *               /
 			 *             *
 			 */
-			turn = 45;
 		}
-		
+		addSequential(new BBGoDistance(0.5));
 		addSequential(new BBGoToAngle(turn));
-		addSequential(new BBGoDistance(5.3));
+		addSequential(new BBGoDistance(6.8));
+		addSequential(new BBGoToAngle(secondTurn));
 		addSequential(new Outtake(1, 0.9));
 	}
 	

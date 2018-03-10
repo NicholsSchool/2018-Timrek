@@ -12,6 +12,7 @@ public class BBGoDistance extends Command {
 	  double speed;
 	  double startPosition;
 	  double currentPosition;
+	  boolean ranOnce;
 	  public BBGoDistance(double distance) {
 		  requires(Robot.driveTrain);
 		  double inches = distance*12;
@@ -21,12 +22,12 @@ public class BBGoDistance extends Command {
 		  currentPosition = 0;
 	  }
 	  protected void initialize() {
-		  Robot.driveTrain.resetEncoders();
+//		  Robot.driveTrain.resetEncoders();
 		  Robot.navX.reset();
+//		  RobotMap.lDrvMSTR.setSelectedSensorPosition(0, 0, 0);
 		  startPosition = RobotMap.lDrvMSTR.getSelectedSensorPosition(0);
-		  
-		  System.out.println("INITAL ENCODER POSITION: " + RobotMap.lDrvMSTR.getSelectedSensorPosition(0));
-		  System.out.println("STARTING DISTANCE COMMAND TO " + desiredDistance);
+//		  System.out.println("INITAL ENCODER POSITION: " + RobotMap.lDrvMSTR.getSelectedSensorPosition(0));
+//		  System.out.println("STARTING DISTANCE COMMAND TO " + desiredDistance);
 		  
 		  if(desiredDistance > 0){
 			  speed = Constants.BB_GO_DISTANCE_SPEED;
@@ -40,13 +41,14 @@ public class BBGoDistance extends Command {
 		  currentPosition = RobotMap.lDrvMSTR.getSelectedSensorPosition(0) - startPosition; 
 		 
 		  System.out.println("RUNNING DISTANCE COMMAND TO " + desiredDistance);
-		  System.out.println("EXECUTE ENCODER POSITION: " + RobotMap.lDrvMSTR.getSelectedSensorPosition(0));
-		  
+		  System.out.println("START ENCODER POSITION: " + startPosition );
+		  System.out.println("Actual ENCODER POSITION: " + RobotMap.lDrvMSTR.getSelectedSensorPosition(0));
+		  System.out.println("CURRENT POSITION" + currentPosition);
 		  if(desiredDistance > 0){
-			  Robot.driveTrain.move(speed + 0.03, speed);
+			  Robot.driveTrain.move(speed + 0.015, speed);
 		  }
 		  else {
-			  Robot.driveTrain.move(speed - 0.03, speed);
+			  Robot.driveTrain.move(speed - 0.015, speed);
 		  }
 		 // System.out.println("Distance: " + desiredDistance);
 		 // System.out.println("Distance Left: " + (desiredDistance - RobotMap.lDrvMSTR.getSelectedSensorPosition(0)));
@@ -54,7 +56,7 @@ public class BBGoDistance extends Command {
 
 	  protected boolean isFinished() {
 		  if(desiredDistance > 0){
-			  System.out.println("ENCODER POSITION: " + RobotMap.lDrvMSTR.getSelectedSensorPosition(0));
+			//  System.out.println("ENCODER POSITION: " + RobotMap.lDrvMSTR.getSelectedSensorPosition(0));
 			  return currentPosition >= desiredDistance;
 		  }
 		  else {

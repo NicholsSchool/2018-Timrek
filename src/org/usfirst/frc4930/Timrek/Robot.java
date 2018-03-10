@@ -43,7 +43,7 @@ public class Robot extends TimedRobot
   public static Mast mast;
 
   // ALL THESE VALUES NEED TO BE CHECKED TO SEE HOW SOLENOID STATE RELATES TO ROBOT
-  public static boolean shifterInLowGear = true;
+  public static boolean shifterInLowGear = false;
   public static boolean ptoOn = false;
   public static boolean dropped = false;
   public static boolean clawOpen = false;
@@ -86,7 +86,7 @@ public class Robot extends TimedRobot
   public void autonomousInit() {
 	//  RobotMap.solenoid4.set(false);
 	 inAuto = true;
-	  
+	 RobotMap.solenoid0.set(true);
     autonomousCommand = new AutoPaths();
     RobotMap.ahrs.reset();
     // schedule the autonomous command (example)
