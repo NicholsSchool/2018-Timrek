@@ -104,13 +104,12 @@ public class Robot extends TimedRobot
 
   @Override
   public void disabledInit() {
-    driveTrain.endLoop();
+ 
   }
 
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
-    driveTrain.endLoop();
 	  state.setString(status);
 	  toggle.setNumber( (RobotMap.toggleSwitch.get()) ? 1 : 0);
 	  detaunt1.setNumber(preference1Dial.getPosition());
@@ -190,7 +189,6 @@ public class Robot extends TimedRobot
         RobotMap.dropWhl.getSelectedSensorPosition(0));
 
     SmartDashboard.putNumber("Get Angle", navX.getAngle());
-    // SmartDashboard.putNumber("Get Yaw", navX.getYaw());
 
     SmartDashboard.putBoolean("ARM STABLIZE: ", Robot.arm.shouldMaintain);
 
@@ -210,11 +208,7 @@ public class Robot extends TimedRobot
     SmartDashboard.putBoolean("UPPER ARM UP LSWICTH", RobotMap.uArmUpLSwitch.get());
 
     SmartDashboard.putBoolean("TOGGLE SWITCH: ", RobotMap.toggleSwitch.get());
-    // two button engage for the pto
-    // if(oi.j0b7.get() && oi.j0b8.get())
-    // {
-    // new EngagePTO().start();
-    // }
+
   }
   
  

@@ -65,9 +65,13 @@ public class Constants
   	SHOULDER_EXTENDED = 190000,
   	ELBOW_EXTENDED = 100000,
   	SHOULDER_TO_BAR = 100000,
-  	ELBOW_TO_BAR = 70000,
-    LOWER_ARM_INCRAMENTS = 40000;
-
+  	ELBOW_TO_BAR = 70000;
+  
+  //Other arm values
+  public static final double 
+  	ARM_JOYSTICK_OFFSET = 0.2;
+  
+  
   // values for Auto
   public static final int
   	TICKS_PER_REVOULTION_LOW_GEAR = 1300, //NEEDS TO BE TESTED
@@ -83,22 +87,16 @@ public class Constants
   	AUTO_FULL_RAISE_ELBOW_VALUE = ELBOW_EXTENDED * 2,
   	AUTO_FULL_RAISE_SHOULDER_VALUE = SHOULDER_EXTENDED;
   
-  //Values for Auto Paths
-  //ALL VALUES NEED TO BE TESTED
-  public static final double
-  DEFAULT_FORWARD = 2.5,
-  HORIZONTAL_ACROSS_FIELD = 18.0,
-  VERTICAL_DISTANCE_TO_SCALE_OUTSIDE = 24.5,
-  VERTICAL_DISTANCE_TO_SCALE_INSIDE = 20.5,
-  HORIZONTAL_SCALE_INSIDE = 2,
-  FORWARD_TO_SCALE_FROM_INSIDE = 3;
-  
+  public static final double 
+	BB_GO_DISTANCE_OFFEST = 0.015;
   
   
   // speeds for Auto
   public static final double
   	BB_GO_DISTANCE_SPEED = 0.9,
   	BB_GO_TO_ANGLE_SPEED = 0.6;
+  
+  
   
   // inverts
   public static final int 

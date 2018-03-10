@@ -43,35 +43,24 @@ public class BBGoDistance extends Command {
 		  speed = driveSpeed;
 	  }
 	  protected void initialize() {
-//		  Robot.driveTrain.resetEncoders();
 		  Robot.navX.reset();
-//		  RobotMap.lDrvMSTR.setSelectedSensorPosition(0, 0, 0);
 		  startPosition = RobotMap.lDrvMSTR.getSelectedSensorPosition(0);
-//		  System.out.println("INITAL ENCODER POSITION: " + RobotMap.lDrvMSTR.getSelectedSensorPosition(0));
-//		  System.out.println("STARTING DISTANCE COMMAND TO " + desiredDistance);
-		  
+
 	  }
 
 	  protected void execute() {
 		  currentPosition = RobotMap.lDrvMSTR.getSelectedSensorPosition(0) - startPosition; 
 		 
-		  System.out.println("RUNNING DISTANCE COMMAND TO " + desiredDistance);
-		  System.out.println("START ENCODER POSITION: " + startPosition );
-		  System.out.println("Actual ENCODER POSITION: " + RobotMap.lDrvMSTR.getSelectedSensorPosition(0));
-		  System.out.println("CURRENT POSITION" + currentPosition);
 		  if(desiredDistance > 0){
-			  Robot.driveTrain.move(speed + 0.015, speed);
+			  Robot.driveTrain.move(speed + Constants.BB_GO_DISTANCE_OFFEST, speed);
 		  }
 		  else {
-			  Robot.driveTrain.move(speed - 0.015, speed);
+			  Robot.driveTrain.move(speed - Constants.BB_GO_DISTANCE_OFFEST, speed);
 		  }
-		 // System.out.println("Distance: " + desiredDistance);
-		 // System.out.println("Distance Left: " + (desiredDistance - RobotMap.lDrvMSTR.getSelectedSensorPosition(0)));
 	  }
 
 	  protected boolean isFinished() {
 		  if(desiredDistance > 0){
-			//  System.out.println("ENCODER POSITION: " + RobotMap.lDrvMSTR.getSelectedSensorPosition(0));
 			  return currentPosition >= desiredDistance;
 		  }
 		  else {

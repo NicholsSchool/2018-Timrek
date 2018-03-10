@@ -54,9 +54,9 @@ public class Arm extends Subsystem
 
   public void set(double speed) {
 	  
-    if (speed > 0.2) {
+    if (speed > Constants.ARM_JOYSTICK_OFFSET) {
     	extend(speed);
-    } else if (speed < -0.2) {    	
+    } else if (speed < -Constants.ARM_JOYSTICK_OFFSET) {    	
     	retract(speed);
     } else {
     	//adjustElbow(elbowPos);

@@ -181,13 +181,13 @@ public class AutoPaths extends CommandGroup{
 			turn = 45;
 			/*
 			 * 		   {}------{}
-			 * 	     /
-			 *       |    
-			 * 		 |         
-			 * 		 | {}------{} 
-			 *       |
-			 *       |
-			 *       *
+			 * 	      /
+			 *       .    
+			 * 		 .         
+			 * 		/  {}------{} 
+			 *     /  
+			 *    / |
+			 *   *
 			 */
 		}
 		else {
@@ -195,20 +195,16 @@ public class AutoPaths extends CommandGroup{
 			/*
 			 * 		   {}------{}
 			 * 	                 \
-			 *                    |
-			 * 		              |
-			 * 		   {}------{} |
-			 *                    | 
-			 *                    |
-			 *                    *
+			 *                    .
+			 * 		              .
+			 * 		   {}------{}  \
+			 *                      \ 
+			 *                       \
+			 *                        *
 			 */
 		}
 		addSequential(new BBGoDistance(22, false, 0.75));
-	//	addSequential(new BBGoDistance(7));
-		
-		
-//		addSequential(new BBGoToAngle(turn));
-//		addSequential(new BBGoDistance(1.8));
+
 	    addSequential(new ArmToPosition(Arm.SCALE_POSITION, 1.0));
 		addSequential(new Outtake(1, 0.7));
 	}
@@ -374,9 +370,6 @@ public class AutoPaths extends CommandGroup{
 		addSequential(new Outtake(1, 0.8));
 	}
 	
-	private void middlePath2Cube(){
-		
-	}
 	
 }
 
