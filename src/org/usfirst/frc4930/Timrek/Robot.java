@@ -192,10 +192,10 @@ public class Robot extends TimedRobot
 
     SmartDashboard.putBoolean("ARM STABLIZE: ", Robot.arm.shouldMaintain);
 
-    SmartDashboard.putNumber("PositionPot Raw: ", RobotMap.preference1Pot.get());
-    SmartDashboard.putNumber("DelayPot Raw: ", RobotMap.preference2Pot.get());
-    SmartDashboard.putNumber("PositionPot", Robot.preference1Dial.getPosition());
-    SmartDashboard.putNumber("DelayPot", Robot.preference2Dial.getPosition());
+    SmartDashboard.putNumber("Preference1Pot Raw: ", RobotMap.preference1Pot.get());
+    SmartDashboard.putNumber("Preference2Pot Raw: ", RobotMap.preference2Pot.get());
+    SmartDashboard.putNumber("Preference1Dial", Robot.preference1Dial.getPosition());
+    SmartDashboard.putNumber("Preference2Dial", Robot.preference2Dial.getPosition());
 
     SmartDashboard.putBoolean("LOWER ARM DOWN: ", RobotMap.lArmDownLSwitch.get());
 
