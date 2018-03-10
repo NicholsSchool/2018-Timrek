@@ -88,7 +88,7 @@ public class Constants
   	AUTO_FULL_RAISE_SHOULDER_VALUE = SHOULDER_EXTENDED;
   
   public static final double 
-	BB_GO_DISTANCE_OFFEST = 0.015;
+	BB_GO_DISTANCE_OFFSET = 0.015;
   
   
   // speeds for Auto

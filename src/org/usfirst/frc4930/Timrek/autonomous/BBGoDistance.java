@@ -52,10 +52,10 @@ public class BBGoDistance extends Command {
 		  currentPosition = RobotMap.lDrvMSTR.getSelectedSensorPosition(0) - startPosition; 
 		 
 		  if(desiredDistance > 0){
-			  Robot.driveTrain.move(speed + Constants.BB_GO_DISTANCE_OFFEST, speed);
+			  Robot.driveTrain.move(speed + Constants.BB_GO_DISTANCE_OFFSET, speed);
 		  }
 		  else {
-			  Robot.driveTrain.move(speed - Constants.BB_GO_DISTANCE_OFFEST, speed);
+			  Robot.driveTrain.move(speed - Constants.BB_GO_DISTANCE_OFFSET, speed);
 		  }
 	  }
 
