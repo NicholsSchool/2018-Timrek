@@ -71,7 +71,10 @@ public class AutoPaths extends CommandGroup{
 	private boolean checkPreference(int pathNum) {
 		boolean runPreference;
 		
-		if( pathNum <= 2){
+		if(pathNum == 0 || pathNum == 10){
+			runPreference = true;
+		}
+		else if( pathNum <= 2){
 			runPreference = (switchLeft == startingLeft);
 		}
 		else if (pathNum == 3){
@@ -82,9 +85,6 @@ public class AutoPaths extends CommandGroup{
 		}
 		else if (pathNum == 5){
 			runPreference = (scaleLeft != startingLeft);
-		}
-		else if (pathNum == 10){
-			runPreference = true;
 		}
 		else {
 			runPreference = false;
@@ -291,8 +291,28 @@ public class AutoPaths extends CommandGroup{
 		double turn;
 		if(goLeft){
 			turn = -45;
+			/*
+			 * 		   {}------{}
+			 * 	     
+			 *           
+			 * 		          
+			 * 		   {}------{} 
+			 *           \
+			 *            \
+			 *             *
+			 */
 		}
 		else {
+			/*
+			 * 		   {}------{}
+			 * 	     
+			 *           
+			 * 		          
+			 * 		   {}------{} 
+			 *                / 
+			 *               /
+			 *             *
+			 */
 			turn = 45;
 		}
 		

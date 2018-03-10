@@ -53,6 +53,8 @@ public class RobotMap
   public static AnalogPotentiometer positionPot;
   public static AnalogPotentiometer timeDelayPot;
   public static DigitalInput lArmDownLSwitch;
+  public static DigitalInput uArmDownLSwitch;
+  public static DigitalInput uArmUpLSwitch;
 
   public static DifferentialDrive driveTank;
 
@@ -123,7 +125,9 @@ public class RobotMap
     positionPot = new AnalogPotentiometer(Constants.POSITIONPOT_CHNL, 360, 0);
     timeDelayPot = new AnalogPotentiometer(Constants.DELAYPOT_CHNL, 360, 0);
     lArmDownLSwitch = new DigitalInput(Constants.LARM_DOWN_LSWITCH_CHNL);
-
+    uArmDownLSwitch = new DigitalInput(Constants.UARM_DOWN_LSWITCH_CHNL);
+    uArmUpLSwitch = new DigitalInput(Constants.UARM_UP_LSWITCH_CHNL);
+    
     // Pneumatics
     compressor = new Compressor(50);
     solenoid0 = new Solenoid(50, 0); // Shifter

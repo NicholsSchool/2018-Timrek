@@ -25,8 +25,8 @@ public class Constants
   // sensors
   public static final int 
   	GRIPPER_LSWITCH_CHNL = 0, 
-  	UARM_UP_LSWITCH_CHNL = 0,
-    UARM_DOWN_LSWITCH_CHNL = 0, 
+  	UARM_UP_LSWITCH_CHNL = 7,
+    UARM_DOWN_LSWITCH_CHNL = 9, 
     LARM_DOWN_LSWITCH_CHNL = 8,
 
     POSITIONPOT_CHNL = 0,
@@ -46,21 +46,21 @@ public class Constants
   	LOWER_MAST_SPEED = -0.4,
     RAISE_MAST_SPEED = 0.4,
     
-	ELBOW_RAISE_SPD = 0.9,
+	ELBOW_RAISE_SPD = 0.5, //changed from .9
   	ELBOW_LOWER_SPD = -0.4,
   	SHOULDER_RAISE_SPD = 0.8,
   	SHOULDER_LOWER_SPD = -0.1,
   	
-  	ELBOW_RAISE_SPD_CUBE = 1.0,
+  	ELBOW_RAISE_SPD_CUBE = 0.6, //changed from 1
   	ELBOW_LOWER_SPD_CUBE = -0.4,
   	SHOULDER_RAISE_SPD_CUBE = 0.8,
-  	SHOULDER_LOWER_SPD_CUBE = -0.1;
+  	SHOULDER_LOWER_SPD_CUBE = -0.3;
 
 
   // encoder values for the arm
   public static final int 
   	SHOULDER_EXTENDED = 190000,
-  	ELBOW_EXTENDED = 90000,
+  	ELBOW_EXTENDED = 100000,
   	SHOULDER_TO_BAR = 100000,
   	ELBOW_TO_BAR = 70000,
     LOWER_ARM_INCRAMENTS = 40000;

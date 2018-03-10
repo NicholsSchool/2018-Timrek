@@ -9,17 +9,21 @@ public class ClawClose extends Command {
 		    requires(Robot.claw);
 		  }
 
-		  protected void initialize() {}
+		  protected void initialize() {
+			    Robot.claw.close();
+			    new Intake(2, 1.0).start();
+		  }
 
 		  protected void execute() {
-		    Robot.claw.close();
 		  }
 
 		  protected boolean isFinished() {
-		    return true;
+		    return false;
 		  }
 
-		  protected void end() {}
+		  protected void end() {
+			  Robot.gripper.stop();
+		  }
 
 		  protected void interrupted() {
 		    end();

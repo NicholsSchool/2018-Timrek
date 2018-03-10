@@ -110,7 +110,7 @@ public class Robot extends TimedRobot
     RobotMap.dropWhl.setSelectedSensorPosition(0, 0, 100);
     RobotMap.ahrs.reset();
     RobotMap.solenoid1.set(false);
-    arm.setEncoders(50000, 0);
+    arm.setEncoders(90000, 0);
   }
 
   @Override
@@ -154,6 +154,8 @@ public class Robot extends TimedRobot
 
     SmartDashboard.putNumber("LEFT DRIVE", RobotMap.lDrvMSTR.get());
     SmartDashboard.putNumber("RIGHT DRIVE", RobotMap.rDrvMSTR.get());
+    
+    SmartDashboard.putBoolean("UPPER ARM UP LSWICTH", RobotMap.uArmUpLSwitch.get());
 
     // two button engage for the pto
     // if(oi.j0b7.get() && oi.j0b8.get())
